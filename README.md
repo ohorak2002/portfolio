@@ -22,22 +22,34 @@ js/scroll.js      ← reveal-on-scroll, sticky nav, theme toggle, copy email.
 
 ## Sections on the page
 
-Hero · About me · What I believe · Right now · My work · The journey (résumé)
-· Extracurriculars · What I'm reading · Interests · Contact
+Six major sections, in this order:
 
-To remove a section, delete its `<section>` from `index.html` and its block
-from `data.js`. To reorder, move the `<section>` blocks — nothing depends on
-their order.
+1. **Home** — photo, name, tagline
+2. **About me** — who you are, quick facts, four principles
+3. **My projects** — what you're building now, then the projects themselves
+4. **Résumé** — education and honors, coursework and skills, experience
+5. **Beyond the classroom** — activities and leadership, reading, interests
+6. **Contact me** — email, phone, links
+
+Each section groups several blocks under one heading, so the page reads as six
+stops rather than a dozen. To remove a section, delete its `<section>` from
+`index.html` and its block from `data.js`.
 
 ## Adding your photo
 
-Drop a square image into `assets/` and set it in `data.js`:
+Your photo is already in `assets/profile.jpg`. Two knobs in `data.js`:
 
 ```js
 photo: "assets/profile.jpg",
+photoPosition: "center 15%",
 ```
 
-Leave it as `""` and the site shows your initials in a ringed circle instead,
+`photoPosition` controls which part of the photo stays visible inside the
+circle. The second value is vertical — **lower percentages show more of the
+top of the image**. If your face sits too low in the circle, drop it to
+`center 8%`; too high, raise it to `center 25%`.
+
+Set `photo: ""` and the site falls back to your initials in a ringed circle,
 which looks intentional rather than broken.
 
 ## Running it locally

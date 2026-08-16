@@ -20,7 +20,7 @@
   /* Spacious rhythm (density dial: 3/10) */
   --wrap: 1000px;
   --gutter: clamp(1.5rem, 5vw, 3rem);
-  --band: clamp(5rem, 10vw, 8.5rem);
+  --band: clamp(3.4rem, 6vw, 5.6rem);
   --radius: 18px;
   --radius-sm: 12px;
 
@@ -177,7 +177,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   position: relative;
   min-height: 100svh;
   display: flex; align-items: center;
-  padding: calc(var(--nav-h) + 3rem) 0 6rem;
+  padding: calc(var(--nav-h) + 2rem) 0 4.5rem;
   text-align: center;
   overflow: hidden;
 }
@@ -196,7 +196,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .hero__inner { display: flex; flex-direction: column; align-items: center; }
 
 /* Portrait — circular, ringed like a tree cross-section */
-.portrait { position: relative; width: 132px; height: 132px; margin-bottom: 2.2rem; }
+.portrait { position: relative; width: 146px; height: 146px; margin-bottom: 1.9rem; }
 .portrait__ring {
   position: absolute; inset: -9px;
   border-radius: 50%;
@@ -220,15 +220,15 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   margin-bottom: .5rem;
 }
 .hero__role {
-  font-family: var(--font-serif); font-style: italic;
-  font-size: var(--t-lg); color: var(--leaf-ink); margin-bottom: 1.8rem;
+  font-size: var(--t-sm); font-weight: 600; letter-spacing: .04em;
+  color: var(--leaf-ink); margin-bottom: 1.5rem;
 }
 .hero__tagline {
   font-family: var(--font-serif); font-size: var(--t-xl);
   color: var(--ink); max-width: 20ch; line-height: 1.34; margin-bottom: 1.1rem;
 }
 .hero__tagline .hl { color: var(--forest); font-style: italic; }
-.hero__blurb { max-width: 46ch; color: var(--ink-dim); margin-bottom: 2.4rem; }
+.hero__blurb { max-width: 54ch; color: var(--ink-dim); margin-bottom: 2rem; }
 
 .hero__actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
 
@@ -266,7 +266,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
 .divider {
   display: flex; justify-content: center;
-  padding-block: clamp(2rem, 5vw, 3.5rem);
+  padding-block: clamp(1.2rem, 2.6vw, 2rem);
   color: var(--leaf);
 }
 .divider__art { width: 200px; height: auto; opacity: .55; }
@@ -275,8 +275,10 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .band--tint { background: var(--tint); }
 .band--close { padding-bottom: calc(var(--band) + 2rem); overflow: hidden; }
 
-.head { margin-bottom: clamp(2.5rem, 5vw, 3.8rem); max-width: 62ch; }
+.head { margin-bottom: clamp(1.8rem, 3.4vw, 2.6rem); max-width: 62ch; }
 .head--center { margin-inline: auto; text-align: center; }
+.head--row { display: flex; align-items: flex-end; justify-content: space-between;
+             gap: 1.5rem; flex-wrap: wrap; max-width: none; }
 .head__title { font-size: var(--t-2xl); font-weight: 500; letter-spacing: -.015em; }
 .head__note { margin-top: .7rem; font-size: var(--t-sm); color: var(--ink-dim); }
 
@@ -303,179 +305,202 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 .facts dd { color: var(--ink); }
 
-/* ─────────────────────  7. MISSION / VALUES  ────────────────────────── */
+/* ─────────────────  7. SUBHEADS (inside a big section)  ─────────────── */
+/* Six major sections, each holding a few labelled blocks. The subhead is
+   deliberately quieter than a section title so the hierarchy stays obvious. */
 
-.statement {
-  max-width: 26ch; margin: 0 auto clamp(3rem, 6vw, 4.5rem);
-  font-family: var(--font-serif); font-size: var(--t-2xl);
-  line-height: 1.32; color: var(--ink); text-align: center;
+.subhead {
+  font-family: var(--font-sans);
+  font-size: var(--t-sm); font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-dim);
+  margin: clamp(2.2rem, 4vw, 3rem) 0 1.2rem;
+  padding-bottom: .7rem;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: .7rem;
+}
+.subhead::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--leaf); flex: none;
 }
 
-.values { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); background: var(--line-soft); border-block: 1px solid var(--line-soft); }
-.values li { background: var(--tint); padding: 1.9rem 1.6rem; }
-.values__icon { display: block; width: 24px; height: 24px; color: var(--leaf); margin-bottom: 1rem; }
-.values h3 { font-size: var(--t-lg); font-weight: 500; margin-bottom: .45rem; }
+/* ────────────────────────  8. VALUES (About)  ───────────────────────── */
+
+.values {
+  display: grid; gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  background: var(--line-soft);
+  border: 1px solid var(--line-soft); border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: clamp(2rem, 3.5vw, 2.8rem);
+}
+.values li { background: var(--card); padding: 1.5rem 1.4rem; }
+.values__icon { display: block; width: 23px; height: 23px; color: var(--leaf); margin-bottom: .85rem; }
+.values h3 { font-family: var(--font-sans); font-size: var(--t-base); font-weight: 600; margin-bottom: .3rem; }
 .values p { font-size: var(--t-sm); color: var(--ink-dim); }
 
-/* ────────────────────────────  8. NOW  ──────────────────────────────── */
+/* ────────────────────  9. NOW ROW (Projects)  ───────────────────────── */
 
-.now { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-.now li {
-  padding: 1.7rem; border: 1px solid var(--line); border-radius: var(--radius);
-  background: var(--card);
-  transition: border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+.now {
+  display: grid; gap: .9rem;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  margin-bottom: 2rem;
 }
-.now li:hover { border-color: var(--leaf); transform: translateY(-3px); }
-.now__top { display: flex; align-items: center; gap: .6rem; margin-bottom: .9rem; }
-.now__icon { width: 20px; height: 20px; color: var(--leaf); flex: none; }
-.now h3 { font-size: var(--t-lg); font-weight: 500; }
+.now li { padding: 1.2rem 1.3rem; border-radius: var(--radius-sm); background: var(--mist); }
 .now__state {
-  display: inline-block; margin-bottom: .7rem;
-  font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--forest); background: var(--mist);
-  padding: .25rem .6rem; border-radius: 99px;
+  display: inline-block; margin-bottom: .5rem;
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--forest);
 }
-.now p { font-size: var(--t-sm); color: var(--ink-dim); }
+.now h3 { font-family: var(--font-sans); font-size: var(--t-base); font-weight: 600; margin-bottom: .2rem; }
+.now p { font-size: var(--t-sm); color: var(--ink-mid); }
 
-/* ────────────────────────────  9. WORK  ─────────────────────────────── */
-/* One project per row — nothing to click, nothing to filter, just scroll. */
+/* ──────────────────────  10. WORK (Projects)  ───────────────────────── */
 
-.work { display: flex; flex-direction: column; gap: 1.2rem; }
+.work { display: flex; flex-direction: column; gap: 1rem; }
 .work__item {
-  display: grid; grid-template-columns: auto 1fr; gap: clamp(1.5rem, 4vw, 3rem);
-  padding: clamp(1.8rem, 4vw, 2.6rem);
+  display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem, 3vw, 2.4rem);
+  padding: clamp(1.5rem, 3.5vw, 2.2rem);
   background: var(--card); border: 1px solid var(--line);
   border-radius: var(--radius);
-  transition: border-color var(--slow) var(--ease), box-shadow var(--slow) var(--ease);
+  transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
 }
 .work__item:hover { border-color: var(--leaf); box-shadow: var(--shadow); }
 
-.work__num {
-  font-family: var(--font-serif); font-size: var(--t-lg);
-  color: var(--leaf); line-height: 1;
-  padding-top: .35rem;
-}
-.work__year { font-size: var(--t-sm); color: var(--ink-dim); margin-bottom: .35rem; }
-.work__title { font-size: var(--t-xl); font-weight: 500; margin-bottom: .8rem; }
-.work__blurb { color: var(--ink-mid); margin-bottom: 1.2rem; max-width: 62ch; }
+.work__num { font-family: var(--font-serif); font-size: var(--t-lg); color: var(--leaf-ink); line-height: 1; padding-top: .3rem; }
+.work__year { font-size: var(--t-sm); color: var(--ink-dim); margin-bottom: .3rem; }
+.work__title { font-size: var(--t-xl); font-weight: 500; margin-bottom: .7rem; }
+.work__blurb { color: var(--ink-mid); margin-bottom: 1rem; max-width: 62ch; }
 
 .work__learned {
-  display: flex; gap: .8rem; align-items: flex-start;
-  padding: 1rem 1.2rem; border-radius: var(--radius-sm);
-  background: var(--mist); margin-bottom: 1.3rem; max-width: 62ch;
+  display: flex; gap: .75rem; align-items: flex-start;
+  padding: .9rem 1.1rem; border-radius: var(--radius-sm);
+  background: var(--mist); margin-bottom: 1.1rem; max-width: 62ch;
 }
-.work__learned-icon { width: 19px; height: 19px; color: var(--forest); flex: none; margin-top: .2rem; }
+.work__learned-icon { width: 18px; height: 18px; color: var(--forest); flex: none; margin-top: .2rem; }
 .work__learned p { font-size: var(--t-sm); color: var(--ink-mid); }
 .work__learned b { color: var(--ink); font-weight: 600; }
 
 .work__foot { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
-.tags { display: flex; flex-wrap: wrap; gap: .4rem; }
-.tag {
-  font-size: .78rem; font-weight: 500; letter-spacing: .03em;
-  padding: .28rem .7rem; border-radius: 99px;
-  background: var(--mist); color: var(--ink-mid);
-}
 .work__links { display: flex; gap: 1rem; margin-left: auto; }
 .work__links a {
-  display: inline-flex; align-items: center; gap: .3rem;
   font-size: var(--t-sm); font-weight: 600; color: var(--forest);
   border-bottom: 1px solid transparent;
   transition: border-color var(--fast) var(--ease);
 }
 .work__links a:hover { border-bottom-color: var(--forest); }
 
-/* ──────────────────────────  10. JOURNEY  ───────────────────────────── */
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.tag {
+  font-size: .78rem; font-weight: 500;
+  padding: .28rem .7rem; border-radius: 99px;
+  background: var(--mist); color: var(--ink-mid);
+}
 
-.path { position: relative; padding-left: 2.4rem; margin-bottom: clamp(3rem, 6vw, 4.5rem); }
+/* ────────────────────  11. EDUCATION (Résumé)  ──────────────────────── */
+
+.edu {
+  padding: clamp(1.4rem, 3vw, 1.9rem);
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.edu__head { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: .8rem; }
+.edu__school { font-family: var(--font-serif); font-size: var(--t-xl); font-weight: 500; color: var(--ink); }
+.edu__degree { color: var(--ink-mid); }
+.edu__meta { text-align: right; font-size: var(--t-sm); color: var(--ink-dim); }
+.edu__gpa {
+  display: inline-block; font-size: var(--t-sm); font-weight: 600;
+  color: var(--forest); background: var(--mist);
+  padding: .3rem .8rem; border-radius: 99px; margin-bottom: 1.3rem;
+}
+.honors { display: grid; gap: .55rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.honors li { display: flex; gap: .6rem; align-items: flex-start; font-size: var(--t-sm); color: var(--ink-mid); }
+.honors__icon { width: 17px; height: 17px; color: var(--leaf); flex: none; margin-top: .28rem; }
+
+/* ─────────────────  12. COURSEWORK & SKILLS (Résumé)  ───────────────── */
+
+.kit { display: grid; gap: 1.6rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.kit__group h4 {
+  font-family: var(--font-sans); font-size: var(--t-sm); font-weight: 600;
+  color: var(--ink); margin-bottom: .7rem;
+}
+
+/* ────────────────────  13. EXPERIENCE (Résumé)  ─────────────────────── */
+
+.path { position: relative; padding-left: 2.2rem; }
 .path::before {
-  content: ""; position: absolute; left: 9px; top: 10px; bottom: 10px;
+  content: ""; position: absolute; left: 8px; top: 10px; bottom: 10px;
   width: 1px; background: var(--line);
 }
-.path li { position: relative; padding-bottom: 2.6rem; }
-.path li:last-child { padding-bottom: 0; }
-.path li::before {
-  content: ""; position: absolute; left: -2.4rem; top: 6px;
-  width: 19px; height: 19px; border-radius: 50%;
-  background: var(--paper); border: 1px solid var(--line);
+.path > li { position: relative; padding-bottom: 2rem; }
+.path > li:last-child { padding-bottom: 0; }
+.path > li::before {
+  content: ""; position: absolute; left: -2.2rem; top: 4px;
+  width: 17px; height: 17px; border-radius: 50%;
+  background: var(--tint); border: 1px solid var(--line);
 }
-.path__icon {
-  position: absolute; left: calc(-2.4rem + 3px); top: 9px;
-  width: 13px; height: 13px; color: var(--leaf);
+.path__icon { position: absolute; left: calc(-2.2rem + 3px); top: 7px; width: 11px; height: 11px; color: var(--leaf); }
+.path__period { font-size: var(--t-sm); color: var(--ink-dim); margin-bottom: .2rem; }
+.path__role { font-family: var(--font-serif); font-size: var(--t-lg); font-weight: 500; color: var(--ink); }
+.path__org { color: var(--leaf-ink); font-size: var(--t-sm); font-weight: 600; margin-bottom: .55rem; }
+.path__points { display: grid; gap: .4rem; max-width: 62ch; }
+.path__points li {
+  position: relative; padding-left: 1.1rem;
+  font-size: var(--t-sm); color: var(--ink-mid);
 }
-.path__period {
-  font-size: var(--t-sm); font-weight: 600; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--ink-dim); margin-bottom: .3rem;
-}
-.path h3 { font-size: var(--t-lg); font-weight: 500; }
-.path__org { color: var(--leaf-ink); font-size: var(--t-sm); font-weight: 600; margin-bottom: .6rem; }
-.path p { color: var(--ink-mid); max-width: 58ch; }
-
-.skills { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
-.skills h3 {
-  font-family: var(--font-sans); font-size: var(--t-sm); font-weight: 600;
-  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-dim);
-  padding-bottom: .7rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line);
+.path__points li::before {
+  content: ""; position: absolute; left: 0; top: .62em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--leaf);
 }
 
-/* ───────────────────────  11. EXTRACURRICULARS  ─────────────────────── */
+/* ───────────────────  14. ACTIVITIES (Beyond)  ──────────────────────── */
 
-.extras { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.extras li {
-  padding: 1.7rem; background: var(--card);
-  border: 1px solid var(--line); border-radius: var(--radius);
+.acts { border-top: 1px solid var(--line-soft); }
+.acts li {
+  display: flex; align-items: center; gap: 1rem;
+  padding: .9rem .2rem; border-bottom: 1px solid var(--line-soft);
 }
-.extras__icon { width: 22px; height: 22px; color: var(--leaf); margin-bottom: 1rem; }
-.extras h3 { font-size: var(--t-lg); font-weight: 500; margin-bottom: .15rem; }
-.extras__org { color: var(--leaf-ink); font-size: var(--t-sm); font-weight: 600; }
-.extras__period { font-size: var(--t-sm); color: var(--ink-dim); margin-bottom: .7rem; }
-.extras p { font-size: var(--t-sm); color: var(--ink-mid); }
+.acts__icon { width: 20px; height: 20px; color: var(--leaf); flex: none; }
+.acts h4 { font-family: var(--font-sans); font-size: var(--t-base); font-weight: 600; color: var(--ink); }
+.acts__org { font-size: var(--t-sm); color: var(--ink-mid); }
+.acts__period { margin-left: auto; font-size: var(--t-sm); color: var(--ink-dim); white-space: nowrap; }
 
-/* ──────────────────────────  12. READING  ───────────────────────────── */
+/* ────────────────────  15. READING (Beyond)  ────────────────────────── */
 
-.shelf { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); }
+.shelf { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); }
 .book {
-  display: flex; gap: 1.1rem;
-  padding: 1.5rem; border-radius: var(--radius);
+  display: flex; gap: 1rem;
+  padding: 1.3rem; border-radius: var(--radius);
   border: 1px solid var(--line); background: var(--card);
-  transition: border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
 }
-.book:hover { border-color: var(--leaf); transform: translateY(-3px); }
-
-/* A little book spine, drawn in CSS */
-.book__spine {
-  width: 9px; flex: none; border-radius: 3px;
-  background: linear-gradient(var(--leaf), var(--forest));
-  opacity: .8;
-}
+.book__spine { width: 8px; flex: none; border-radius: 3px; background: linear-gradient(var(--leaf), var(--forest)); opacity: .8; }
 .book__status {
-  display: inline-block; margin-bottom: .5rem;
-  font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--forest); background: var(--mist);
-  padding: .22rem .55rem; border-radius: 99px;
+  display: inline-block; margin-bottom: .45rem;
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--forest);
 }
-.book h3 { font-size: var(--t-base); font-weight: 500; line-height: 1.35; }
-.book__author { font-size: var(--t-sm); color: var(--ink-dim); margin-bottom: .6rem; }
+.book h4 { font-family: var(--font-serif); font-size: var(--t-base); font-weight: 500; color: var(--ink); line-height: 1.35; }
+.book__author { font-size: var(--t-sm); color: var(--ink-dim); margin-bottom: .5rem; }
 .book__take { font-size: var(--t-sm); color: var(--ink-mid); font-style: italic; }
 
-/* ─────────────────────────  13. INTERESTS  ──────────────────────────── */
+/* ───────────────────  16. INTERESTS (Beyond)  ───────────────────────── */
 
-.interests { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
-             background: var(--line-soft); border: 1px solid var(--line-soft); border-radius: var(--radius); overflow: hidden; }
-.interests li {
-  background: var(--tint); padding: 1.9rem 1.7rem;
-  transition: background var(--fast) var(--ease);
+.interests {
+  display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  background: var(--line-soft); border: 1px solid var(--line-soft);
+  border-radius: var(--radius); overflow: hidden;
 }
-.interests li:hover { background: var(--card); }
-.interests__icon { display: block; width: 26px; height: 26px; color: var(--leaf); margin-bottom: 1.1rem; }
-.interests h3 { font-size: var(--t-lg); font-weight: 500; margin-bottom: .45rem; }
+.interests li { background: var(--card); padding: 1.5rem 1.4rem; }
+.interests__icon { display: block; width: 24px; height: 24px; color: var(--leaf); margin-bottom: .85rem; }
+.interests h4 { font-family: var(--font-sans); font-size: var(--t-base); font-weight: 600; color: var(--ink); margin-bottom: .3rem; }
 .interests p { font-size: var(--t-sm); color: var(--ink-dim); }
 
-/* ──────────────────────────  14. CONTACT  ───────────────────────────── */
+/* ──────────────────────────  17. CONTACT  ───────────────────────────── */
 
 .contact { text-align: center; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
 .contact .kicker { justify-content: center; }
 .contact__headline { font-size: var(--t-3xl); font-weight: 500; letter-spacing: -.02em; margin-bottom: 1.1rem; }
-.contact__body { max-width: 48ch; color: var(--ink-mid); font-size: var(--t-lg); margin-bottom: 2.4rem; }
+.contact__body { max-width: 48ch; color: var(--ink-mid); font-size: var(--t-lg); margin-bottom: 2.2rem; }
+.contact__actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
 
 .contact__copy {
   display: inline-flex; align-items: center; gap: .35rem;
@@ -504,7 +529,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 .horizon svg { width: 100%; height: 100%; }
 
-/* ──────────────────────────  15. FOOTER  ────────────────────────────── */
+/* ──────────────────────────  18. FOOTER  ────────────────────────────── */
 
 .footer { border-top: 1px solid var(--line-soft); padding-block: 2rem; }
 .footer__inner {
@@ -514,7 +539,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .footer a { color: var(--ink-mid); border-bottom: 1px solid var(--line); transition: color var(--fast) var(--ease); }
 .footer a:hover { color: var(--forest); }
 
-/* ──────────────────────────  16. TOAST  ─────────────────────────────── */
+/* ──────────────────────────  19. TOAST  ─────────────────────────────── */
 
 .toast {
   position: fixed; bottom: 1.8rem; left: 50%;
@@ -527,7 +552,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 .toast.is-up { transform: translate(-50%, 0); }
 
-/* ─────────────────────  17. TOUCH TARGETS  ──────────────────────────── */
+/* ─────────────────────  20. TOUCH TARGETS  ──────────────────────────── */
 /* Every interactive element needs a 44px-tall hit area on touch screens.
    Text links use an invisible ::after to grow the tappable box WITHOUT
    pushing their underline away from the text. Buttons just take padding. */
@@ -548,7 +573,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   height: 44px; transform: translateY(-50%);
 }
 
-/* ──────────────────  18. THE ONE SCROLL TRANSITION  ─────────────────── */
+/* ──────────────────  21. THE ONE SCROLL TRANSITION  ─────────────────── */
 /* Everything on the page enters the same way: a slow, soft rise.
    One easing, one distance, one duration — that's what makes it calm. */
 
@@ -559,24 +584,32 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   transition-delay: var(--d, 0ms);
 }
 
-/* ────────────────────────  19. RESPONSIVE  ──────────────────────────── */
+/* ────────────────────────  22. RESPONSIVE  ──────────────────────────── */
 
 @media (max-width: 880px) {
   .about { grid-template-columns: 1fr; }
   .work__item { grid-template-columns: 1fr; gap: 1rem; }
   .work__num { padding-top: 0; }
   .work__links { margin-left: 0; }
+  .edu__meta { text-align: left; }
+  .head--row { align-items: flex-start; }
 }
 
 @media (max-width: 680px) {
   .nav__links { display: none; }          /* the page is one scroll — nav is a convenience, not a requirement */
   .nav__inner { justify-content: space-between; }
-  .hero { text-align: center; }
   .hero__frond { display: none; }
   .footer__inner { flex-direction: column; gap: .4rem; }
+
+  /* Activity rows stack so the period doesn't crush the org name */
+  .acts li { flex-wrap: wrap; row-gap: .2rem; }
+  .acts__period { margin-left: 2rem; width: 100%; }
+
+  .contact__actions { width: 100%; flex-direction: column; }
+  .contact__actions .btn { width: 100%; }
 }
 
-/* ────────────────────  20. REDUCED MOTION / PRINT  ──────────────────── */
+/* ────────────────────  23. REDUCED MOTION / PRINT  ──────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

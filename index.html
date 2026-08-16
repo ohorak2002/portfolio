@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Oren Horak — Portfolio</title>
-<meta name="description" content="Student and builder. A little about who I am, what I've made, what I'm reading, and how to reach me.">
+<meta name="description" content="Oren Horak — Management Information Systems student at the University of Georgia. Projects, résumé, coaching, and how to get in touch.">
 <meta name="color-scheme" content="light dark">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Oren Horak — Portfolio">
-<meta property="og:description" content="Student and builder. Small, careful things for the web.">
+<meta property="og:description" content="MIS student at the University of Georgia. I coach, I build, and I keep showing up.">
+<meta property="og:image" content="assets/profile.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='6' fill='%23F2F7F0'/><g fill='none' stroke='%232F4A20' stroke-width='1.6' stroke-linecap='round'><path d='M12 20V7'/><path d='M12 13c0-3.3 2.7-6 6-6 0 3.3-2.7 6-6 6z'/><path d='M12 16c0-2.2-1.8-4-4-4 0 2.2 1.8 4 4 4z'/></g></svg>">
@@ -26,7 +27,7 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- ══════════════ NAV — one slim bar, nothing else ══════════════ -->
+<!-- ══════════════ NAV ══════════════ -->
 <header class="nav" id="nav">
   <div class="nav__inner">
     <a class="nav__mark" href="#top">
@@ -36,9 +37,9 @@
 
     <nav class="nav__links" aria-label="Page sections">
       <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#journey">Journey</a>
-      <a href="#reading">Reading</a>
+      <a href="#projects">Projects</a>
+      <a href="#resume">Résumé</a>
+      <a href="#beyond">Beyond</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -55,7 +56,7 @@
 
 <main id="main">
 
-<!-- ══════════════ HERO ══════════════ -->
+<!-- ══════════════ 1 · HOME ══════════════ -->
 <section class="hero" id="top">
   <span class="hero__frond hero__frond--l" aria-hidden="true"></span>
   <span class="hero__frond hero__frond--r" aria-hidden="true"></span>
@@ -73,8 +74,8 @@
     <p class="hero__blurb" data-rise></p>
 
     <div class="hero__actions" data-rise>
-      <a class="btn btn--solid" href="#work">See my work</a>
-      <a class="btn btn--quiet" href="#contact">Get in touch</a>
+      <a class="btn btn--solid" href="#projects">See my projects</a>
+      <a class="btn btn--quiet" href="#contact">Contact me</a>
     </div>
   </div>
 
@@ -83,9 +84,7 @@
   </a>
 </section>
 
-<div class="divider" aria-hidden="true"></div>
-
-<!-- ══════════════ ABOUT ══════════════ -->
+<!-- ══════════════ 2 · ABOUT ══════════════ -->
 <section class="band" id="about">
   <div class="wrap">
     <header class="head" data-rise>
@@ -97,107 +96,82 @@
       <div class="about__prose" data-rise></div>
       <ul class="facts" data-rise></ul>
     </div>
-  </div>
-</section>
 
-<!-- ══════════════ WHAT I BELIEVE ══════════════ -->
-<section class="band band--tint" id="mission">
-  <div class="wrap">
-    <header class="head head--center" data-rise>
-      <p class="kicker"></p>
-      <h2 class="head__title"></h2>
-    </header>
-
-    <blockquote class="statement" data-rise></blockquote>
     <ul class="values"></ul>
   </div>
 </section>
 
 <div class="divider" aria-hidden="true"></div>
 
-<!-- ══════════════ NOW ══════════════ -->
-<section class="band" id="now">
+<!-- ══════════════ 3 · PROJECTS ══════════════ -->
+<section class="band" id="projects">
   <div class="wrap">
     <header class="head" data-rise>
       <p class="kicker"></p>
       <h2 class="head__title"></h2>
       <p class="head__note"></p>
     </header>
-    <ul class="now"></ul>
-  </div>
-</section>
 
-<!-- ══════════════ WORK ══════════════ -->
-<section class="band band--tint" id="work">
-  <div class="wrap">
-    <header class="head" data-rise>
-      <p class="kicker"></p>
-      <h2 class="head__title"></h2>
-    </header>
+    <ul class="now"></ul>
     <ol class="work"></ol>
   </div>
 </section>
 
-<div class="divider" aria-hidden="true"></div>
-
-<!-- ══════════════ JOURNEY ══════════════ -->
-<section class="band" id="journey">
+<!-- ══════════════ 4 · RÉSUMÉ ══════════════ -->
+<section class="band band--tint" id="resume">
   <div class="wrap">
-    <header class="head" data-rise>
-      <p class="kicker"></p>
-      <h2 class="head__title"></h2>
+    <header class="head head--row" data-rise>
+      <div>
+        <p class="kicker"></p>
+        <h2 class="head__title"></h2>
+      </div>
+      <a class="btn btn--quiet" id="resumeDownload" href="#" download>Download résumé</a>
     </header>
 
+    <h3 class="subhead">Education</h3>
+    <div class="edu" data-rise></div>
+
+    <h3 class="subhead">Coursework &amp; skills</h3>
+    <div class="kit" data-rise></div>
+
+    <h3 class="subhead">Experience</h3>
     <ol class="path"></ol>
-    <div class="skills"></div>
-  </div>
-</section>
-
-<!-- ══════════════ EXTRACURRICULARS ══════════════ -->
-<section class="band band--tint" id="extras">
-  <div class="wrap">
-    <header class="head" data-rise>
-      <p class="kicker"></p>
-      <h2 class="head__title"></h2>
-    </header>
-    <ul class="extras"></ul>
   </div>
 </section>
 
 <div class="divider" aria-hidden="true"></div>
 
-<!-- ══════════════ READING ══════════════ -->
-<section class="band" id="reading">
+<!-- ══════════════ 5 · BEYOND THE CLASSROOM ══════════════ -->
+<section class="band" id="beyond">
   <div class="wrap">
     <header class="head" data-rise>
       <p class="kicker"></p>
       <h2 class="head__title"></h2>
-      <p class="head__note"></p>
     </header>
-    <ul class="shelf"></ul>
-  </div>
-</section>
 
-<!-- ══════════════ INTERESTS ══════════════ -->
-<section class="band band--tint" id="interests">
-  <div class="wrap">
-    <header class="head" data-rise>
-      <p class="kicker"></p>
-      <h2 class="head__title"></h2>
-    </header>
+    <h3 class="subhead">Activities &amp; leadership</h3>
+    <ul class="acts" data-rise></ul>
+
+    <h3 class="subhead">What I'm reading</h3>
+    <ul class="shelf"></ul>
+
+    <h3 class="subhead">Things I think about</h3>
     <ul class="interests"></ul>
   </div>
 </section>
 
-<!-- ══════════════ CONTACT ══════════════ -->
-<section class="band band--close" id="contact">
+<!-- ══════════════ 6 · CONTACT ══════════════ -->
+<section class="band band--tint band--close" id="contact">
   <span class="horizon" aria-hidden="true"></span>
   <div class="wrap contact">
     <p class="kicker" data-rise></p>
     <h2 class="contact__headline" data-rise></h2>
     <p class="contact__body" data-rise></p>
 
-    <a class="btn btn--solid btn--big" id="mailBtn" href="#" data-rise></a>
+    <div class="contact__actions" data-rise>
+      <a class="btn btn--solid btn--big" id="mailBtn" href="#"></a>
+      <a class="btn btn--quiet btn--big" id="phoneBtn" href="#"></a>
+    </div>
 
     <button class="contact__copy" id="copyMail" data-rise>
       <span>or copy </span><code></code>
@@ -212,7 +186,7 @@
 <footer class="footer">
   <div class="wrap footer__inner">
     <span>© <span id="year"></span> <span id="footerName"></span></span>
-    <span>Grown by hand. <a href="#top">Back to top</a></span>
+    <span>Built by hand. <a href="#top">Back to top</a></span>
   </div>
 </footer>
 
