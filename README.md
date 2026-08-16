@@ -1,69 +1,89 @@
 # Personal Portfolio
 
-A hand-written portfolio site. No framework, no build step, no dependencies.
-Open `index.html` in a browser and it works.
+A calm, nature-inspired portfolio site. One page, one scroll, no framework,
+no build step, no dependencies. Open `index.html` and it works.
 
 ## Editing your content
 
 **You only ever need to touch one file: [`js/data.js`](js/data.js).**
 
-Everything on the page — your name, headline, mission, projects, résumé
-timeline, skills, interests, contact details — is generated from the object in
-that file. Change the text, save, refresh the browser.
+Every word on the page comes from the object in that file — your name, the
+hero, about, values, projects, timeline, extracurriculars, bookshelf,
+interests and contact details. Change the text, save, refresh.
 
 ```
-js/data.js       ← your content. Edit this.
-index.html       ← page skeleton and mount points.
-css/style.css    ← all the design. Colours live at the top under "TOKENS".
-js/render.js     ← turns data.js into HTML. Rarely needs changing.
-js/effects.js    ← cursor, particles, scroll animation, theme switching.
-js/palette.js    ← the ⌘K command palette.
-js/main.js       ← boot + fallbacks.
+js/data.js        ← your content. This is the file you edit.
+index.html        ← page skeleton and mount points.
+css/style.css     ← all the design. Colours are the first 80 lines.
+js/botanical.js   ← the hand-drawn plant SVGs.
+js/render.js      ← turns data.js into HTML. Rarely needs changing.
+js/scroll.js      ← reveal-on-scroll, sticky nav, theme toggle, copy email.
 ```
+
+## Sections on the page
+
+Hero · About me · What I believe · Right now · My work · The journey (résumé)
+· Extracurriculars · What I'm reading · Interests · Contact
+
+To remove a section, delete its `<section>` from `index.html` and its block
+from `data.js`. To reorder, move the `<section>` blocks — nothing depends on
+their order.
+
+## Adding your photo
+
+Drop a square image into `assets/` and set it in `data.js`:
+
+```js
+photo: "assets/profile.jpg",
+```
+
+Leave it as `""` and the site shows your initials in a ringed circle instead,
+which looks intentional rather than broken.
 
 ## Running it locally
 
-Easiest — just double-click `index.html`. Everything works from `file://`
-because the content is a plain JS file, not a fetched JSON request.
+Double-click `index.html` — it works straight from the filesystem, because the
+content is a plain JS file rather than a fetched JSON request.
 
-For a proper local server (recommended, since the clipboard API needs it):
+For a local server (needed only for the copy-email button):
 
 ```bash
 npx serve .
 ```
 
-Then open http://localhost:3000.
+## Design notes
 
-## Things built into the site
+**Colour.** Two greens do two jobs. `--leaf` is the soft sage used for
+illustrations and icons. `--leaf-ink` is the same green pushed darker so it
+stays readable as text. Every text and graphic pair on the page has been
+measured against WCAG AA in both light and dark mode.
 
-| Feature | Where to find it |
-|---|---|
-| Command palette | Press <kbd>⌘K</kbd> / <kbd>Ctrl+K</kbd>, or `/` |
-| Light + dark mode | Sun icon in the nav (remembers your choice) |
-| Four accent palettes | Circle icon in the nav — citrus, ember, ice, bloom |
-| Custom trailing cursor | Desktop only, disabled on touch |
-| Particle constellation | Hero background, reacts to your mouse, pauses off-screen |
-| Text scramble | Rotating hero word, and the nav monogram on hover |
-| Scroll reveals | Every section, with staggered delays |
-| Card spotlight + tilt | Hover any project card |
-| Project filters | Chips above the work grid, generated from project `type` |
-| Section rail | Right edge on desktop — click to jump |
-| Konami code | ↑↑↓↓←→←→BA |
-| Console message | Open devtools |
-| Print stylesheet | <kbd>⌘P</kbd> gives a clean résumé print |
+**Motion.** There is exactly one animation: a slow, soft rise as elements
+enter the viewport. Same distance, same easing, same duration everywhere —
+that consistency is what makes it feel calm instead of busy. All of it is
+disabled under `prefers-reduced-motion`.
 
-Respects `prefers-reduced-motion` — all animation is disabled for visitors who
-ask for it, and the particle canvas never starts.
+**Clicks.** The page is built to be scrolled, not navigated. There are no
+tabs, filters, accordions or modals — every piece of content is visible by
+scrolling. The whole page has fewer than twenty interactive elements, and the
+nav is a convenience rather than a requirement.
+
+**Touch.** Every interactive element has at least a 44×44px hit area. Text
+links use an invisible pseudo-element to grow the tappable box without pushing
+their underline away from the text.
 
 ## Customising the look
 
-Open `css/style.css`. The first ~70 lines are design tokens:
+`css/style.css` starts with the design tokens:
 
-- `--font-serif` / `--font-sans` / `--font-mono` — swap the typefaces
-  (update the Google Fonts `<link>` in `index.html` too)
-- `[data-theme="dark"]` / `[data-theme="light"]` — background and text colours
-- `[data-accent="…"]` — the four accent palettes. Add a fifth by copying a line
-  and adding its name to the `ACCENTS` array in `js/effects.js`.
+- `[data-theme="light"]` / `[data-theme="dark"]` — the two palettes
+- `--font-serif` / `--font-sans` — Lora and Raleway (update the Google Fonts
+  `<link>` in `index.html` if you change them)
+- `--band`, `--gutter`, `--wrap` — the spacing rhythm
+
+If you change a green, re-check its contrast. The two that matter are
+`--leaf-ink` against `--paper`/`--tint` (needs 4.5:1) and `--forest-ink`
+against `--forest` (the button label, also 4.5:1).
 
 ## Deploying
 
