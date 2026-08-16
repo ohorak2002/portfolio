@@ -103,10 +103,15 @@
         class: "feature__media",
         src: N.video,
         poster: N.gif || (shots[0] && shots[0].src) || null,
-        autoplay: "", loop: "", muted: "", playsinline: "",
         "aria-label": `A short demo of ${N.name}`
       });
-      v.muted = true;               // must be set as a property for autoplay
+      // These must be set as properties, not passed to el() — it skips
+      // empty-string values, which is exactly what a boolean attribute is.
+      v.autoplay = true;
+      v.loop = true;
+      v.muted = true;               // required for autoplay to be allowed
+      v.playsInline = true;
+      v.controls = false;
       art.appendChild(v);
     } else {
       art.appendChild(el("img", {

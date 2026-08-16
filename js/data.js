@@ -77,7 +77,7 @@ window.PORTFOLIO = {
          video: "assets/nested-demo.mp4"   ← best quality, plays silently on loop
          gif:   "assets/nested-shop.gif"   ← simpler, bigger file
        If you set both, the video wins and the gif is the fallback poster. */
-    video: "",
+    video: "assets/nested-demo.mp4",
     gif: "",
 
     /* The live demo that plays in the Nested section. Same storyboard as the
