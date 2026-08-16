@@ -68,8 +68,7 @@
   $(".hero__greeting").textContent = D.hero.greeting;
   $(".hero__name").textContent = D.meta.name;
   $(".hero__role").textContent = D.meta.role;
-  $(".hero__tagline").innerHTML = tint(D.hero.tagline);
-  $(".hero__blurb").textContent = D.hero.blurb;
+  $(".hero__statement").innerHTML = tint(D.hero.statement);
 
   document.querySelectorAll(".divider").forEach(d => { d.innerHTML = B.divider; });
 
@@ -90,10 +89,24 @@
   if (fbtns.children.length) factions.appendChild(fbtns);
   else factions.appendChild(el("p", { class: "feature__soon", text: "Links coming once it's deployed." }));
 
-  // Real screenshot if there is one, otherwise the illustrated room.
+  // Real screenshots if there are any, otherwise the illustrated room.
   const art = $(".feature__art");
-  if (N.screenshot) {
-    art.appendChild(el("img", { class: "feature__shot", src: N.screenshot, alt: `Screenshot of ${N.name}`, loading: "lazy" }));
+  const shots = N.shots || [];
+  if (shots.length) {
+    art.classList.add("feature__art--shots");
+    const frame = el("div", { class: "shots" });
+    shots.forEach((sh, i) => {
+      frame.appendChild(el("img", {
+        class: `shots__img${i === 0 ? " is-on" : ""}`,
+        src: sh.src,
+        alt: `${N.name} — the ${sh.label} palette`,
+        loading: i === 0 ? "eager" : "lazy"
+      }));
+    });
+    art.appendChild(frame);
+    if (shots.length > 1) {
+      art.appendChild(el("p", { class: "shots__label", text: shots[0].label }));
+    }
   } else {
     art.classList.add("feature__art--drawn");
     art.innerHTML = B.room;

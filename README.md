@@ -38,13 +38,37 @@ people to see. To move it below About, swap the two `<section>` blocks in
 
 ## Nested
 
-Its own top-level block in `data.js`. Two things worth knowing:
+Its own top-level block in `data.js`.
 
-- `screenshot: ""` — the section currently draws an isometric room in SVG as a
-  stand-in. Put a real screenshot in `assets/`, name it here, and it replaces
-  the drawing.
-- `links: { live: "", repo: "" }` — while both are empty the section says
-  "Links coming once it's deployed." Fill either one and proper buttons appear.
+**Screenshots.** `shots` is a list of real captures from the running app. One
+image shows as a still; several crossfade slowly (4.2s each) with the palette
+name in the corner. They only animate while the section is on screen, and not
+at all under `prefers-reduced-motion`.
+
+```js
+shots: [
+  { src: "assets/nested-clay.jpg", label: "Clay & Linen" },
+  ...
+]
+```
+
+To refresh them: run Nested, open devtools, and paste this into the console to
+downscale the canvas and save it.
+
+```js
+const c = document.querySelector('canvas'), w = 1200;
+const off = document.createElement('canvas');
+off.width = w; off.height = Math.round(c.height * w / c.width);
+off.getContext('2d').drawImage(c, 0, 0, off.width, off.height);
+const a = document.createElement('a');
+a.href = off.toDataURL('image/jpeg', 0.8); a.download = 'nested-new.jpg'; a.click();
+```
+
+Check the file size afterwards. A suspiciously small file (under ~40KB) means
+the camera was pointed at a blank wall when you captured.
+
+**Links.** `links: { live: "", repo: "" }` — while both are empty the section
+shows a "links coming soon" note. Fill either one and real buttons appear.
 
 ## Adding your photo
 

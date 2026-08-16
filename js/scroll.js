@@ -98,6 +98,33 @@
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  /* ─── NESTED SCREENSHOT CROSSFADE ──────────────────────────────────── */
+  /* Three renders of the same room in different palettes, fading between
+     each other. It only runs while the section is on screen, and not at all
+     if the visitor asked for reduced motion. */
+
+  (function shots() {
+    const imgs = $$(".shots__img");
+    const label = $(".shots__label");
+    if (imgs.length < 2 || REDUCED) return;
+
+    const labels = imgs.map(i => (i.alt.split("the ")[1] || "").replace(" palette", ""));
+    let i = 0, timer = null;
+
+    const step = () => {
+      imgs[i].classList.remove("is-on");
+      i = (i + 1) % imgs.length;
+      imgs[i].classList.add("is-on");
+      if (label) label.textContent = labels[i];
+    };
+
+    const start = () => { if (!timer) timer = setInterval(step, 4200); };
+    const stop  = () => { clearInterval(timer); timer = null; };
+
+    new IntersectionObserver(([e]) => e.isIntersecting ? start() : stop(),
+      { threshold: 0.25 }).observe($(".feature__art"));
+  })();
+
   /* ─── COPY EMAIL ───────────────────────────────────────────────────── */
 
   let toastTimer;

@@ -33,41 +33,45 @@ window.PORTFOLIO = {
   /* ─── 1 · HOME ────────────────────────────────────────────────────── */
   hero: {
     greeting: "Hello, I'm",
-    // Wrap words in *asterisks* to tint them forest green.
-    tagline: "I coach, I build, and I *keep showing up*.",
-    blurb:
-      "MIS student at the University of Georgia, and the person behind Nested."
+    // The emphasised line under your name. Wrap words in *asterisks* to tint
+    // them forest green. Keep it to one sentence — it carries the whole hero.
+    statement:
+      "MIS student at the University of Georgia, and the person behind *Nested*."
   },
 
   /* ─── 2 · NESTED — the headline project ───────────────────────────── */
   nested: {
     kicker: "Featured project",
     name: "Nested",
-    tagline: "A 3D room designer that runs entirely in your browser.",
+    tagline: "You don't have to picture it.",
     blurb:
-      "Nested lets you build a room from scratch — draw the walls, set the " +
-      "dimensions, drop in furniture, and move a camera through the result. " +
-      "There's no account to make and nothing to upload. The whole thing runs " +
-      "on your machine, which means it opens instantly and your floor plan " +
-      "never leaves your laptop.",
+      "Nested builds a room from five questions. Tell it the shape of your space " +
+      "and what you like, and it lays the whole thing out for you — walls, floor, " +
+      "furniture, lighting — then hands you the controls. Drag anything you want to " +
+      "move, swap the palette, or drop in a photo of a room you like and it pulls " +
+      "the colours out. No account, no upload, nothing leaves your machine.",
 
-    // Drop a screenshot in assets/ and name it here, e.g. "assets/nested.png".
-    // Leave it "" and the illustrated room below shows instead.
-    screenshot: "",
+    // Screenshots pulled straight from the running app. Add or remove freely;
+    // one image shows as a still, several crossfade slowly.
+    shots: [
+      { src: "assets/nested-clay.jpg",       label: "Clay & Linen" },
+      { src: "assets/nested-terracotta.jpg", label: "Terracotta" },
+      { src: "assets/nested-midnight.jpg",   label: "Midnight" }
+    ],
 
     features: [
-      { icon: "sprout", title: "Build the room",    body: "Draw walls, set dimensions, and shape a floor plan that matches a real space." },
-      { icon: "tree",   title: "Furnish it",        body: "Place and rotate furniture, then move it until the layout actually works." },
-      { icon: "leaf",   title: "Walk through it",   body: "Move a camera through the scene to see the room from inside, not just above." },
-      { icon: "seed",   title: "Nothing leaves",    body: "No account, no upload, no server. It runs entirely in the browser tab." }
+      { icon: "sprout", title: "Five questions",   body: "Answer five things about your space and taste. Nested builds and arranges the room from your answers." },
+      { icon: "tree",   title: "Move anything",    body: "Click a piece to pick it up, drag empty space to orbit. Auto-arrange cleans up when it gets crowded." },
+      { icon: "flower", title: "Sixteen palettes", body: "Clay & Linen through to Midnight — or drop in a photo of a room you like and it matches the colours." },
+      { icon: "seed",   title: "Runs on your machine", body: "No account and no upload. It's a browser tab, so it opens instantly and your floor plan stays yours." }
     ],
 
     learned:
-      "How a render loop, a scene graph, and raycast-based selection actually fit " +
-      "together — and that the hard part of 3D isn't the maths, it's making the " +
-      "controls feel obvious to someone who has never used the tool.",
+      "How a render loop, a scene graph, and raycast-based selection fit together — " +
+      "and that the hard part of 3D isn't the maths, it's making the controls obvious " +
+      "to someone who has never opened the tool before.",
 
-    tags: ["Three.js", "JavaScript", "WebGL", "Canvas"],
+    tags: ["Three.js", "React", "WebGL", "Vite"],
     links: { live: "", repo: "" },     // fill these in and the buttons appear
     status: "In active development"
   },
