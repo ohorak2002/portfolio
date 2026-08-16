@@ -71,6 +71,57 @@ window.PORTFOLIO = {
       "and that the hard part of 3D isn't the maths, it's making the controls obvious " +
       "to someone who has never opened the tool before.",
 
+
+    /* The live demo that plays in the Nested section. Same storyboard as the
+       Remotion film in ../nested-video. Every figure below was read out of
+       the running app — items, stores, prices and the $573 total. */
+    tour: {
+      actMs: 6500,
+
+      shots: [
+        { src: "assets/nested-clay.jpg",       label: "Clay & Linen" },
+        { src: "assets/nested-terracotta.jpg", label: "Terracotta" },
+        { src: "assets/nested-midnight.jpg",   label: "Midnight" }
+      ],
+
+      palettes: [
+        { name: "Clay & Linen", swatch: ["#C9B49C", "#EDE4D6", "#8A7A66"] },
+        { name: "Terracotta",   swatch: ["#C4714B", "#E8C6AE", "#7A4230"] },
+        { name: "Midnight",     swatch: ["#2B3140", "#4A5570", "#171B24"] },
+        { name: "Forest Floor", swatch: ["#5A6E4E", "#93A882", "#33402C"] },
+        { name: "Pine & Slate", swatch: ["#4A6357", "#8FA69A", "#2C3B34"] },
+        { name: "Sand & Sea",   swatch: ["#C7B79B", "#7FA3AC", "#4C6670"] }
+      ],
+
+      items: [
+        { name: "Upholstered Platform Bed, Queen", price: 549, store: "Wayfair",
+          save: { amount: 370, store: "Walmart", price: 179 } },
+        { name: "Two-Drawer Nightstand", price: 119, store: "Target" },
+        { name: "Arc Floor Lamp", price: 299, store: "West Elm",
+          save: { amount: 260, store: "IKEA", price: 39 } },
+        { name: "Artificial Monstera, 4 ft", price: 88, store: "Wayfair",
+          save: { amount: 66, store: "Walmart", price: 22 } }
+      ],
+
+      cart: [
+        { name: "Platform Bed Frame, Queen", price: 179 },
+        { name: "Two-Drawer Nightstand",     price: 119 },
+        { name: "Area Rug, 8x10",            price: 89 },
+        { name: "Floor Lamp, Standing",      price: 39 },
+        { name: "Artificial Monstera, 4 ft", price: 88 },
+        { name: "Gallery Frame Set of 6",    price: 59 }
+      ],
+      cartTotal: 573,
+      savingsNote: "Swapping every piece for its cheapest equivalent would save about $66.",
+
+      compare: {
+        from: { store: "Wayfair", name: "Upholstered Platform Bed, Queen", price: 549 },
+        to:   { store: "Walmart", name: "Platform Bed Frame, Queen (Value)", price: 179 }
+      },
+
+      stores: ["IKEA", "Wayfair", "West Elm", "Target", "Home Depot", "Walmart", "Amazon"]
+    },
+
     tags: ["Three.js", "React", "WebGL", "Vite"],
     links: { live: "", repo: "" },     // fill these in and the buttons appear
     status: "In active development"

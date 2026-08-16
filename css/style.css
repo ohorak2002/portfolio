@@ -679,7 +679,184 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .interests h4 { font-family: var(--font-sans); font-size: var(--t-base); font-weight: 600; color: var(--ink); margin-bottom: .3rem; }
 .interests p { font-size: var(--t-sm); color: var(--ink-dim); }
 
-/* ──────────────────────────  19. CONTACT  ───────────────────────────── */
+/* ─────────────────────  19. THE NESTED TOUR  ────────────────────────── */
+/* A live demo of the app, playing inside the page. Dark chrome on purpose —
+   it reads as "this is the product", distinct from the site around it. */
+
+.tour {
+  --t-ink:   #10160F;
+  --t-panel: #161D16;
+  --t-card:  #1D261C;
+  --t-line:  #2C382A;
+  --t-text:  #F1F6EF;
+  --t-dim:   #93A491;
+  --t-mint:  #7BC9A2;
+  --t-gold:  #E3C069;
+
+  display: flex; flex-direction: column;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--t-ink);
+  border: 1px solid var(--t-line);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  line-height: 1.45;
+  container-type: inline-size;
+}
+
+.tour__bar {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .7rem .9rem;
+  border-bottom: 1px solid var(--t-line);
+}
+.tour__dots { display: flex; gap: .3rem; }
+.tour__dot { width: 9px; height: 9px; border-radius: 99px; }
+.tour__brand { font-family: var(--font-serif); font-size: 15px; color: var(--t-text); }
+
+.tour__tabs { display: flex; gap: 1.4rem; padding: 0 .95rem; border-bottom: 1px solid var(--t-line); }
+.tour__tab {
+  position: relative;
+  padding: .6rem .1rem; font-size: 12px; font-weight: 600;
+  color: var(--t-dim); border-bottom: 2px solid transparent;
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+/* Grow the tap area to 44px without moving the underline off the label. */
+.tour__tab::after {
+  content: "";
+  position: absolute; left: -.5rem; right: -.5rem; top: 50%;
+  height: 44px; transform: translateY(-50%);
+}
+.tour__tab.is-on { color: var(--t-text); border-bottom-color: var(--t-mint); }
+
+.tour__stage { position: relative; aspect-ratio: 16 / 11; }
+
+.tour__act {
+  position: absolute; inset: 0;
+  padding: .9rem;
+  opacity: 0; visibility: hidden;
+  transition: opacity .55s var(--ease);
+}
+.tour__act.is-on { opacity: 1; visibility: visible; }
+
+/* ── act 1 · design ── */
+.tour__act--design { display: grid; grid-template-columns: 1fr 1.15fr; gap: .8rem; }
+.tour__palettes { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
+.tour__pal {
+  display: flex; align-items: center; gap: .55rem;
+  padding: .42rem .5rem; border-radius: 9px;
+  border: 1px solid transparent;
+  transition: background .35s var(--ease), border-color .35s var(--ease);
+}
+.tour__pal.is-on { background: var(--t-card); border-color: var(--t-mint); }
+.tour__sw { display: flex; gap: 2px; flex: none; }
+.tour__sw span { width: 11px; height: 15px; border-radius: 2px; }
+.tour__pal-name { font-size: 12px; color: var(--t-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tour__pal.is-on .tour__pal-name { color: var(--t-text); font-weight: 600; }
+
+.tour__view { position: relative; border-radius: 11px; overflow: hidden; background: var(--t-card); }
+.tour__shot {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0;
+  transition: opacity .8s var(--ease);
+}
+.tour__shot.is-on { opacity: 1; }
+.tour__label {
+  position: absolute; right: .5rem; bottom: .5rem;
+  padding: .18rem .5rem; border-radius: 99px;
+  background: rgba(10,14,10,.82);
+  border: 1px solid var(--t-line);
+  color: var(--t-text); font-size: 10px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+
+/* ── act 2 · shop ── */
+.tour__act--shop { display: grid; grid-template-columns: 1.5fr 1fr; gap: .8rem; }
+.tour__list { display: flex; flex-direction: column; gap: .35rem; overflow: hidden; }
+.tour__item {
+  display: flex; align-items: center; gap: .6rem;
+  padding: .48rem .6rem; border-radius: 9px;
+  background: var(--t-card); border: 1px solid var(--t-line);
+  opacity: 0; translate: 0 12px;
+  transition: opacity .5s var(--ease) var(--d, 0ms),
+              translate .5s var(--ease) var(--d, 0ms),
+              border-color .4s var(--ease);
+}
+.tour__act--shop.is-on .tour__item { opacity: 1; translate: 0 0; }
+.tour__item.is-added { border-color: var(--t-mint); }
+.tour__item-main { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1; }
+.tour__item-name { font-size: 12px; font-weight: 600; color: var(--t-text); }
+.tour__item-meta { font-size: 11px; color: var(--t-dim); }
+.tour__item-save { font-size: 10.5px; color: var(--t-gold); }
+.tour__add {
+  flex: none; font-size: 10.5px; font-weight: 700;
+  padding: .24rem .6rem; border-radius: 99px;
+  border: 1px solid var(--t-line); color: var(--t-text);
+  transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
+}
+.tour__item.is-added .tour__add { background: var(--t-mint); color: var(--t-ink); border-color: var(--t-mint); }
+
+.tour__cart { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
+.tour__cart-head {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--t-dim); margin-bottom: .15rem;
+}
+.tour__cart-line {
+  display: flex; justify-content: space-between; gap: .5rem;
+  font-size: 11px; color: var(--t-dim);
+  padding-bottom: .22rem; border-bottom: 1px solid var(--t-line);
+}
+.tour__cart-line span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tour__cart-line b { color: var(--t-text); flex: none; }
+.tour__total-label { font-size: 11px; color: var(--t-dim); margin-top: auto; }
+.tour__total {
+  font-family: var(--font-serif); font-size: 30px; line-height: 1;
+  color: var(--t-mint); font-variant-numeric: tabular-nums;
+}
+.tour__note { font-size: 10.5px; color: var(--t-gold); }
+
+/* ── act 3 · save ── */
+.tour__act--save { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem; }
+.tour__stores { display: flex; flex-wrap: wrap; gap: .7rem; justify-content: center; }
+.tour__stores span { font-size: 10.5px; color: var(--t-dim); font-weight: 600; }
+.tour__compare { display: flex; align-items: stretch; gap: .6rem; width: 100%; }
+.tour__card {
+  flex: 1; display: flex; flex-direction: column; gap: .25rem;
+  padding: .7rem .75rem; border-radius: 11px;
+  background: var(--t-card); border: 1px solid var(--t-line);
+}
+.tour__card--win { border-color: var(--t-mint); border-width: 2px; }
+.tour__store { font-size: 10.5px; color: var(--t-dim); }
+.tour__thing { font-size: 12px; font-weight: 600; color: var(--t-text); line-height: 1.25; }
+.tour__price { font-family: var(--font-serif); font-size: 26px; line-height: 1.1; position: relative; display: inline-block; }
+.tour__price--old { color: var(--t-dim); }
+.tour__price--new { color: var(--t-mint); }
+.tour__strike {
+  position: absolute; left: 0; top: 52%; height: 2px; width: 0;
+  background: var(--t-gold); border-radius: 2px;
+}
+.tour__act--save.is-on .tour__strike { width: 100%; transition: width .6s var(--ease) .5s; }
+.tour__arrow { align-self: center; color: var(--t-mint); font-size: 18px; }
+.tour__badge {
+  padding: .4rem 1rem; border-radius: 99px;
+  background: var(--t-gold); color: #241B06;
+  font-size: 12px; font-weight: 800;
+}
+
+/* The window is narrow on phones — drop to a single column. */
+@container (max-width: 430px) {
+  .tour__act--design,
+  .tour__act--shop { grid-template-columns: 1fr; }
+  .tour__palettes,
+  .tour__cart { display: none; }
+  .tour__compare { flex-direction: column; }
+  .tour__arrow { rotate: 90deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tour__act, .tour__item, .tour__shot, .tour__strike { transition: none !important; }
+}
+
+/* ──────────────────────────  20. CONTACT  ───────────────────────────── */
 
 .contact { text-align: center; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
 .contact .kicker { justify-content: center; }
@@ -714,7 +891,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 .horizon svg { width: 100%; height: 100%; }
 
-/* ──────────────────────────  20. FOOTER  ────────────────────────────── */
+/* ──────────────────────────  21. FOOTER  ────────────────────────────── */
 
 .footer { border-top: 1px solid var(--line-soft); padding-block: 2rem; }
 .footer__inner {
@@ -724,7 +901,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .footer a { color: var(--ink-mid); border-bottom: 1px solid var(--line); transition: color var(--fast) var(--ease); }
 .footer a:hover { color: var(--forest); }
 
-/* ──────────────────────────  21. TOAST  ─────────────────────────────── */
+/* ──────────────────────────  22. TOAST  ─────────────────────────────── */
 
 .toast {
   position: fixed; bottom: 1.8rem; left: 50%;
@@ -737,7 +914,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 .toast.is-up { transform: translate(-50%, 0); }
 
-/* ─────────────────────  22. TOUCH TARGETS  ──────────────────────────── */
+/* ─────────────────────  23. TOUCH TARGETS  ──────────────────────────── */
 /* Every interactive element needs a 44px-tall hit area on touch screens.
    Text links use an invisible ::after to grow the tappable box WITHOUT
    pushing their underline away from the text. Buttons just take padding. */
@@ -758,7 +935,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   height: 44px; transform: translateY(-50%);
 }
 
-/* ──────────────────  23. THE ONE SCROLL TRANSITION  ─────────────────── */
+/* ──────────────────  24. THE ONE SCROLL TRANSITION  ─────────────────── */
 /* Everything on the page enters the same way: a slow, soft rise.
    One easing, one distance, one duration — that's what makes it calm. */
 
@@ -769,7 +946,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   transition-delay: var(--d, 0ms);
 }
 
-/* ────────────────────────  24. RESPONSIVE  ──────────────────────────── */
+/* ────────────────────────  25. RESPONSIVE  ──────────────────────────── */
 
 @media (max-width: 880px) {
   .about { grid-template-columns: 1fr; }
@@ -799,7 +976,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   .contact__actions .btn { width: 100%; }
 }
 
-/* ────────────────────  25. REDUCED MOTION / PRINT  ──────────────────── */
+/* ────────────────────  26. REDUCED MOTION / PRINT  ──────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

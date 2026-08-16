@@ -89,10 +89,13 @@
   if (fbtns.children.length) factions.appendChild(fbtns);
   else factions.appendChild(el("p", { class: "feature__soon", text: "Links coming once it's deployed." }));
 
-  // Real screenshots if there are any, otherwise the illustrated room.
+  // The Nested tour (js/nestedTour.js) owns this slot when data.nested.tour
+  // exists. Otherwise fall back to the still crossfade, then the drawing.
   const art = $(".feature__art");
   const shots = N.shots || [];
-  if (shots.length) {
+  if (N.tour) {
+    art.classList.add("feature__art--tour");
+  } else if (shots.length) {
     art.classList.add("feature__art--shots");
     const frame = el("div", { class: "shots" });
     shots.forEach((sh, i) => {
@@ -104,9 +107,7 @@
       }));
     });
     art.appendChild(frame);
-    if (shots.length > 1) {
-      art.appendChild(el("p", { class: "shots__label", text: shots[0].label }));
-    }
+    if (shots.length > 1) art.appendChild(el("p", { class: "shots__label", text: shots[0].label }));
   } else {
     art.classList.add("feature__art--drawn");
     art.innerHTML = B.room;
