@@ -72,6 +72,14 @@ window.PORTFOLIO = {
       "to someone who has never opened the tool before.",
 
 
+    /* Drop a rendered demo in assets/ and name it here, and it REPLACES the
+       live tour below. Leave both "" to keep the tour.
+         video: "assets/nested-demo.mp4"   ← best quality, plays silently on loop
+         gif:   "assets/nested-shop.gif"   ← simpler, bigger file
+       If you set both, the video wins and the gif is the fallback poster. */
+    video: "",
+    gif: "",
+
     /* The live demo that plays in the Nested section. Same storyboard as the
        Remotion film in ../nested-video. Every figure below was read out of
        the running app — items, stores, prices and the $573 total. */

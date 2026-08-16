@@ -89,13 +89,37 @@
   if (fbtns.children.length) factions.appendChild(fbtns);
   else factions.appendChild(el("p", { class: "feature__soon", text: "Links coming once it's deployed." }));
 
-  // The Nested tour (js/nestedTour.js) owns this slot when data.nested.tour
-  // exists. Otherwise fall back to the still crossfade, then the drawing.
+  /* What fills the art slot, in order of preference:
+     a rendered video, a gif, the live tour, still screenshots, the drawing. */
   const art = $(".feature__art");
   const shots = N.shots || [];
-  if (N.tour) {
+  const tourMount = $("#nestedTour");
+
+  if (N.video || N.gif) {
+    if (tourMount) tourMount.remove();
+    art.classList.add("feature__art--media");
+    if (N.video) {
+      const v = el("video", {
+        class: "feature__media",
+        src: N.video,
+        poster: N.gif || (shots[0] && shots[0].src) || null,
+        autoplay: "", loop: "", muted: "", playsinline: "",
+        "aria-label": `A short demo of ${N.name}`
+      });
+      v.muted = true;               // must be set as a property for autoplay
+      art.appendChild(v);
+    } else {
+      art.appendChild(el("img", {
+        class: "feature__media",
+        src: N.gif,
+        alt: `A short demo of ${N.name}`,
+        loading: "lazy"
+      }));
+    }
+  } else if (N.tour) {
     art.classList.add("feature__art--tour");
   } else if (shots.length) {
+    if (tourMount) tourMount.remove();
     art.classList.add("feature__art--shots");
     const frame = el("div", { class: "shots" });
     shots.forEach((sh, i) => {
@@ -109,6 +133,7 @@
     art.appendChild(frame);
     if (shots.length > 1) art.appendChild(el("p", { class: "shots__label", text: shots[0].label }));
   } else {
+    if (tourMount) tourMount.remove();
     art.classList.add("feature__art--drawn");
     art.innerHTML = B.room;
   }

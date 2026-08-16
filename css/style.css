@@ -679,6 +679,15 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .interests h4 { font-family: var(--font-sans); font-size: var(--t-base); font-weight: 600; color: var(--ink); margin-bottom: .3rem; }
 .interests p { font-size: var(--t-sm); color: var(--ink-dim); }
 
+/* A rendered demo (mp4 or gif) sits in the same slot as the live tour. */
+.feature__media {
+  width: 100%; height: auto; display: block;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: var(--card);
+}
+
 /* ─────────────────────  19. THE NESTED TOUR  ────────────────────────── */
 /* A live demo of the app, playing inside the page. Dark chrome on purpose —
    it reads as "this is the product", distinct from the site around it. */
