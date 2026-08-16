@@ -22,18 +22,29 @@ js/scroll.js      ← reveal-on-scroll, sticky nav, theme toggle, copy email.
 
 ## Sections on the page
 
-Six major sections, in this order:
+Seven sections, with five in the top nav:
 
-1. **Home** — photo, name, tagline
-2. **About me** — who you are, quick facts, four principles
-3. **My projects** — what you're building now, then the projects themselves
-4. **Résumé** — education and honors, coursework and skills, experience
-5. **Beyond the classroom** — activities and leadership, reading, interests
-6. **Contact me** — email, phone, links
+1. **Home** — the large arched portrait, name, tagline
+2. **Nested** — the featured project, deliberately the biggest block on the page
+3. **About me** — who you are, quick facts, four principles
+4. **Work experience** — education and honors, coursework and skills, five roles
+5. **My goals** — short and long term
+6. **Beyond the classroom** — activities, reading, interests
+7. **Contact me** — email, phone, links
 
-Each section groups several blocks under one heading, so the page reads as six
-stops rather than a dozen. To remove a section, delete its `<section>` from
-`index.html` and its block from `data.js`.
+Nested sits immediately after the hero because it's the work you most want
+people to see. To move it below About, swap the two `<section>` blocks in
+`index.html` and reorder the nav links above them.
+
+## Nested
+
+Its own top-level block in `data.js`. Two things worth knowing:
+
+- `screenshot: ""` — the section currently draws an isometric room in SVG as a
+  stand-in. Put a real screenshot in `assets/`, name it here, and it replaces
+  the drawing.
+- `links: { live: "", repo: "" }` — while both are empty the section says
+  "Links coming once it's deployed." Fill either one and proper buttons appear.
 
 ## Adding your photo
 

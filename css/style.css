@@ -159,6 +159,13 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .nav__links a:hover { color: var(--ink); background: var(--mist); }
 .nav__links a.is-here { color: var(--forest); }
 
+/* The featured project gets a standing highlight in the nav */
+.nav__links a.nav__feature {
+  color: var(--forest); font-weight: 600;
+  background: var(--mist);
+}
+.nav__links a.nav__feature:hover { background: var(--forest); color: var(--forest-ink); }
+
 .nav__theme {
   width: 38px; height: 38px; flex: none;
   display: grid; place-items: center;
@@ -175,9 +182,8 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
 .hero {
   position: relative;
-  min-height: 100svh;
   display: flex; align-items: center;
-  padding: calc(var(--nav-h) + 2rem) 0 4.5rem;
+  padding: calc(var(--nav-h) + 1.6rem) 0 3rem;
   text-align: center;
   overflow: hidden;
 }
@@ -185,59 +191,94 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 /* Soft ferns in the corners — decoration only, very low contrast */
 .hero__frond {
   position: absolute; bottom: -40px;
-  width: clamp(150px, 24vw, 300px);
-  color: var(--leaf); opacity: .14;
+  width: clamp(150px, 22vw, 290px);
+  color: var(--leaf); opacity: .13;
   pointer-events: none;
 }
 .hero__frond svg { width: 100%; height: auto; }
-.hero__frond--l { left: -50px; transform: rotate(12deg); }
-.hero__frond--r { right: -50px; transform: rotate(-12deg) scaleX(-1); }
+.hero__frond--l { left: -60px; transform: rotate(12deg); }
+.hero__frond--r { right: -60px; transform: rotate(-12deg) scaleX(-1); }
 
 .hero__inner { display: flex; flex-direction: column; align-items: center; }
 
-/* Portrait — circular, ringed like a tree cross-section */
-.portrait { position: relative; width: 146px; height: 146px; margin-bottom: 1.9rem; }
-.portrait__ring {
-  position: absolute; inset: -9px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  box-shadow: 0 0 0 8px var(--mist);
+/* ── The portrait: the centrepiece of the page ──────────────────────────
+   An arch, not a circle. The photo is a standing 2:3 portrait, so a tall
+   arched frame shows the whole subject instead of cropping to a head — and
+   an arch reads as a garden doorway, which suits the rest of the page.   */
+
+.portrait {
+  position: relative;
+  width: clamp(215px, 34vw, 300px);
+  aspect-ratio: 3 / 4;
+  margin-bottom: 1.7rem;
+  isolation: isolate;
 }
+
+/* A wide soft glow sitting behind everything */
+.portrait__halo {
+  position: absolute; z-index: 0;
+  left: 50%; top: 46%;
+  width: 150%; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--mist) 0%, transparent 68%);
+  opacity: .9;
+}
+
+/* An offset outline arch, like a second frame just behind the first */
+.portrait__arch {
+  position: absolute; z-index: 1;
+  inset: -14px -14px -14px 14px;
+  border: 1px solid var(--leaf);
+  opacity: .45;
+  border-radius: 999px 999px var(--radius) var(--radius);
+}
+
 .portrait__media {
-  width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
-  background: var(--mist); color: var(--forest);
-  display: grid; place-items: center;
-  font-family: var(--font-serif); font-size: 2.6rem; letter-spacing: .02em;
+  position: relative; z-index: 2;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  border-radius: 999px 999px var(--radius) var(--radius);
+  background: var(--mist);
+  box-shadow: var(--shadow);
 }
 .portrait__media img { width: 100%; height: 100%; object-fit: cover; }
 
+/* Fallback when no photo is set */
+.portrait__media.is-initials {
+  display: grid; place-items: center;
+  color: var(--forest);
+  font-family: var(--font-serif); font-size: 4rem; letter-spacing: .02em;
+}
+
 .hero__greeting {
   font-size: var(--t-sm); letter-spacing: .16em; text-transform: uppercase;
-  color: var(--ink-dim); margin-bottom: .7rem;
+  color: var(--ink-dim); margin-bottom: 1rem;
 }
 .hero__name {
   font-size: var(--t-3xl); font-weight: 500; letter-spacing: -.02em;
-  margin-bottom: .5rem;
+  margin-bottom: .45rem;
 }
 .hero__role {
   font-size: var(--t-sm); font-weight: 600; letter-spacing: .04em;
-  color: var(--leaf-ink); margin-bottom: 1.5rem;
+  color: var(--leaf-ink); margin-bottom: 1.1rem;
 }
 .hero__tagline {
   font-family: var(--font-serif); font-size: var(--t-xl);
-  color: var(--ink); max-width: 20ch; line-height: 1.34; margin-bottom: 1.1rem;
+  color: var(--ink); max-width: 22ch; line-height: 1.32; margin-bottom: .8rem;
 }
 .hero__tagline .hl { color: var(--forest); font-style: italic; }
-.hero__blurb { max-width: 54ch; color: var(--ink-dim); margin-bottom: 2rem; }
+.hero__blurb { max-width: 52ch; color: var(--ink-dim); margin-bottom: 1.7rem; }
 
 .hero__actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
 
 .hero__down {
-  position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
-  width: 34px; height: 54px; display: grid; place-items: center;
+  display: grid; place-items: center;
+  width: 40px; height: 46px;
+  margin: 1.4rem auto 0;
 }
 .hero__down-line {
-  width: 1px; height: 42px;
+  width: 1px; height: 40px;
   background: linear-gradient(var(--line), var(--leaf));
   transform-origin: top;
   animation: reach 2.6s var(--ease) infinite;
@@ -258,7 +299,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 .btn--solid { background: var(--forest); color: var(--forest-ink); }
 .btn--solid:hover { background: var(--ink); transform: translateY(-2px); }
-.btn--quiet { color: var(--ink); border: 1px solid var(--line); }
+.btn--quiet { color: var(--ink); border: 1px solid var(--line); background: var(--card); }
 .btn--quiet:hover { border-color: var(--forest); color: var(--forest); background: var(--mist); }
 .btn--big { min-height: 56px; padding: 1rem 2.4rem; font-size: var(--t-base); }
 
@@ -305,7 +346,118 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 .facts dd { color: var(--ink); }
 
-/* ─────────────────  7. SUBHEADS (inside a big section)  ─────────────── */
+/* ──────────────────  7. NESTED (featured project)  ─────────────────── */
+/* The biggest, loudest block on the page — this is the work Oren wants
+   people to see first, so it gets a tinted band, a two-column top, and
+   type one step up from every other section.                            */
+
+.feature {
+  background: var(--tint);
+  border-bottom: 1px solid var(--line-soft);
+  position: relative; overflow: hidden;
+}
+
+.feature__top {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  margin-bottom: clamp(2.4rem, 5vw, 3.6rem);
+}
+
+.feature__name {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 1.8rem + 4vw, 5rem);
+  font-weight: 500; line-height: 1; letter-spacing: -.03em;
+  color: var(--ink); margin-bottom: .6rem;
+}
+.feature__tagline {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: var(--t-xl); color: var(--forest);
+  line-height: 1.3; margin-bottom: 1.2rem;
+}
+.feature__blurb { color: var(--ink-mid); margin-bottom: 1.4rem; max-width: 56ch; }
+
+.feature__tags { margin-bottom: 1.6rem; }
+.tag--live {
+  background: var(--forest); color: var(--forest-ink); font-weight: 600;
+}
+
+.feature__btns { display: flex; flex-wrap: wrap; gap: .7rem; }
+.feature__soon { font-size: var(--t-sm); color: var(--ink-dim); font-style: italic; }
+
+/* Artwork — a real screenshot if there is one, else the drawn room */
+.feature__art {
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.feature__shot {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.feature__art--drawn {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: clamp(1rem, 3vw, 2rem);
+  color: var(--leaf);
+}
+.feature__art--drawn svg { width: 100%; height: auto; }
+
+/* The four things it does */
+.feature__features {
+  display: grid; gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
+  background: var(--line-soft);
+  border: 1px solid var(--line-soft); border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1.6rem;
+}
+.feature__features li { background: var(--card); padding: 1.5rem 1.4rem; }
+.feature__icon { display: block; width: 24px; height: 24px; color: var(--leaf); margin-bottom: .85rem; }
+.feature__features h3 {
+  font-family: var(--font-sans); font-size: var(--t-base);
+  font-weight: 600; color: var(--ink); margin-bottom: .3rem;
+}
+.feature__features p { font-size: var(--t-sm); color: var(--ink-dim); }
+
+.feature__learned {
+  display: flex; gap: .8rem; align-items: flex-start;
+  padding: 1.1rem 1.3rem; border-radius: var(--radius-sm);
+  background: var(--mist);
+}
+.feature__learned-icon { width: 19px; height: 19px; color: var(--forest); flex: none; margin-top: .25rem; }
+.feature__learned p { font-size: var(--t-sm); color: var(--ink-mid); }
+.feature__learned b { color: var(--ink); font-weight: 600; }
+
+/* ────────────────────────  8. MY GOALS  ────────────────────────────── */
+
+.goals {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+}
+.goals li {
+  position: relative;
+  padding: 1.6rem 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.goals li:hover { border-color: var(--leaf); transform: translateY(-3px); }
+.goals__icon { display: block; width: 24px; height: 24px; color: var(--leaf); margin-bottom: .9rem; }
+.goals__horizon {
+  display: inline-block; margin-bottom: .55rem;
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--forest); background: var(--mist);
+  padding: .25rem .6rem; border-radius: 99px;
+}
+.goals h3 {
+  font-family: var(--font-sans); font-size: var(--t-base);
+  font-weight: 600; color: var(--ink); margin-bottom: .35rem;
+}
+.goals p { font-size: var(--t-sm); color: var(--ink-dim); }
+
+/* ─────────────────  9. SUBHEADS (inside a big section)  ─────────────── */
 /* Six major sections, each holding a few labelled blocks. The subhead is
    deliberately quieter than a section title so the hierarchy stays obvious. */
 
@@ -324,7 +476,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   background: var(--leaf); flex: none;
 }
 
-/* ────────────────────────  8. VALUES (About)  ───────────────────────── */
+/* ────────────────────────  10. VALUES (About)  ───────────────────────── */
 
 .values {
   display: grid; gap: 1px;
@@ -339,7 +491,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .values h3 { font-family: var(--font-sans); font-size: var(--t-base); font-weight: 600; margin-bottom: .3rem; }
 .values p { font-size: var(--t-sm); color: var(--ink-dim); }
 
-/* ────────────────────  9. NOW ROW (Projects)  ───────────────────────── */
+/* ────────────────────  11. NOW ROW (Projects)  ───────────────────────── */
 
 .now {
   display: grid; gap: .9rem;
@@ -355,7 +507,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .now h3 { font-family: var(--font-sans); font-size: var(--t-base); font-weight: 600; margin-bottom: .2rem; }
 .now p { font-size: var(--t-sm); color: var(--ink-mid); }
 
-/* ──────────────────────  10. WORK (Projects)  ───────────────────────── */
+/* ──────────────────────  12. WORK (Projects)  ───────────────────────── */
 
 .work { display: flex; flex-direction: column; gap: 1rem; }
 .work__item {
@@ -397,7 +549,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   background: var(--mist); color: var(--ink-mid);
 }
 
-/* ────────────────────  11. EDUCATION (Résumé)  ──────────────────────── */
+/* ────────────────────  13. EDUCATION (Résumé)  ──────────────────────── */
 
 .edu {
   padding: clamp(1.4rem, 3vw, 1.9rem);
@@ -416,7 +568,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .honors li { display: flex; gap: .6rem; align-items: flex-start; font-size: var(--t-sm); color: var(--ink-mid); }
 .honors__icon { width: 17px; height: 17px; color: var(--leaf); flex: none; margin-top: .28rem; }
 
-/* ─────────────────  12. COURSEWORK & SKILLS (Résumé)  ───────────────── */
+/* ─────────────────  14. COURSEWORK & SKILLS (Résumé)  ───────────────── */
 
 .kit { display: grid; gap: 1.6rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 .kit__group h4 {
@@ -424,7 +576,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   color: var(--ink); margin-bottom: .7rem;
 }
 
-/* ────────────────────  13. EXPERIENCE (Résumé)  ─────────────────────── */
+/* ────────────────────  15. EXPERIENCE (Résumé)  ─────────────────────── */
 
 .path { position: relative; padding-left: 2.2rem; }
 .path::before {
@@ -452,7 +604,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   width: 5px; height: 5px; border-radius: 50%; background: var(--leaf);
 }
 
-/* ───────────────────  14. ACTIVITIES (Beyond)  ──────────────────────── */
+/* ───────────────────  16. ACTIVITIES (Beyond)  ──────────────────────── */
 
 .acts { border-top: 1px solid var(--line-soft); }
 .acts li {
@@ -464,7 +616,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .acts__org { font-size: var(--t-sm); color: var(--ink-mid); }
 .acts__period { margin-left: auto; font-size: var(--t-sm); color: var(--ink-dim); white-space: nowrap; }
 
-/* ────────────────────  15. READING (Beyond)  ────────────────────────── */
+/* ────────────────────  17. READING (Beyond)  ────────────────────────── */
 
 .shelf { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); }
 .book {
@@ -482,7 +634,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .book__author { font-size: var(--t-sm); color: var(--ink-dim); margin-bottom: .5rem; }
 .book__take { font-size: var(--t-sm); color: var(--ink-mid); font-style: italic; }
 
-/* ───────────────────  16. INTERESTS (Beyond)  ───────────────────────── */
+/* ───────────────────  18. INTERESTS (Beyond)  ───────────────────────── */
 
 .interests {
   display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -494,7 +646,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .interests h4 { font-family: var(--font-sans); font-size: var(--t-base); font-weight: 600; color: var(--ink); margin-bottom: .3rem; }
 .interests p { font-size: var(--t-sm); color: var(--ink-dim); }
 
-/* ──────────────────────────  17. CONTACT  ───────────────────────────── */
+/* ──────────────────────────  19. CONTACT  ───────────────────────────── */
 
 .contact { text-align: center; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
 .contact .kicker { justify-content: center; }
@@ -529,7 +681,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 .horizon svg { width: 100%; height: 100%; }
 
-/* ──────────────────────────  18. FOOTER  ────────────────────────────── */
+/* ──────────────────────────  20. FOOTER  ────────────────────────────── */
 
 .footer { border-top: 1px solid var(--line-soft); padding-block: 2rem; }
 .footer__inner {
@@ -539,7 +691,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .footer a { color: var(--ink-mid); border-bottom: 1px solid var(--line); transition: color var(--fast) var(--ease); }
 .footer a:hover { color: var(--forest); }
 
-/* ──────────────────────────  19. TOAST  ─────────────────────────────── */
+/* ──────────────────────────  21. TOAST  ─────────────────────────────── */
 
 .toast {
   position: fixed; bottom: 1.8rem; left: 50%;
@@ -552,7 +704,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 .toast.is-up { transform: translate(-50%, 0); }
 
-/* ─────────────────────  20. TOUCH TARGETS  ──────────────────────────── */
+/* ─────────────────────  22. TOUCH TARGETS  ──────────────────────────── */
 /* Every interactive element needs a 44px-tall hit area on touch screens.
    Text links use an invisible ::after to grow the tappable box WITHOUT
    pushing their underline away from the text. Buttons just take padding. */
@@ -573,7 +725,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   height: 44px; transform: translateY(-50%);
 }
 
-/* ──────────────────  21. THE ONE SCROLL TRANSITION  ─────────────────── */
+/* ──────────────────  23. THE ONE SCROLL TRANSITION  ─────────────────── */
 /* Everything on the page enters the same way: a slow, soft rise.
    One easing, one distance, one duration — that's what makes it calm. */
 
@@ -584,10 +736,12 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   transition-delay: var(--d, 0ms);
 }
 
-/* ────────────────────────  22. RESPONSIVE  ──────────────────────────── */
+/* ────────────────────────  24. RESPONSIVE  ──────────────────────────── */
 
 @media (max-width: 880px) {
   .about { grid-template-columns: 1fr; }
+  .feature__top { grid-template-columns: 1fr; }
+  .feature__art { order: -1; }          /* picture first when stacked */
   .work__item { grid-template-columns: 1fr; gap: 1rem; }
   .work__num { padding-top: 0; }
   .work__links { margin-left: 0; }
@@ -605,11 +759,14 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   .acts li { flex-wrap: wrap; row-gap: .2rem; }
   .acts__period { margin-left: 2rem; width: 100%; }
 
+  .portrait { width: min(74vw, 260px); }
+  .feature__btns { width: 100%; flex-direction: column; }
+  .feature__btns .btn { width: 100%; }
   .contact__actions { width: 100%; flex-direction: column; }
   .contact__actions .btn { width: 100%; }
 }
 
-/* ────────────────────  23. REDUCED MOTION / PRINT  ──────────────────── */
+/* ────────────────────  25. REDUCED MOTION / PRINT  ──────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -622,7 +779,8 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 
 @media print {
-  .nav, .hero__down, .hero__frond, .horizon, .divider, .toast { display: none !important; }
+  .nav, .hero__down, .hero__frond, .horizon, .divider, .toast,
+  .portrait__halo, .portrait__arch { display: none !important; }
   body { background: #fff; color: #000; }
   .band { padding-block: 1.5rem; page-break-inside: avoid; }
   .band--tint { background: none; }

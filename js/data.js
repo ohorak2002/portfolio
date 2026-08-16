@@ -3,8 +3,8 @@
    Every word on the site comes from the object below.
    Change text here, save the file, refresh the browser.
 
-   The page has six sections: Home · About · Projects · Résumé ·
-   Beyond the Classroom · Contact.
+   Page order:  Home · Nested · About me · Work Experience · My goals ·
+                Beyond the classroom · Contact
    ========================================================================= */
 
 window.PORTFOLIO = {
@@ -19,9 +19,9 @@ window.PORTFOLIO = {
     phone: "+1 (678) 414-4991",     // set to "" to hide it everywhere
 
     photo: "assets/profile.jpg",
-    // Which part of the photo stays visible inside the circle.
-    // First value is horizontal, second vertical. Lower % = show more of the top.
-    photoPosition: "center 15%",
+    // Which part of the photo stays visible inside the frame.
+    // Second value is vertical: LOWER % shows more of the top of the image.
+    photoPosition: "center 18%",
 
     links: {
       github: "https://github.com/ohorak2002",
@@ -30,39 +30,84 @@ window.PORTFOLIO = {
     }
   },
 
-  /* ─── 1. HOME ─────────────────────────────────────────────────────── */
+  /* ─── 1 · HOME ────────────────────────────────────────────────────── */
   hero: {
     greeting: "Hello, I'm",
     // Wrap words in *asterisks* to tint them forest green.
     tagline: "I coach, I build, and I *keep showing up*.",
     blurb:
-      "A Management Information Systems student at the University of Georgia. " +
-      "Five years of coaching swimmers taught me more about software than I expected — " +
-      "both are mostly about breaking something hard into steps a person can actually follow."
+      "MIS student at the University of Georgia, and the person behind Nested."
   },
 
-  /* ─── 2. ABOUT ────────────────────────────────────────────────────── */
+  /* ─── 2 · NESTED — the headline project ───────────────────────────── */
+  nested: {
+    kicker: "Featured project",
+    name: "Nested",
+    tagline: "A 3D room designer that runs entirely in your browser.",
+    blurb:
+      "Nested lets you build a room from scratch — draw the walls, set the " +
+      "dimensions, drop in furniture, and move a camera through the result. " +
+      "There's no account to make and nothing to upload. The whole thing runs " +
+      "on your machine, which means it opens instantly and your floor plan " +
+      "never leaves your laptop.",
+
+    // Drop a screenshot in assets/ and name it here, e.g. "assets/nested.png".
+    // Leave it "" and the illustrated room below shows instead.
+    screenshot: "",
+
+    features: [
+      { icon: "sprout", title: "Build the room",    body: "Draw walls, set dimensions, and shape a floor plan that matches a real space." },
+      { icon: "tree",   title: "Furnish it",        body: "Place and rotate furniture, then move it until the layout actually works." },
+      { icon: "leaf",   title: "Walk through it",   body: "Move a camera through the scene to see the room from inside, not just above." },
+      { icon: "seed",   title: "Nothing leaves",    body: "No account, no upload, no server. It runs entirely in the browser tab." }
+    ],
+
+    learned:
+      "How a render loop, a scene graph, and raycast-based selection actually fit " +
+      "together — and that the hard part of 3D isn't the maths, it's making the " +
+      "controls feel obvious to someone who has never used the tool.",
+
+    tags: ["Three.js", "JavaScript", "WebGL", "Canvas"],
+    links: { live: "", repo: "" },     // fill these in and the buttons appear
+    status: "In active development"
+  },
+
+  // Smaller things, listed under Nested.
+  otherProjects: [
+    {
+      title: "This portfolio",
+      year: "2026",
+      blurb:
+        "The site you're reading. No frameworks and no dependencies — every line " +
+        "of HTML, CSS and JavaScript is hand-written, and all the content lives " +
+        "in one small file I can edit in a minute.",
+      tags: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
+      links: { live: "https://ohorak2002.github.io/", repo: "" }
+    }
+  ],
+
+  /* ─── 3 · ABOUT ME ────────────────────────────────────────────────── */
   about: {
-    kicker: "01 — About",
+    kicker: "About",
     title: "About me",
     paragraphs: [
-      "I'm studying Management Information Systems because it sits exactly where I like " +
-      "to work: close enough to the technology to build things, close enough to people " +
-      "to know why it matters.",
+      "I'm studying Management Information Systems because it sits exactly where " +
+      "I like to work: close enough to the technology to build things, close " +
+      "enough to people to know why it matters.",
 
-      "Outside class I've spent most of the last five years on a pool deck — coaching " +
-      "kids from twelve months old to eighteen, including a season paired one-on-one " +
-      "with an adaptive swimmer. It turns out that teaching someone to trust the water " +
-      "is very good practice for explaining anything difficult to anyone."
+      "Outside class I've spent most of the last five years on a pool deck — " +
+      "coaching kids from twelve months old to eighteen, including a season " +
+      "paired one-on-one with an adaptive swimmer. It turns out that teaching " +
+      "someone to trust the water is very good practice for explaining anything " +
+      "difficult to anyone."
     ],
     facts: [
       { label: "Studying",     value: "Management Information Systems, UGA — class of 2029" },
       { label: "GPA",          value: "4.0 · President's List 2025" },
-      { label: "Currently",    value: "Learning Java and building side projects" },
+      { label: "Building",     value: "Nested, a browser-based 3D room designer" },
       { label: "Ask me about", value: "Coaching, swimming, or drumming" },
       { label: "Open to",      value: "Internships and collaborations" }
     ],
-    // Four short principles. Keep them to one line each.
     values: [
       { title: "Ship the ugly version", body: "A working thing beats a beautiful plan. Polish is the second pass." },
       { title: "Teach to understand",   body: "If I can't explain it to a nine-year-old, I don't know it yet." },
@@ -71,49 +116,10 @@ window.PORTFOLIO = {
     ]
   },
 
-  /* ─── 3. PROJECTS ─────────────────────────────────────────────────── */
-  projects: {
-    kicker: "02 — Projects",
-    title: "My projects",
-    note: "Early days — everything here is something I didn't know how to do when I started.",
-
-    // What you're building right now. Shown as a short row above the projects.
-    now: [
-      { title: "Room Maker",          state: "Building", body: "A 3D room designer that runs in the browser." },
-      { title: "This site",           state: "Shipped",  body: "Hand-written, no framework, hosted on GitHub Pages." },
-      { title: "Algorithmic Design",  state: "Learning", body: "Working through Java data structures for coursework." }
-    ],
-
-    items: [
-      {
-        title: "Room Maker",
-        year: "2026",
-        blurb:
-          "A 3D room designer that runs entirely in the browser. Place walls, drop in " +
-          "furniture, and move a camera through the result. No account and no upload — " +
-          "nothing ever leaves your machine.",
-        learned: "How a render loop, a scene graph, and click-to-select actually fit together.",
-        tags: ["Three.js", "JavaScript", "WebGL"],
-        links: { live: "", repo: "" }
-      },
-      {
-        title: "This Portfolio",
-        year: "2026",
-        blurb:
-          "The site you're reading. No frameworks and no dependencies — every line of " +
-          "HTML, CSS and JavaScript is hand-written, and all the content lives in one " +
-          "small file I can edit in a minute.",
-        learned: "That constraints make better work. No framework meant understanding every line.",
-        tags: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
-        links: { live: "https://ohorak2002.github.io/", repo: "" }
-      }
-    ]
-  },
-
-  /* ─── 4. RÉSUMÉ ───────────────────────────────────────────────────── */
-  resume: {
-    kicker: "03 — Résumé",
-    title: "Résumé",
+  /* ─── 4 · WORK EXPERIENCE ─────────────────────────────────────────── */
+  experience: {
+    kicker: "Experience",
+    title: "Work experience",
 
     education: {
       school: "University of Georgia",
@@ -132,10 +138,10 @@ window.PORTFOLIO = {
     },
 
     coursework: ["Algorithmic Design (Java)", "Computing in Product Innovation (CTRL)"],
-    skills: ["Java", "CTRL", "GitHub / GitHub Pages", "HTML & CSS", "JavaScript"],
+    skills: ["Java", "CTRL", "GitHub / GitHub Pages", "HTML & CSS", "JavaScript", "Three.js"],
 
     // Newest first.
-    experience: [
+    jobs: [
       {
         role: "Swim Instructor",
         org: "Atlanta Swim Academy",
@@ -189,18 +195,72 @@ window.PORTFOLIO = {
     ]
   },
 
-  /* ─── 5. BEYOND THE CLASSROOM ─────────────────────────────────────── */
+  /* ─── 5 · MY GOALS ────────────────────────────────────────────────── */
+  /* ⚠ These are DRAFTS I wrote from your résumé. Rewrite them in your own
+     words — this is the section people will read most closely, and it should
+     sound like you, not like a template.                                     */
+  goals: {
+    kicker: "Goals",
+    title: "My goals",
+    note: "Where I'm pointed, short term and long.",
+    items: [
+      {
+        horizon: "This year",
+        title: "Get Nested to a real v1",
+        body:
+          "Not a demo — something a person could actually use to plan a room, " +
+          "with saving, undo, and controls that don't need explaining."
+      },
+      {
+        horizon: "This year",
+        title: "Land a summer internship",
+        body:
+          "Somewhere I can see how software gets built by a team, and be the " +
+          "least experienced person in the room for a few months."
+      },
+      {
+        horizon: "By graduation",
+        title: "Get genuinely fluent in code",
+        body:
+          "Java first, then enough of a second language to stop thinking about " +
+          "syntax and start thinking about design."
+      },
+      {
+        horizon: "By graduation",
+        title: "Lead something on campus",
+        body:
+          "I ran the Jewish Student Union in high school and want to do that " +
+          "again here — a group where I'm responsible for other people's time."
+      },
+      {
+        horizon: "Long term",
+        title: "Work where software meets people",
+        body:
+          "The MIS version of the pool deck: translating between what a system " +
+          "can do and what a person actually needs from it."
+      },
+      {
+        horizon: "Long term",
+        title: "Never stop coaching",
+        body:
+          "Five summers in and it's still the best part of my year. Whatever " +
+          "else I'm doing, I want to be teaching someone something."
+      }
+    ]
+  },
+
+  /* ─── 6 · BEYOND THE CLASSROOM ────────────────────────────────────── */
   beyond: {
-    kicker: "04 — Beyond",
+    kicker: "Beyond",
     title: "Beyond the classroom",
 
     activities: [
-      { role: "President",            org: "Jewish Student Union",                        period: "2022 — 2025" },
-      { role: "Secretary",            org: "American Sign Language National Honor Society", period: "2024 — 2025" },
-      { role: "Youth Mentor",         org: "Friendship Circle of Atlanta",                 period: "2023" },
-      { role: "Varsity Swimmer",      org: "Lassiter Swim & Dive",                         period: "2022 — 2025" },
-      { role: "Swim Member",          org: "Gamecock Club Swim",                           period: "2025 — 2026" },
-      { role: "Lead Drummer",         org: "Three rock bands",                             period: "2020 — 2025" }
+      { role: "President",       org: "Jewish Student Union",                          period: "2022 — 2025" },
+      { role: "Secretary",       org: "American Sign Language National Honor Society",  period: "2024 — 2025" },
+      { role: "Youth Mentor",    org: "Friendship Circle of Atlanta",                   period: "2023" },
+      { role: "Varsity Swimmer", org: "Lassiter Swim & Dive",                           period: "2022 — 2025" },
+      { role: "Swim Member",     org: "Gamecock Club Swim",                             period: "2025 — 2026" },
+      { role: "Lead Drummer",    org: "Three rock bands",                               period: "2020 — 2025" }
     ],
 
     // status: "Reading" | "Finished" | "Up next"
@@ -212,20 +272,20 @@ window.PORTFOLIO = {
 
     // icon: leaf | fern | flower | tree | book | seed | sprout
     interests: [
-      { icon: "tree",   title: "The pool deck",   body: "Five summers of coaching. Still the best part of my year." },
-      { icon: "flower", title: "Drumming",        body: "Lead drummer in three bands. Loud, and worth it." },
+      { icon: "tree",   title: "The pool deck",    body: "Five summers of coaching. Still the best part of my year." },
+      { icon: "flower", title: "Drumming",         body: "Lead drummer in three bands. Loud, and worth it." },
       { icon: "leaf",   title: "Interface design", body: "Why some software feels calm and some feels like a slot machine." },
-      { icon: "seed",   title: "Sign language",   body: "Two years in the ASL Honor Society. A whole grammar in your hands." }
+      { icon: "seed",   title: "Sign language",    body: "Two years in the ASL Honor Society. A whole grammar in your hands." }
     ]
   },
 
-  /* ─── 6. CONTACT ──────────────────────────────────────────────────── */
+  /* ─── 7 · CONTACT ─────────────────────────────────────────────────── */
   contact: {
-    kicker: "05 — Contact",
+    kicker: "Contact",
     headline: "Contact me",
     body:
-      "I'm open to internships, collaborations, and the kind of email that starts with " +
-      "\"this is probably a bad idea, but…\". I answer everything.",
+      "I'm open to internships, collaborations, and the kind of email that starts " +
+      "with \"this is probably a bad idea, but…\". I answer everything.",
     cta: "Send me an email"
   }
 };

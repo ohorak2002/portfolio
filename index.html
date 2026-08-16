@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Oren Horak — Portfolio</title>
-<meta name="description" content="Oren Horak — Management Information Systems student at the University of Georgia. Projects, résumé, coaching, and how to get in touch.">
+<meta name="description" content="Oren Horak — Management Information Systems student at the University of Georgia. Creator of Nested, a browser-based 3D room designer.">
 <meta name="color-scheme" content="light dark">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Oren Horak — Portfolio">
-<meta property="og:description" content="MIS student at the University of Georgia. I coach, I build, and I keep showing up.">
+<meta property="og:description" content="MIS student at the University of Georgia. Creator of Nested, a browser-based 3D room designer.">
 <meta property="og:image" content="assets/profile.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -36,10 +36,10 @@
     </a>
 
     <nav class="nav__links" aria-label="Page sections">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#resume">Résumé</a>
-      <a href="#beyond">Beyond</a>
+      <a href="#nested" class="nav__feature">Nested</a>
+      <a href="#about">About me</a>
+      <a href="#experience">Work experience</a>
+      <a href="#goals">My goals</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -62,29 +62,63 @@
   <span class="hero__frond hero__frond--r" aria-hidden="true"></span>
 
   <div class="wrap hero__inner">
-    <div class="portrait" data-rise>
-      <div class="portrait__ring" aria-hidden="true"></div>
-      <div class="portrait__media" id="portrait"></div>
-    </div>
-
     <p class="hero__greeting" data-rise></p>
+
+    <!-- The portrait is the centrepiece of the page -->
+    <figure class="portrait" data-rise>
+      <span class="portrait__halo" aria-hidden="true"></span>
+      <span class="portrait__arch" aria-hidden="true"></span>
+      <div class="portrait__media" id="portrait"></div>
+    </figure>
+
     <h1 class="hero__name" data-rise></h1>
     <p class="hero__role" data-rise></p>
     <p class="hero__tagline" data-rise></p>
     <p class="hero__blurb" data-rise></p>
 
     <div class="hero__actions" data-rise>
-      <a class="btn btn--solid" href="#projects">See my projects</a>
+      <a class="btn btn--solid" href="#nested">See Nested</a>
       <a class="btn btn--quiet" href="#contact">Contact me</a>
     </div>
   </div>
 
-  <a class="hero__down" href="#about" aria-label="Scroll to About">
+  <a class="hero__down" href="#nested" aria-label="Scroll to Nested">
     <span class="hero__down-line" aria-hidden="true"></span>
   </a>
 </section>
 
-<!-- ══════════════ 2 · ABOUT ══════════════ -->
+<!-- ══════════════ 2 · NESTED (featured) ══════════════ -->
+<section class="band feature" id="nested">
+  <div class="wrap">
+    <div class="feature__top">
+      <div class="feature__intro" data-rise>
+        <p class="kicker"></p>
+        <h2 class="feature__name"></h2>
+        <p class="feature__tagline"></p>
+        <p class="feature__blurb"></p>
+
+        <div class="tags feature__tags"></div>
+        <div class="feature__actions"></div>
+      </div>
+
+      <div class="feature__art" data-rise></div>
+    </div>
+
+    <ul class="feature__features"></ul>
+
+    <div class="feature__learned" data-rise>
+      <span class="feature__learned-icon" aria-hidden="true"></span>
+      <p></p>
+    </div>
+
+    <h3 class="subhead">Other projects</h3>
+    <ol class="work"></ol>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- ══════════════ 3 · ABOUT ME ══════════════ -->
 <section class="band" id="about">
   <div class="wrap">
     <header class="head" data-rise>
@@ -101,24 +135,8 @@
   </div>
 </section>
 
-<div class="divider" aria-hidden="true"></div>
-
-<!-- ══════════════ 3 · PROJECTS ══════════════ -->
-<section class="band" id="projects">
-  <div class="wrap">
-    <header class="head" data-rise>
-      <p class="kicker"></p>
-      <h2 class="head__title"></h2>
-      <p class="head__note"></p>
-    </header>
-
-    <ul class="now"></ul>
-    <ol class="work"></ol>
-  </div>
-</section>
-
-<!-- ══════════════ 4 · RÉSUMÉ ══════════════ -->
-<section class="band band--tint" id="resume">
+<!-- ══════════════ 4 · WORK EXPERIENCE ══════════════ -->
+<section class="band band--tint" id="experience">
   <div class="wrap">
     <header class="head head--row" data-rise>
       <div>
@@ -134,15 +152,27 @@
     <h3 class="subhead">Coursework &amp; skills</h3>
     <div class="kit" data-rise></div>
 
-    <h3 class="subhead">Experience</h3>
+    <h3 class="subhead">Where I've worked</h3>
     <ol class="path"></ol>
   </div>
 </section>
 
 <div class="divider" aria-hidden="true"></div>
 
-<!-- ══════════════ 5 · BEYOND THE CLASSROOM ══════════════ -->
-<section class="band" id="beyond">
+<!-- ══════════════ 5 · MY GOALS ══════════════ -->
+<section class="band" id="goals">
+  <div class="wrap">
+    <header class="head" data-rise>
+      <p class="kicker"></p>
+      <h2 class="head__title"></h2>
+      <p class="head__note"></p>
+    </header>
+    <ul class="goals"></ul>
+  </div>
+</section>
+
+<!-- ══════════════ 6 · BEYOND THE CLASSROOM ══════════════ -->
+<section class="band band--tint" id="beyond">
   <div class="wrap">
     <header class="head" data-rise>
       <p class="kicker"></p>
@@ -160,8 +190,8 @@
   </div>
 </section>
 
-<!-- ══════════════ 6 · CONTACT ══════════════ -->
-<section class="band band--tint band--close" id="contact">
+<!-- ══════════════ 7 · CONTACT ══════════════ -->
+<section class="band band--close" id="contact">
   <span class="horizon" aria-hidden="true"></span>
   <div class="wrap contact">
     <p class="kicker" data-rise></p>

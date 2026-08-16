@@ -109,5 +109,39 @@ window.BOTANICAL = (function () {
           fill="currentColor" opacity=".3"/>
   </svg>`;
 
-  return { icons, divider, frond, horizon, get(name) { return icons[name] || icons.leaf; } };
+  /* ── Isometric room, used as the Nested artwork until a real screenshot
+        replaces it. Line art so it inherits the page's green.             ── */
+  const room = `<svg viewBox="0 0 400 300" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <!-- walls -->
+    <path d="M50 180V95L200 20v85z" opacity=".75"/>
+    <path d="M350 180V95L200 20v85z" opacity=".55"/>
+    <!-- floor -->
+    <path d="M50 180l150-75 150 75-150 75z"/>
+    <!-- floor grid -->
+    <g opacity=".35">
+      <path d="M87.5 161.25l150 75M125 142.5l150 75M162.5 123.75l150 75"/>
+      <path d="M87.5 198.75l150-75M125 217.5l150-75M162.5 236.25l150-75"/>
+    </g>
+    <!-- a couch -->
+    <g>
+      <path d="M120 196l40-20 40 20-40 20z"/>
+      <path d="M120 196v22l40 20v-22M200 196v22l-40 20"/>
+      <path d="M120 196l-14-7v22l14 7" opacity=".8"/>
+    </g>
+    <!-- a table -->
+    <g>
+      <path d="M245 156l30-15 30 15-30 15z"/>
+      <path d="M248 160v16M302 160v16M275 173v16"/>
+    </g>
+    <!-- a potted plant, because of course -->
+    <g>
+      <path d="M300 205l16-8 16 8-4 20h-24z"/>
+      <path d="M316 197v-24"/>
+      <path d="M316 181c0-9 7-16 16-16 0 9-7 16-16 16z"/>
+      <path d="M316 189c0-7-6-12-13-12 0 7 6 12 13 12z"/>
+    </g>
+  </svg>`;
+
+  return { icons, divider, frond, horizon, room, get(name) { return icons[name] || icons.leaf; } };
 })();

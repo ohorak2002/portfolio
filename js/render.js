@@ -8,7 +8,7 @@
 
   const D = window.PORTFOLIO;
   const B = window.BOTANICAL;
-  const $  = (s, r = document) => r.querySelector(s);
+  const $ = (s, r = document) => r.querySelector(s);
 
   function el(tag, props = {}, kids = []) {
     const n = document.createElement(tag);
@@ -36,6 +36,14 @@
     if (n) { if (note) n.textContent = note; else n.remove(); }
   }
 
+  // Build the Live / Code button pair used by Nested and the smaller projects.
+  function linkButtons(links, cls) {
+    const box = el("div", { class: cls });
+    if (links && links.live) box.appendChild(el("a", { class: "btn btn--solid", href: links.live, target: "_blank", rel: "noopener", text: "Try it live" }));
+    if (links && links.repo) box.appendChild(el("a", { class: "btn btn--quiet", href: links.repo, target: "_blank", rel: "noopener", text: "View the code" }));
+    return box;
+  }
+
   /* ─── META ─────────────────────────────────────────────────────────── */
   document.title = `${D.meta.name} — Portfolio`;
   $("#year").textContent = new Date().getFullYear();
@@ -53,6 +61,7 @@
     if (D.meta.photoPosition) img.style.objectPosition = D.meta.photoPosition;
     portrait.appendChild(img);
   } else {
+    portrait.classList.add("is-initials");
     portrait.textContent = D.meta.initials;
   }
 
@@ -64,7 +73,65 @@
 
   document.querySelectorAll(".divider").forEach(d => { d.innerHTML = B.divider; });
 
-  /* ─── 2 · ABOUT ────────────────────────────────────────────────────── */
+  /* ─── 2 · NESTED ───────────────────────────────────────────────────── */
+  const N = D.nested;
+
+  $("#nested .kicker").textContent = N.kicker;
+  $(".feature__name").textContent = N.name;
+  $(".feature__tagline").textContent = N.tagline;
+  $(".feature__blurb").textContent = N.blurb;
+
+  const ftags = $(".feature__tags");
+  (N.tags || []).forEach(t => ftags.appendChild(el("span", { class: "tag", text: t })));
+  if (N.status) ftags.prepend(el("span", { class: "tag tag--live", text: N.status }));
+
+  const factions = $(".feature__actions");
+  const fbtns = linkButtons(N.links, "feature__btns");
+  if (fbtns.children.length) factions.appendChild(fbtns);
+  else factions.appendChild(el("p", { class: "feature__soon", text: "Links coming once it's deployed." }));
+
+  // Real screenshot if there is one, otherwise the illustrated room.
+  const art = $(".feature__art");
+  if (N.screenshot) {
+    art.appendChild(el("img", { class: "feature__shot", src: N.screenshot, alt: `Screenshot of ${N.name}`, loading: "lazy" }));
+  } else {
+    art.classList.add("feature__art--drawn");
+    art.innerHTML = B.room;
+  }
+
+  const ffeat = $(".feature__features");
+  (N.features || []).forEach((f, i) => {
+    ffeat.appendChild(el("li", { "data-rise": "", style: `--d:${i * 70}ms` }, [
+      el("span", { class: "feature__icon", html: B.get(f.icon) }),
+      el("h3", { text: f.title }),
+      el("p", { text: f.body })
+    ]));
+  });
+
+  $(".feature__learned-icon").innerHTML = B.icons.seed;
+  $(".feature__learned p").innerHTML = `<b>What I learned:</b> ${esc(N.learned)}`;
+
+  const work = $(".work");
+  (D.otherProjects || []).forEach((p, i) => {
+    const links = el("div", { class: "work__links" });
+    if (p.links && p.links.live) links.appendChild(el("a", { href: p.links.live, target: "_blank", rel: "noopener", text: "Visit site →" }));
+    if (p.links && p.links.repo) links.appendChild(el("a", { href: p.links.repo, target: "_blank", rel: "noopener", text: "View code →" }));
+
+    work.appendChild(el("li", { class: "work__item", "data-rise": "", style: `--d:${i * 70}ms` }, [
+      el("span", { class: "work__num", text: String(i + 1).padStart(2, "0") }),
+      el("div", {}, [
+        el("p", { class: "work__year", text: p.year }),
+        el("h4", { class: "work__title", text: p.title }),
+        el("p", { class: "work__blurb", text: p.blurb }),
+        el("div", { class: "work__foot" }, [
+          el("div", { class: "tags" }, (p.tags || []).map(t => el("span", { class: "tag", text: t }))),
+          links.children.length ? links : null
+        ])
+      ])
+    ]));
+  });
+
+  /* ─── 3 · ABOUT ME ─────────────────────────────────────────────────── */
   head("#about", D.about);
 
   const prose = $(".about__prose");
@@ -87,50 +154,14 @@
     ]));
   });
 
-  /* ─── 3 · PROJECTS ─────────────────────────────────────────────────── */
-  head("#projects", D.projects);
-
-  const now = $(".now");
-  (D.projects.now || []).forEach((it, i) => {
-    now.appendChild(el("li", { "data-rise": "", style: `--d:${i * 70}ms` }, [
-      el("span", { class: "now__state", text: it.state }),
-      el("h3", { text: it.title }),
-      el("p", { text: it.body })
-    ]));
-  });
-
-  const work = $(".work");
-  D.projects.items.forEach((p, i) => {
-    const links = el("div", { class: "work__links" });
-    if (p.links && p.links.live) links.appendChild(el("a", { href: p.links.live, target: "_blank", rel: "noopener", text: "Visit site →" }));
-    if (p.links && p.links.repo) links.appendChild(el("a", { href: p.links.repo, target: "_blank", rel: "noopener", text: "View code →" }));
-
-    work.appendChild(el("li", { class: "work__item", "data-rise": "", style: `--d:${i * 70}ms` }, [
-      el("span", { class: "work__num", text: String(i + 1).padStart(2, "0") }),
-      el("div", {}, [
-        el("p", { class: "work__year", text: p.year }),
-        el("h3", { class: "work__title", text: p.title }),
-        el("p", { class: "work__blurb", text: p.blurb }),
-        p.learned ? el("div", { class: "work__learned" }, [
-          el("span", { class: "work__learned-icon", html: B.icons.seed }),
-          el("p", { html: `<b>What I learned:</b> ${esc(p.learned)}` })
-        ]) : null,
-        el("div", { class: "work__foot" }, [
-          el("div", { class: "tags" }, (p.tags || []).map(t => el("span", { class: "tag", text: t }))),
-          links.children.length ? links : null
-        ])
-      ])
-    ]));
-  });
-
-  /* ─── 4 · RÉSUMÉ ───────────────────────────────────────────────────── */
-  head("#resume", D.resume);
+  /* ─── 4 · WORK EXPERIENCE ──────────────────────────────────────────── */
+  head("#experience", D.experience);
 
   const dl = $("#resumeDownload");
   if (D.meta.links.resume) dl.href = D.meta.links.resume;
   else dl.remove();
 
-  const E = D.resume.education;
+  const E = D.experience.education;
   $(".edu").append(
     el("div", { class: "edu__head" }, [
       el("div", {}, [
@@ -151,20 +182,19 @@
     ))
   );
 
-  const kit = $(".kit");
-  kit.append(
+  $(".kit").append(
     el("div", { class: "kit__group" }, [
       el("h4", { text: "Coursework" }),
-      el("div", { class: "tags" }, D.resume.coursework.map(c => el("span", { class: "tag", text: c })))
+      el("div", { class: "tags" }, D.experience.coursework.map(c => el("span", { class: "tag", text: c })))
     ]),
     el("div", { class: "kit__group" }, [
       el("h4", { text: "Skills" }),
-      el("div", { class: "tags" }, D.resume.skills.map(s => el("span", { class: "tag", text: s })))
+      el("div", { class: "tags" }, D.experience.skills.map(s => el("span", { class: "tag", text: s })))
     ])
   );
 
   const path = $(".path");
-  D.resume.experience.forEach((x, i) => {
+  D.experience.jobs.forEach((x, i) => {
     path.appendChild(el("li", { "data-rise": "", style: `--d:${i * 60}ms` }, [
       el("span", { class: "path__icon", html: B.icons.leaf }),
       el("p", { class: "path__period", text: `${x.period} · ${x.place}` }),
@@ -174,7 +204,21 @@
     ]));
   });
 
-  /* ─── 5 · BEYOND ───────────────────────────────────────────────────── */
+  /* ─── 5 · MY GOALS ─────────────────────────────────────────────────── */
+  head("#goals", D.goals);
+
+  const GOAL_ICONS = ["sprout", "leaf", "fern", "tree", "flower", "seed"];
+  const goals = $(".goals");
+  D.goals.items.forEach((g, i) => {
+    goals.appendChild(el("li", { "data-rise": "", style: `--d:${i * 70}ms` }, [
+      el("span", { class: "goals__icon", html: B.get(GOAL_ICONS[i % GOAL_ICONS.length]) }),
+      el("span", { class: "goals__horizon", text: g.horizon }),
+      el("h3", { text: g.title }),
+      el("p", { text: g.body })
+    ]));
+  });
+
+  /* ─── 6 · BEYOND ───────────────────────────────────────────────────── */
   head("#beyond", D.beyond);
 
   const acts = $(".acts");
@@ -211,7 +255,7 @@
     ]));
   });
 
-  /* ─── 6 · CONTACT ──────────────────────────────────────────────────── */
+  /* ─── 7 · CONTACT ──────────────────────────────────────────────────── */
   $("#contact .kicker").textContent = D.contact.kicker;
   $(".contact__headline").textContent = D.contact.headline;
   $(".contact__body").textContent = D.contact.body;
