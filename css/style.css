@@ -45,7 +45,7 @@
   --line-soft: #1c1c24;
   --ink:       #f2f2f5;
   --ink-mid:   #a3a3b0;
-  --ink-dim:   #6a6a78;
+  --ink-dim:   #7d7d8c;   /* 4.88:1 on --bg — stays readable as small meta text */
   --shadow:    0 20px 60px -20px rgba(0,0,0,.8);
   --glow:      .55;
   --grain-op:  .035;
@@ -61,20 +61,25 @@
   --line-soft: #eceae5;
   --ink:       #14141a;
   --ink-mid:   #55555f;
-  --ink-dim:   #8a8a93;
+  --ink-dim:   #6e6e78;   /* 4.67:1 on --bg */
   --shadow:    0 18px 44px -18px rgba(20,20,26,.18);
   --glow:      .22;
   --grain-op:  .022;
 }
 
-/* Accent palettes — cycled by the accent button */
+/* Accent palettes — cycled by the accent button.
+   Every pair below clears WCAG AA (4.5:1) on two axes: the accent read as text
+   on --bg, and --accent-ink read as text on the accent (buttons). Light theme
+   needs its own darker values because a neon on near-white is unreadable. */
 [data-accent="citrus"] { --accent: #d9f24a; --accent-ink: #0a0a0d; --accent-2: #6ee7c8; }
-[data-accent="ember"]  { --accent: #ff6b35; --accent-ink: #ffffff; --accent-2: #ffc857; }
+[data-accent="ember"]  { --accent: #ff6b35; --accent-ink: #200a02; --accent-2: #ffc857; }
 [data-accent="ice"]    { --accent: #57c7ff; --accent-ink: #04121c; --accent-2: #b58cff; }
 [data-accent="bloom"]  { --accent: #ff79c0; --accent-ink: #20040f; --accent-2: #ffd166; }
 
-[data-theme="light"][data-accent="citrus"] { --accent: #97b81a; --accent-ink: #ffffff; }
-[data-theme="light"][data-accent="ice"]    { --accent: #0d8fd1; --accent-ink: #ffffff; }
+[data-theme="light"][data-accent="citrus"] { --accent: #566f0c; --accent-ink: #ffffff; --accent-2: #1c8f74; }
+[data-theme="light"][data-accent="ember"]  { --accent: #b8380a; --accent-ink: #ffffff; --accent-2: #a2650b; }
+[data-theme="light"][data-accent="ice"]    { --accent: #0d6f9c; --accent-ink: #ffffff; --accent-2: #6a4bc4; }
+[data-theme="light"][data-accent="bloom"]  { --accent: #b02a6e; --accent-ink: #ffffff; --accent-2: #9a6a08; }
 
 /* ─────────────────────────────  2. BASE  ─────────────────────────────── */
 
@@ -284,7 +289,8 @@ kbd {
 }
 .hero__headline .line { display: block; overflow: hidden; }
 .hero__headline .line > span { display: block; }
-.hero__headline em { font-style: italic; color: var(--accent); }
+/* *asterisks* in the headline data become this */
+.hero__headline .hl { font-style: italic; color: var(--accent); }
 
 .hero__rotator {
   display: inline-flex; align-items: baseline; gap: .55rem;

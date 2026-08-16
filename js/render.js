@@ -78,10 +78,23 @@
   $(".section--mission .kicker").textContent = D.mission.kicker;
 
   // Split into words so each can fade in individually on scroll.
-  $(".mission__statement").innerHTML = markup(D.mission.statement)
-    .split(" ")
-    .map(w => `<span class="w">${w}</span>`)
-    .join(" ");
+  // The *highlight* markers have to be resolved per-word, not on the whole
+  // string — otherwise a multi-word highlight gets torn in half by the split.
+  (function buildStatement() {
+    let inHl = false;
+    $(".mission__statement").innerHTML = D.mission.statement
+      .trim().split(/\s+/)
+      .map(raw => {
+        let word = raw;
+        if (word.startsWith("*")) { inHl = true; word = word.slice(1); }
+        const lit = inHl;
+        // Closing marker may sit before trailing punctuation: `built*,`
+        if (/\*[.,!?;:—]*$/.test(word)) inHl = false;
+        word = word.replace(/\*/g, "");
+        return `<span class="w${lit ? " hl" : ""}">${esc(word)}</span>`;
+      })
+      .join(" ");
+  })();
 
   const principles = $("#principles");
   D.mission.principles.forEach((p, i) => {

@@ -36,8 +36,9 @@ window.PORTFOLIO = {
   hero: {
     // The line above your name. Small, quiet.
     eyebrow: "Portfolio · 2026",
-    // The big statement. Line breaks are meaningful — each string is a line.
-    headline: ["I build", "for the web."],
+    // The big statement. Each string is its own line.
+    // Wrap words in *asterisks* to make them accent-coloured and italic.
+    headline: ["I build things", "*for the web*."],
     // One paragraph. Say something true, not something impressive.
     blurb:
       "I'm a student who learns by shipping. Most of what I know came from " +
