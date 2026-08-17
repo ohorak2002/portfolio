@@ -155,6 +155,34 @@
   $(".feature__learned-icon").innerHTML = B.icons.seed;
   $(".feature__learned p").innerHTML = `<b>What I learned:</b> ${esc(N.learned)}`;
 
+  /* The three-step walkthrough. Each step is a rendered GIF with its own
+     category and topic. Loading is lazy — they are heavy compared to the
+     rest of the page and all sit below the fold. */
+  const W = N.walkthrough;
+  const walk = $(".walk");
+  if (W && walk) {
+    $(".walk .kicker").textContent = W.kicker;
+    $(".walk__title").textContent = W.title;
+    $(".walk__intro").textContent = W.intro;
+
+    const steps = $(".walk__steps");
+    W.steps.forEach((st, i) => {
+      steps.appendChild(el("li", { class: "walk__step", "data-rise": "", style: `--d:${i * 80}ms` }, [
+        el("figure", { class: "walk__media" }, [
+          el("img", { src: st.gif, alt: st.alt, loading: "lazy", decoding: "async" })
+        ]),
+        el("div", { class: "walk__body" }, [
+          el("span", { class: "walk__n", text: st.n }),
+          el("span", { class: "walk__cat", text: st.category }),
+          el("h4", { class: "walk__step-title", text: st.title }),
+          el("p", { text: st.body })
+        ])
+      ]));
+    });
+  } else if (walk) {
+    walk.remove();
+  }
+
   const work = $(".work");
   (D.otherProjects || []).forEach((p, i) => {
     const links = el("div", { class: "work__links" });

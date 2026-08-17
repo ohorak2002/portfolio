@@ -45,7 +45,7 @@ window.PORTFOLIO = {
     name: "Nested",
     tagline: "You don't have to picture it.",
     blurb:
-      "Nested builds a room from five questions. Tell it the shape of your space " +
+      "Nested builds a room from six questions. Tell it the shape of your space " +
       "and what you like, and it lays the whole thing out for you — walls, floor, " +
       "furniture, lighting — then hands you the controls. Drag anything you want to " +
       "move, swap the palette, or drop in a photo of a room you like and it pulls " +
@@ -60,7 +60,7 @@ window.PORTFOLIO = {
     ],
 
     features: [
-      { icon: "sprout", title: "Five questions",   body: "Answer five things about your space and taste. Nested builds and arranges the room from your answers." },
+      { icon: "sprout", title: "Six questions",    body: "Where you live, colours, feel, light, walls, size. Nested builds and arranges the room from your answers." },
       { icon: "tree",   title: "Move anything",    body: "Click a piece to pick it up, drag empty space to orbit. Auto-arrange cleans up when it gets crowded." },
       { icon: "flower", title: "Sixteen palettes", body: "Clay & Linen through to Midnight — or drop in a photo of a room you like and it matches the colours." },
       { icon: "seed",   title: "Runs on your machine", body: "No account and no upload. It's a browser tab, so it opens instantly and your floor plan stays yours." }
@@ -128,6 +128,59 @@ window.PORTFOLIO = {
       },
 
       stores: ["IKEA", "Wayfair", "West Elm", "Target", "Home Depot", "Walmart", "Amazon"]
+    },
+
+
+    /* The three-step walkthrough — one GIF per topic, all rendered by
+       Remotion from ../nested-video. The framing: an interior designer is
+       expensive and shopping in person is slow, so Nested lets you try every
+       version of a room for nothing, then buy once. */
+    walkthrough: {
+      kicker: "How it works",
+      title: "Try the room before you pay for it",
+      intro:
+        "Hiring an interior designer is expensive, and working it out yourself " +
+        "means driving to shops and guessing. Nested lets you experiment for " +
+        "free — see the exact room in 3D with the exact prices, and only spend " +
+        "money once you already know what you want.",
+      steps: [
+        {
+          n: "01",
+          category: "Getting started",
+          title: "Answer six questions",
+          body:
+            "Where you live, the colours you would not get tired of, how the room " +
+            "should feel, the light, the walls, the size. Tick what already came " +
+            "with the place and Nested won't recommend things you own. That's the " +
+            "whole setup — it builds and arranges the room from your answers.",
+          gif: "assets/nested-1-start.gif",
+          alt: "The six-question intake being filled in: address, palette, feel, light, and exact room dimensions."
+        },
+        {
+          n: "02",
+          category: "Shop & experiment",
+          title: "Try every version, free",
+          body:
+            "Browse the catalogue by category, drop pieces into the room and watch " +
+            "the running total move. Swap anything for a cheaper equivalent and see " +
+            "what it saves. Rearranging costs nothing, so you can be indecisive on " +
+            "purpose until the room is actually right.",
+          gif: "assets/nested-2-experiment.gif",
+          alt: "Pieces being added to a room from the catalogue while the estimated total climbs and cheaper swaps are shown."
+        },
+        {
+          n: "03",
+          category: "Copy a real room",
+          title: "Bring a photo you liked",
+          body:
+            "Saw a room at an open house, in a listing, or on a screenshot? Drop the " +
+            "photo in. Nested pulls the palette out of it and finds real pieces that " +
+            "match, each with a store and a price — so the room you liked becomes a " +
+            "shopping list you can actually act on.",
+          gif: "assets/nested-3-photo.gif",
+          alt: "A reference photo being scanned, its colours extracted, and matching furniture listed with prices."
+        }
+      ]
     },
 
     tags: ["Three.js", "React", "WebGL", "Vite"],

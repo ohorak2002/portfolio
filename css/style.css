@@ -688,6 +688,59 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   background: var(--card);
 }
 
+/* ── The three-step walkthrough (the rendered GIFs) ── */
+
+.walk { margin-top: clamp(2.4rem, 5vw, 3.6rem); }
+.walk__head { max-width: 62ch; margin-bottom: clamp(1.8rem, 3.5vw, 2.6rem); }
+.walk__title {
+  font-family: var(--font-serif); font-size: var(--t-2xl);
+  font-weight: 500; letter-spacing: -.015em; margin-bottom: .7rem;
+}
+.walk__intro { color: var(--ink-mid); }
+
+.walk__steps { display: flex; flex-direction: column; gap: clamp(1.6rem, 3.5vw, 2.6rem); }
+
+.walk__step {
+  display: grid; grid-template-columns: 1.35fr 1fr;
+  gap: clamp(1.4rem, 3.5vw, 2.6rem);
+  align-items: center;
+}
+/* Alternate which side the picture sits on, so the list doesn't read
+   like a table. */
+.walk__step:nth-child(even) .walk__media { order: 2; }
+
+.walk__media {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #080B08;
+  box-shadow: var(--shadow);
+  line-height: 0;
+}
+.walk__media img { width: 100%; height: auto; display: block; }
+
+.walk__n {
+  font-family: var(--font-serif); font-size: var(--t-lg);
+  color: var(--leaf-ink); display: block; margin-bottom: .5rem;
+}
+.walk__cat {
+  display: inline-block; margin-bottom: .6rem;
+  font-size: .74rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--forest); background: var(--mist);
+  padding: .28rem .7rem; border-radius: 99px;
+}
+.walk__step-title {
+  font-family: var(--font-serif); font-size: var(--t-xl);
+  font-weight: 500; color: var(--ink); margin-bottom: .6rem; line-height: 1.15;
+}
+.walk__body p { font-size: var(--t-sm); color: var(--ink-mid); max-width: 46ch; }
+
+@media (max-width: 860px) {
+  .walk__step { grid-template-columns: 1fr; }
+  .walk__step:nth-child(even) .walk__media { order: 0; }
+}
+
 /* ─────────────────────  19. THE NESTED TOUR  ────────────────────────── */
 /* A live demo of the app, playing inside the page. Dark chrome on purpose —
    it reads as "this is the product", distinct from the site around it. */
@@ -930,6 +983,14 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
 .nav__mark   { padding-block: .5rem; }
 .nav__theme  { width: 44px; height: 44px; }
+
+/* The nav is hidden below 680px but still shown — and tapped — on tablets. */
+.nav__links a { position: relative; }
+.nav__links a::after {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 50%;
+  height: 44px; transform: translateY(-50%);
+}
 .contact__copy { padding-block: .6rem; }
 
 .contact__links a,
