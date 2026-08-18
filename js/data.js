@@ -196,7 +196,7 @@ window.PORTFOLIO = {
     },
 
     tags: ["Three.js", "React", "WebGL", "Vite"],
-    links: { live: "", repo: "" },     // fill these in and the buttons appear
+    links: { live: "https://room-maker-phi.vercel.app", repo: "https://github.com/ohorak2002/room-maker" },
     status: "In active development"
   },
 
