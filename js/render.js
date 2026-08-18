@@ -155,7 +155,7 @@
   $(".feature__learned-icon").innerHTML = B.icons.seed;
   $(".feature__learned p").innerHTML = `<b>What I learned:</b> ${esc(N.learned)}`;
 
-  /* The three-step walkthrough. Each step is a rendered GIF with its own
+  /* The walkthrough. Each step is a rendered GIF with its own
      category and topic. Loading is lazy — they are heavy compared to the
      rest of the page and all sit below the fold. */
   const W = N.walkthrough;

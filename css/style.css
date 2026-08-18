@@ -688,7 +688,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   background: var(--card);
 }
 
-/* ── The three-step walkthrough (the rendered GIFs) ── */
+/* ── The walkthrough (the rendered GIFs) ── */
 
 .walk { margin-top: clamp(2.4rem, 5vw, 3.6rem); }
 .walk__head { max-width: 62ch; margin-bottom: clamp(1.8rem, 3.5vw, 2.6rem); }

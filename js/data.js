@@ -131,7 +131,7 @@ window.PORTFOLIO = {
     },
 
 
-    /* The three-step walkthrough — one GIF per topic, all rendered by
+    /* The four-step walkthrough — one GIF per topic, all rendered by
        Remotion from ../nested-video. The framing: an interior designer is
        expensive and shopping in person is slow, so Nested lets you try every
        version of a room for nothing, then buy once. */
@@ -158,6 +158,18 @@ window.PORTFOLIO = {
         },
         {
           n: "02",
+          category: "Your real space",
+          title: "Trace your actual room",
+          body:
+            "Real rooms are rarely a clean rectangle. Upload a floorplan and it " +
+            "shows through behind a half-metre grid — paint over it and the shape " +
+            "becomes your room, alcoves and cut corners included. The floor area " +
+            "updates as you go, or start from an L-shaped preset.",
+          gif: "assets/nested-2-floorplan.gif",
+          alt: "A floorplan showing behind a half-metre grid while an L-shaped room is painted over it, with the floor area counting up."
+        },
+        {
+          n: "03",
           category: "Shop & experiment",
           title: "Try every version, free",
           body:
@@ -165,11 +177,11 @@ window.PORTFOLIO = {
             "the running total move. Swap anything for a cheaper equivalent and see " +
             "what it saves. Rearranging costs nothing, so you can be indecisive on " +
             "purpose until the room is actually right.",
-          gif: "assets/nested-2-experiment.gif",
+          gif: "assets/nested-3-experiment.gif",
           alt: "Pieces being added to a room from the catalogue while the estimated total climbs and cheaper swaps are shown."
         },
         {
-          n: "03",
+          n: "04",
           category: "Copy a real room",
           title: "Bring a photo you liked",
           body:
@@ -177,7 +189,7 @@ window.PORTFOLIO = {
             "photo in. Nested pulls the palette out of it and finds real pieces that " +
             "match, each with a store and a price — so the room you liked becomes a " +
             "shopping list you can actually act on.",
-          gif: "assets/nested-3-photo.gif",
+          gif: "assets/nested-4-photo.gif",
           alt: "A reference photo being scanned, its colours extracted, and matching furniture listed with prices."
         }
       ]
