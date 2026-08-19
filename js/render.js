@@ -46,9 +46,15 @@
     ]);
   }
 
-  // A crossfading photo gallery with dots and arrows.
-  function gallery(g) {
+  /* A crossfading photo gallery with dots and arrows.
+     The compact variant sits inside a card: the dots move on top of the
+     photo and the caption line is dropped, so it stays small. The captions
+     still ride along as alt text for anyone using a screen reader. */
+  function gallery(g, variant) {
     const photos = g.photos || [];
+    const compact = variant === "gallery--compact";
+    const many = photos.length > 1;
+
     const stage = el("div", { class: "gallery__stage" },
       photos.map((p, i) => el("img", {
         class: `gallery__img${i === 0 ? " is-on" : ""}`,
@@ -56,26 +62,31 @@
         loading: i === 0 ? "eager" : "lazy", decoding: "async"
       })));
 
-    if (photos.length > 1) {
+    if (many) {
       stage.appendChild(el("button", { class: "gallery__arrow gallery__arrow--prev", type: "button", "aria-label": "Previous photo", html: "&#8249;" }));
       stage.appendChild(el("button", { class: "gallery__arrow gallery__arrow--next", type: "button", "aria-label": "Next photo", html: "&#8250;" }));
     }
 
-    const kids = [
-      stage,
-      el("figcaption", { class: "gallery__caption", text: (photos[0] && photos[0].caption) || "" })
-    ];
+    const dots = many
+      ? el("div", { class: "gallery__dots", role: "tablist", "aria-label": `${g.title || "Photo"} gallery` },
+          photos.map((p, i) => el("button", {
+            class: `gallery__dot${i === 0 ? " is-on" : ""}`, type: "button", role: "tab",
+            "aria-selected": i === 0 ? "true" : "false",
+            "aria-label": p.caption || `Photo ${i + 1}`
+          })))
+      : null;
 
-    if (photos.length > 1) {
-      kids.push(el("div", { class: "gallery__dots", role: "tablist", "aria-label": `${g.title || "Photo"} gallery` },
-        photos.map((p, i) => el("button", {
-          class: `gallery__dot${i === 0 ? " is-on" : ""}`, type: "button", role: "tab",
-          "aria-selected": i === 0 ? "true" : "false",
-          "aria-label": p.caption || `Photo ${i + 1}`
-        }))));
+    const kids = [stage];
+    if (compact) {
+      if (dots) stage.appendChild(dots);
+    } else {
+      kids.push(el("figcaption", { class: "gallery__caption", text: (photos[0] && photos[0].caption) || "" }));
+      if (dots) kids.push(dots);
     }
 
-    return el("figure", { class: "gallery", tabindex: "0", "data-rise": "" }, kids);
+    const attrs = { class: `gallery${variant ? " " + variant : ""}`, tabindex: "0" };
+    if (!compact) attrs["data-rise"] = "";   // the card it sits in already rises
+    return el("figure", attrs, kids);
   }
 
   // Build the Live / Code button pair used by Nested and the smaller projects.
@@ -379,21 +390,22 @@
     ]));
   });
 
+  /* Each card leads with whichever it has: a slideshow, a single photo, or
+     the drawn icon. The photos sit above the heading so every card in the
+     row still starts with its title at the same height. */
   const interests = $(".interests");
   D.beyond.interests.forEach((it, i) => {
+    let lead;
+    if (it.photos && it.photos.length) lead = gallery(it, "gallery--compact");
+    else if (it.photo) lead = el("img", { class: "interests__photo", src: it.photo, alt: it.title, loading: "lazy" });
+    else lead = el("span", { class: "interests__icon", html: B.get(it.icon) });
+
     interests.appendChild(el("li", { "data-rise": "", style: `--d:${i * 70}ms` }, [
-      it.photo
-        ? el("img", { class: "interests__photo", src: it.photo, alt: it.title, loading: "lazy" })
-        : el("span", { class: "interests__icon", html: B.get(it.icon) }),
+      lead,
       el("h4", { text: it.title }),
       el("p", { text: it.body }),
       readMore(it.more)
     ]));
-  });
-
-  (D.beyond.galleries || []).forEach(g => {
-    if (g.title) interests.parentNode.appendChild(el("h3", { class: "subhead", text: g.title }));
-    interests.parentNode.appendChild(gallery(g));
   });
 
   /* ─── 7 · CONTACT ──────────────────────────────────────────────────── */

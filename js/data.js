@@ -405,23 +405,13 @@ window.PORTFOLIO = {
       }
     ],
 
-    // icon: leaf | fern | flower | tree | book | seed | sprout
+    /* icon: leaf | fern | flower | tree | book | seed | sprout
+       Give any of these a `photos` list and the icon is replaced by a small
+       slideshow that crossfades on its own, with dots to steer it. One photo
+       is fine too — it just sits there as a still. */
     interests: [
       { icon: "tree",   title: "The pool deck",    body: "Five summers of coaching. Still the best part of my year.",
-        more: "From 2023 to 2025 I was paired one-on-one with a swimmer on the FOCUS Adaptive Swim Team (FAST Fins), working on stamina, team skills and self-confidence — and taking real time off their races. FOCUS is built around perfecting strokes, following verbal commands and increasing fitness." },
-      { icon: "flower", title: "Drumming",         body: "Lead drummer in three bands. Loud, and worth it.",
-        more: "Rock, indie and pop at venues around Atlanta — the Coca-Cola Roxy, MadLife Studios, Atlantic Station and Marietta Square. Won the 2023 Georgia Regional Battle of the Bands." },
-      { icon: "leaf",   title: "Interface design", body: "Why some software feels calm and some feels like a slot machine." },
-      { icon: "seed",   title: "Sign language",    body: "Two years in the ASL Honor Society. A whole grammar in your hands.",
-        more: "Fluent in American Sign Language after four years of classes. As secretary of the ASL National Honor Society I arranged activities for Deaf and Hard of Hearing students around the county." }
-    ],
-
-    /* Photo galleries. Each one crossfades on its own and gets dots and
-       arrows so a visitor can steer. Add another object here for drumming,
-       coaching, or anything else — the code handles as many as you like. */
-    galleries: [
-      {
-        title: "On the pool deck",
+        more: "From 2023 to 2025 I was paired one-on-one with a swimmer on the FOCUS Adaptive Swim Team (FAST Fins), working on stamina, team skills and self-confidence — and taking real time off their races. FOCUS is built around perfecting strokes, following verbal commands and increasing fitness.",
         photos: [
           { src: "assets/swim/swim-1.jpg", caption: "Poolside after a session" },
           { src: "assets/swim/swim-2.jpg", caption: "The team after an evening meet" },
@@ -429,8 +419,12 @@ window.PORTFOLIO = {
           { src: "assets/swim/swim-4.jpg", caption: "Chimney Lakes coaching staff, 2025" },
           { src: "assets/swim/swim-5.jpg", caption: "Between events" },
           { src: "assets/swim/swim-6.jpg", caption: "Off the blocks at a meet" }
-        ]
-      }
+        ] },
+      { icon: "flower", title: "Drumming",         body: "Lead drummer in three bands. Loud, and worth it.",
+        more: "Rock, indie and pop at venues around Atlanta — the Coca-Cola Roxy, MadLife Studios, Atlantic Station and Marietta Square. Won the 2023 Georgia Regional Battle of the Bands." },
+      { icon: "leaf",   title: "Interface design", body: "Why some software feels calm and some feels like a slot machine." },
+      { icon: "seed",   title: "Sign language",    body: "Two years in the ASL Honor Society. A whole grammar in your hands.",
+        more: "Fluent in American Sign Language after four years of classes. As secretary of the ASL National Honor Society I arranged activities for Deaf and Hard of Hearing students around the county." }
     ]
   },
 
