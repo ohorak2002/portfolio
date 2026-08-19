@@ -46,6 +46,23 @@
     ]);
   }
 
+  /* A walkthrough step's picture. A silent looping video where one exists —
+     the same clip at 30fps instead of the GIF's 10, and a third of the
+     weight — and the GIF as the fallback when it doesn't. Playback is left
+     to scroll.js, which only runs the clips that are actually on screen. */
+  function walkMedia(st) {
+    if (!st.video) return el("img", { src: st.gif, alt: st.alt, loading: "lazy", decoding: "async" });
+    const v = el("video", {
+      class: "walk__video", src: st.video, poster: st.poster || null,
+      preload: "metadata", "aria-label": st.alt
+    });
+    v.loop = true;
+    v.muted = true;          // boolean properties, not attributes — el() skips ""
+    v.playsInline = true;
+    v.controls = false;
+    return v;
+  }
+
   /* "Take a look inside" — a disclosure holding a short write-up of a book,
      the seven-level ladder, the takeaways, and where to read or buy it.
      Built on <details>, so it still opens with JavaScript switched off. */
@@ -281,9 +298,7 @@
     const steps = $(".walk__steps");
     W.steps.forEach((st, i) => {
       steps.appendChild(el("li", { class: "walk__step", "data-rise": "", style: `--d:${i * 80}ms` }, [
-        el("figure", { class: "walk__media" }, [
-          el("img", { src: st.gif, alt: st.alt, loading: "lazy", decoding: "async" })
-        ]),
+        el("figure", { class: "walk__media" }, [ walkMedia(st) ]),
         el("div", { class: "walk__body" }, [
           el("span", { class: "walk__n", text: st.n }),
           el("span", { class: "walk__cat", text: st.category }),
@@ -393,14 +408,22 @@
   /* ─── 5 · MY GOALS ─────────────────────────────────────────────────── */
   head("#goals", D.goals);
 
-  const GOAL_ICONS = ["sprout", "leaf", "fern", "tree", "flower", "seed"];
+  /* A checklist, not a list — a visitor can tick these off as they read, and
+     the ticks are remembered on their own machine. The key is the title, so
+     reordering the goals doesn't shuffle anyone's ticks. */
   const goals = $(".goals");
   D.goals.items.forEach((g, i) => {
-    goals.appendChild(el("li", { "data-rise": "", style: `--d:${i * 70}ms` }, [
-      el("span", { class: "goals__icon", html: B.get(GOAL_ICONS[i % GOAL_ICONS.length]) }),
-      el("span", { class: "goals__horizon", text: g.horizon }),
-      el("h3", { text: g.title }),
-      el("p", { text: g.body })
+    const id = `goal-${i}`;
+    goals.appendChild(el("li", { class: "goal", "data-rise": "", style: `--d:${i * 70}ms` }, [
+      el("input", {
+        class: "goal__input", type: "checkbox", id,
+        "data-goal": g.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
+      }),
+      el("div", { class: "goal__text" }, [
+        el("span", { class: "goals__horizon", text: g.horizon }),
+        el("h3", {}, el("label", { class: "goal__label", for: id, text: g.title })),
+        el("p", { text: g.body })
+      ])
     ]));
   });
 
@@ -474,6 +497,14 @@
   const mailBtn = $("#mailBtn");
   mailBtn.href = `mailto:${D.meta.email}`;
   mailBtn.textContent = D.contact.cta;
+
+  const inBtn = $("#linkedinBtn");
+  if (D.meta.links.linkedin) {
+    inBtn.href = D.meta.links.linkedin;
+    inBtn.textContent = D.contact.linkedinCta || "Connect on LinkedIn";
+  } else {
+    inBtn.remove();
+  }
 
   const phoneBtn = $("#phoneBtn");
   if (D.meta.phone) {

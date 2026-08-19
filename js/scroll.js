@@ -106,6 +106,57 @@
       { threshold: 0.25 }).observe($(".feature__art"));
   })();
 
+  /* ─── WALKTHROUGH CLIPS ─────────────────────────────────────────────── */
+  /* Four silent loops. Only the ones on screen are allowed to run, so the
+     page isn't decoding four videos at once, and none of them start until
+     you've scrolled far enough to care. */
+
+  (function walkClips() {
+    const vids = $$(".walk__video");
+    if (!vids.length) return;
+
+    if (REDUCED) {                       // show a still frame and leave it
+      vids.forEach(v => { v.autoplay = false; v.pause(); });
+      return;
+    }
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const v = e.target;
+        if (e.isIntersecting) {
+          const p = v.play();
+          if (p) p.catch(() => { /* autoplay refused — the poster stays up */ });
+        } else {
+          v.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+
+    vids.forEach(v => io.observe(v));
+  })();
+
+  /* ─── GOAL CHECKLIST ────────────────────────────────────────────────── */
+  /* Ticks live in this visitor's own browser and nowhere else. Wrapped
+     because private-mode Safari throws on localStorage rather than
+     returning null, and a thrown error here would kill everything below. */
+
+  (function checklist() {
+    const boxes = $$(".goal__input");
+    if (!boxes.length) return;
+
+    const KEY = "pf-goals";
+    let done = [];
+    try { done = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { done = []; }
+
+    boxes.forEach(b => {
+      if (done.includes(b.dataset.goal)) b.checked = true;
+      b.addEventListener("change", () => {
+        const on = boxes.filter(x => x.checked).map(x => x.dataset.goal);
+        try { localStorage.setItem(KEY, JSON.stringify(on)); } catch (e) { /* nothing to do */ }
+      });
+    });
+  })();
+
   /* ─── PHOTO GALLERIES ───────────────────────────────────────────────── */
   /* Photos crossfade on their own, and the dots and arrows let a visitor
      take over. Any manual choice stops the autoplay for good — once someone

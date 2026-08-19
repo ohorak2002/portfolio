@@ -278,6 +278,10 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .btn--quiet { color: var(--ink); border: 1px solid var(--line); background: var(--card); }
 .btn--quiet:hover { border-color: var(--forest); color: var(--forest); background: var(--mist); }
 .btn--big { min-height: 56px; padding: 1rem 2.4rem; font-size: var(--t-base); }
+/* LinkedIn sits beside the email as a second way in — same weight, its own
+   colour so the pair doesn't read as one button repeated. */
+.btn--in { background: var(--mist); color: var(--leaf-ink); border: 1px solid var(--leaf); }
+.btn--in:hover { background: var(--card); border-color: var(--forest); color: var(--forest); transform: translateY(-2px); }
 
 /* ──────────────────────  5. DIVIDERS & BANDS  ───────────────────────── */
 
@@ -440,14 +444,32 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 .goals li {
   position: relative;
-  padding: 1.6rem 1.5rem;
+  display: flex; align-items: flex-start; gap: .9rem;
+  padding: 1.4rem 1.4rem;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  transition: border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+  transition: border-color var(--fast) var(--ease), transform var(--fast) var(--ease), opacity var(--fast) var(--ease);
 }
 .goals li:hover { border-color: var(--leaf); transform: translateY(-3px); }
-.goals__icon { display: block; width: 24px; height: 24px; color: var(--leaf); margin-bottom: .9rem; }
+
+/* The checkbox is the real thing, just tinted — it stays keyboard
+   operable and announces itself properly without any help from us. */
+.goal__input {
+  flex: none; width: 20px; height: 20px; margin-top: .15rem;
+  accent-color: var(--forest); cursor: pointer;
+}
+.goal__input:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+.goal__text { min-width: 0; }
+.goal__label { cursor: pointer; }
+/* Ticked goals recede. Done with colour rather than opacity, because
+   opacity belongs to the reveal animation and the two would fight. */
+.goals li:has(.goal__input:checked) { background: var(--tint); border-color: var(--line-soft); }
+.goals li:has(.goal__input:checked) .goal__label {
+  text-decoration: line-through; text-decoration-color: var(--leaf);
+  color: var(--ink-dim);
+}
+.goals li:has(.goal__input:checked) p { color: var(--ink-dim); }
 .goals__horizon {
   display: inline-block; margin-bottom: .55rem;
   font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
@@ -478,6 +500,9 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   content: ""; width: 7px; height: 7px; border-radius: 50%;
   background: var(--leaf); flex: none;
 }
+/* Beyond holds four blocks back to back, so it gets tighter gaps than a
+   section with one. */
+#beyond .subhead { margin-top: clamp(1.8rem, 2.6vw, 2.2rem); margin-bottom: 1rem; }
 
 /* ────────────────────────  10. VALUES (About)  ───────────────────────── */
 
@@ -614,9 +639,15 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
 /* ───────────────────  16. ACTIVITIES (Beyond)  ──────────────────────── */
 
-.acts { border-top: 1px solid var(--line-soft); }
+/* Two columns from tablet up — six activities stacked one-per-row made the
+   Beyond section run much longer than it needed to. */
+.acts {
+  display: grid; gap: 0 2.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  border-top: 1px solid var(--line-soft);
+}
 .acts li {
-  padding: .9rem .2rem; border-bottom: 1px solid var(--line-soft);
+  padding: .8rem .2rem; border-bottom: 1px solid var(--line-soft);
 }
 .acts__row { display: flex; align-items: center; gap: 1rem; }
 .acts .more { margin-left: 2.2rem; }   /* line up under the title, past the icon */
@@ -902,7 +933,8 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   box-shadow: var(--shadow);
   line-height: 0;
 }
-.walk__media img { width: 100%; height: auto; display: block; }
+.walk__media img,
+.walk__media video { width: 100%; height: auto; display: block; }
 
 .walk__n {
   font-family: var(--font-serif); font-size: var(--t-lg);

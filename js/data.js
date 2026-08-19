@@ -25,7 +25,7 @@ window.PORTFOLIO = {
 
     links: {
       github: "https://github.com/ohorak2002",
-      linkedin: "",                                  // add yours and it appears
+      linkedin: "https://www.linkedin.com/in/oren-horak-b3b971427",
       resume: "assets/Oren-Horak-Resume.docx"
     }
   },
@@ -148,6 +148,7 @@ window.PORTFOLIO = {
             "should feel, the light, the walls, the size. Tick what already came " +
             "with the place and Nested won't recommend things you own. That's the " +
             "whole setup — it builds and arranges the room from your answers.",
+          video: "assets/nested-1-start.mp4",
           gif: "assets/nested-1-start.gif",
           alt: "The six-question intake being filled in: address, palette, feel, light, and exact room dimensions."
         },
@@ -160,6 +161,7 @@ window.PORTFOLIO = {
             "shows through behind a half-metre grid — paint over it and the shape " +
             "becomes your room, alcoves and cut corners included. The floor area " +
             "updates as you go, or start from an L-shaped preset.",
+          video: "assets/nested-2-floorplan.mp4",
           gif: "assets/nested-2-floorplan.gif",
           alt: "A floorplan showing behind a half-metre grid while an L-shaped room is painted over it, with the floor area counting up."
         },
@@ -172,6 +174,7 @@ window.PORTFOLIO = {
             "the running total move. Swap anything for a cheaper equivalent and see " +
             "what it saves. Rearranging costs nothing, so you can be indecisive on " +
             "purpose until the room is actually right.",
+          video: "assets/nested-3-experiment.mp4",
           gif: "assets/nested-3-experiment.gif",
           alt: "Pieces being added to a room from the catalogue while the estimated total climbs and cheaper swaps are shown."
         },
@@ -184,6 +187,7 @@ window.PORTFOLIO = {
             "photo in. Nested pulls the palette out of it and finds real pieces that " +
             "match, each with a store and a price — so the room you liked becomes a " +
             "shopping list you can actually act on.",
+          video: "assets/nested-4-photo.mp4",
           gif: "assets/nested-4-photo.gif",
           alt: "A reference photo being scanned, its colours extracted, and matching furniture listed with prices."
         }
@@ -201,11 +205,13 @@ window.PORTFOLIO = {
       title: "This portfolio",
       year: "2026",
       blurb:
-        "The site you're reading. No frameworks and no dependencies — every line " +
-        "of HTML, CSS and JavaScript is hand-written, and all the content lives " +
-        "in one small file I can edit in a minute.",
-      tags: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
-      links: { live: "https://ohorak2002.github.io/", repo: "" }
+        "The site you're reading — built with Claude Code, which wrote the HTML, " +
+        "CSS and JavaScript while I directed the design, the structure and every " +
+        "word of the copy. It runs on no frameworks and no dependencies, and all " +
+        "the content sits in one file I can edit in a minute. Learning to steer " +
+        "an AI toward something I'd actually put my name on was the point.",
+      tags: ["Claude Code", "HTML", "CSS", "JavaScript", "GitHub Pages"],
+      links: { live: "https://ohorak2002.github.io/portfolio/", repo: "https://github.com/ohorak2002/portfolio" }
     }
   ],
 
@@ -343,10 +349,11 @@ window.PORTFOLIO = {
       },
       {
         horizon: "By graduation",
-        title: "Get genuinely fluent in code",
+        title: "Get properly good with AI",
         body:
-          "Java first, then enough of a second language to stop thinking about " +
-          "syntax and start thinking about design."
+          "Not just using the tools — understanding where they're strong, where " +
+          "they quietly get things wrong, and how to build something real on top " +
+          "of them. Nested is where I'm practising."
       },
       {
         horizon: "By graduation",
@@ -458,8 +465,8 @@ window.PORTFOLIO = {
        slideshow that crossfades on its own, with dots to steer it. One photo
        is fine too — it just sits there as a still. */
     interests: [
-      { icon: "tree",   title: "The pool deck",    body: "Five summers of coaching. Still the best part of my year.",
-        more: "From 2023 to 2025 I was paired one-on-one with a swimmer on the FOCUS Adaptive Swim Team (FAST Fins), working on stamina, team skills and self-confidence — and taking real time off their races. FOCUS is built around perfecting strokes, following verbal commands and increasing fitness.",
+      { icon: "tree",   title: "Swimming",         body: "The deliberate gap in my schedule. An hour where nothing is due.",
+        more: "Swimming is the break I build the rest of my week around. It's the one place where there's no screen and nothing to answer — just the set in front of me — and that turns out to be the fastest way I know to unwind. Looking after the physical side keeps the mental side steady: I come out of the water clearer than I went in, and the work I go back to is better for it. Five summers of coaching came out of the same habit.",
         photos: [
           { src: "assets/swim/swim-1.jpg", caption: "Poolside after a session" },
           { src: "assets/swim/swim-2.jpg", caption: "The team after an evening meet" },
@@ -469,10 +476,11 @@ window.PORTFOLIO = {
           { src: "assets/swim/swim-6.jpg", caption: "Off the blocks at a meet" }
         ] },
       { icon: "flower", title: "Drumming",         body: "Lead drummer in three bands. Loud, and worth it.",
-        more: "Rock, indie and pop at venues around Atlanta — the Coca-Cola Roxy, MadLife Studios, Atlantic Station and Marietta Square. Won the 2023 Georgia Regional Battle of the Bands." },
-      { icon: "leaf",   title: "Interface design", body: "Why some software feels calm and some feels like a slot machine." },
-      { icon: "seed",   title: "Sign language",    body: "Two years in the ASL Honor Society. A whole grammar in your hands.",
-        more: "Fluent in American Sign Language after four years of classes. As secretary of the ASL National Honor Society I arranged activities for Deaf and Hard of Hearing students around the county." }
+        more: "Drumming is where the energy goes. It's the opposite of everything else I do — nothing subtle, nothing careful, just something loud I get to hit as hard as the song needs. An hour behind a kit and whatever I was stressed about has been played out of me, which is a better result than most things I've tried. Rock, indie and pop at venues around Atlanta: the Coca-Cola Roxy, MadLife Studios, Atlantic Station and Marietta Square, plus the 2023 Georgia Regional Battle of the Bands.",
+        photos: [{ src: "assets/beyond-drums.jpg", caption: "Playing a set with the band" }] },
+      { icon: "seed",   title: "Sign language",    body: "Four years of ASL. A whole grammar that lives in your hands.",
+        more: "Fluent in American Sign Language after four years of classes, and awarded Outstanding Achievement in ASL at Lassiter. As secretary of the ASL National Honor Society I arranged activities for Deaf and Hard of Hearing students around the county.",
+        photos: [{ src: "assets/beyond-asl.jpg", caption: "Outstanding Achievement in ASL, Lassiter High School" }] }
     ]
   },
 
@@ -481,8 +489,10 @@ window.PORTFOLIO = {
     kicker: "Contact",
     headline: "Contact me",
     body:
-      "I'm open to internships, collaborations, and the kind of email that starts " +
-      "with \"this is probably a bad idea, but…\". I answer everything.",
-    cta: "Send me an email"
+      "I'm open to internships, collaborations, and any project worth building. " +
+      "If you've got an idea you're still working out, send it anyway — I answer " +
+      "everything.",
+    cta: "Send me an email",
+    linkedinCta: "Connect on LinkedIn"
   }
 };
