@@ -36,6 +36,48 @@
     if (n) { if (note) n.textContent = note; else n.remove(); }
   }
 
+  // A "Read more" disclosure. Returns null when there is nothing extra to
+  // say, so entries without detail simply don't grow a button.
+  function readMore(text) {
+    if (!text) return null;
+    return el("details", { class: "more" }, [
+      el("summary", { class: "more__btn" }, el("span", { class: "more__label", text: "Read more" })),
+      el("p", { class: "more__body", text })
+    ]);
+  }
+
+  // A crossfading photo gallery with dots and arrows.
+  function gallery(g) {
+    const photos = g.photos || [];
+    const stage = el("div", { class: "gallery__stage" },
+      photos.map((p, i) => el("img", {
+        class: `gallery__img${i === 0 ? " is-on" : ""}`,
+        src: p.src, alt: p.caption || g.title,
+        loading: i === 0 ? "eager" : "lazy", decoding: "async"
+      })));
+
+    if (photos.length > 1) {
+      stage.appendChild(el("button", { class: "gallery__arrow gallery__arrow--prev", type: "button", "aria-label": "Previous photo", html: "&#8249;" }));
+      stage.appendChild(el("button", { class: "gallery__arrow gallery__arrow--next", type: "button", "aria-label": "Next photo", html: "&#8250;" }));
+    }
+
+    const kids = [
+      stage,
+      el("figcaption", { class: "gallery__caption", text: (photos[0] && photos[0].caption) || "" })
+    ];
+
+    if (photos.length > 1) {
+      kids.push(el("div", { class: "gallery__dots", role: "tablist", "aria-label": `${g.title || "Photo"} gallery` },
+        photos.map((p, i) => el("button", {
+          class: `gallery__dot${i === 0 ? " is-on" : ""}`, type: "button", role: "tab",
+          "aria-selected": i === 0 ? "true" : "false",
+          "aria-label": p.caption || `Photo ${i + 1}`
+        }))));
+    }
+
+    return el("figure", { class: "gallery", tabindex: "0", "data-rise": "" }, kids);
+  }
+
   // Build the Live / Code button pair used by Nested and the smaller projects.
   function linkButtons(links, cls) {
     const box = el("div", { class: cls });
@@ -143,8 +185,11 @@
     art.innerHTML = B.room;
   }
 
+  /* Both of these drop out entirely when their data is empty, so the
+     section runs straight from the buttons into the walkthrough. */
   const ffeat = $(".feature__features");
-  (N.features || []).forEach((f, i) => {
+  if (!(N.features || []).length) ffeat.remove();
+  else N.features.forEach((f, i) => {
     ffeat.appendChild(el("li", { "data-rise": "", style: `--d:${i * 70}ms` }, [
       el("span", { class: "feature__icon", html: B.get(f.icon) }),
       el("h3", { text: f.title }),
@@ -152,8 +197,12 @@
     ]));
   });
 
-  $(".feature__learned-icon").innerHTML = B.icons.seed;
-  $(".feature__learned p").innerHTML = `<b>What I learned:</b> ${esc(N.learned)}`;
+  const flearned = $(".feature__learned");
+  if (!N.learned) flearned.remove();
+  else {
+    $(".feature__learned-icon").innerHTML = B.icons.seed;
+    $(".feature__learned p").innerHTML = `<b>What I learned:</b> ${esc(N.learned)}`;
+  }
 
   /* The walkthrough. Each step is a rendered GIF with its own
      category and topic. Loading is lazy — they are heavy compared to the
@@ -297,26 +346,35 @@
   const acts = $(".acts");
   D.beyond.activities.forEach(a => {
     acts.appendChild(el("li", {}, [
-      a.photo
-        ? el("img", { class: "acts__photo", src: a.photo, alt: `${a.role} — ${a.org}`, loading: "lazy" })
-        : el("span", { class: "acts__icon", html: B.icons.fern }),
-      el("div", {}, [
-        el("h4", { text: a.role }),
-        el("p", { class: "acts__org", text: a.org })
+      el("div", { class: "acts__row" }, [
+        a.photo
+          ? el("img", { class: "acts__photo", src: a.photo, alt: `${a.role} — ${a.org}`, loading: "lazy" })
+          : el("span", { class: "acts__icon", html: B.icons.fern }),
+        el("div", {}, [
+          el("h4", { text: a.role }),
+          el("p", { class: "acts__org", text: a.org })
+        ]),
+        el("span", { class: "acts__period", text: a.period })
       ]),
-      el("span", { class: "acts__period", text: a.period })
+      readMore(a.more)
     ]));
   });
 
   const shelf = $(".shelf");
   D.beyond.reading.forEach((b, i) => {
     shelf.appendChild(el("li", { class: "book", "data-rise": "", style: `--d:${i * 70}ms` }, [
-      el("span", { class: "book__spine", "aria-hidden": "true" }),
+      b.cover
+        ? el("img", { class: "book__cover", src: b.cover, alt: `${b.title} — cover`, loading: "lazy" })
+        : el("span", { class: "book__spine", "aria-hidden": "true" }),
       el("div", {}, [
         el("span", { class: "book__status", text: b.status }),
         el("h4", { text: b.title }),
         el("p", { class: "book__author", text: b.author }),
-        b.take ? el("p", { class: "book__take", text: b.take }) : null
+        b.take ? el("p", { class: "book__take", text: b.take }) : null,
+        b.buy ? el("div", { class: "book__buy" }, [
+          el("span", { class: "book__buyLabel", text: "Where to buy" }),
+          el("a", { class: "btn btn--quiet btn--sm", href: b.buy, target: "_blank", rel: "noopener", text: "Amazon" })
+        ]) : null
       ])
     ]));
   });
@@ -328,8 +386,14 @@
         ? el("img", { class: "interests__photo", src: it.photo, alt: it.title, loading: "lazy" })
         : el("span", { class: "interests__icon", html: B.get(it.icon) }),
       el("h4", { text: it.title }),
-      el("p", { text: it.body })
+      el("p", { text: it.body }),
+      readMore(it.more)
     ]));
+  });
+
+  (D.beyond.galleries || []).forEach(g => {
+    if (g.title) interests.parentNode.appendChild(el("h3", { class: "subhead", text: g.title }));
+    interests.parentNode.appendChild(gallery(g));
   });
 
   /* ─── 7 · CONTACT ──────────────────────────────────────────────────── */

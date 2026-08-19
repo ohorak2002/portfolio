@@ -125,6 +125,58 @@
       { threshold: 0.25 }).observe($(".feature__art"));
   })();
 
+  /* ─── PHOTO GALLERIES ───────────────────────────────────────────────── */
+  /* Photos crossfade on their own, and the dots and arrows let a visitor
+     take over. Any manual choice stops the autoplay for good — once someone
+     is steering, the slideshow moving under them is just annoying. */
+
+  $$(".gallery").forEach(box => {
+    const imgs = $$(".gallery__img", box);
+    const dots = $$(".gallery__dot", box);
+    const caption = $(".gallery__caption", box);
+    if (imgs.length < 2) return;
+
+    let i = 0, timer = null, manual = false;
+
+    const show = n => {
+      imgs[i].classList.remove("is-on");
+      if (dots[i]) { dots[i].classList.remove("is-on"); dots[i].setAttribute("aria-selected", "false"); }
+      i = (n + imgs.length) % imgs.length;
+      imgs[i].classList.add("is-on");
+      if (dots[i]) { dots[i].classList.add("is-on"); dots[i].setAttribute("aria-selected", "true"); }
+      if (caption) caption.textContent = imgs[i].alt;
+    };
+
+    const stop = () => { clearInterval(timer); timer = null; };
+    const start = () => { if (!timer && !manual && !REDUCED) timer = setInterval(() => show(i + 1), 4200); };
+    const take = n => { manual = true; stop(); show(n); };
+
+    dots.forEach((d, n) => d.addEventListener("click", () => take(n)));
+    const prev = $(".gallery__arrow--prev", box);
+    const next = $(".gallery__arrow--next", box);
+    if (prev) prev.addEventListener("click", () => take(i - 1));
+    if (next) next.addEventListener("click", () => take(i + 1));
+
+    box.addEventListener("keydown", e => {
+      if (e.key === "ArrowLeft")  { take(i - 1); e.preventDefault(); }
+      if (e.key === "ArrowRight") { take(i + 1); e.preventDefault(); }
+    });
+
+    new IntersectionObserver(([e]) => e.isIntersecting ? start() : stop(),
+      { threshold: 0.25 }).observe(box);
+  });
+
+  /* ─── READ MORE ─────────────────────────────────────────────────────── */
+  /* Native <details>, so it still opens with JS off. This only keeps the
+     label honest once it's open. */
+
+  $$(".more").forEach(d => {
+    const label = $(".more__label", d);
+    if (label) d.addEventListener("toggle", () => {
+      label.textContent = d.open ? "Show less" : "Read more";
+    });
+  });
+
   /* ─── COPY EMAIL ───────────────────────────────────────────────────── */
 
   let toastTimer;

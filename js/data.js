@@ -59,17 +59,12 @@ window.PORTFOLIO = {
       { src: "assets/nested-midnight.jpg",   label: "Midnight" }
     ],
 
-    features: [
-      { icon: "sprout", title: "Six questions",    body: "Where you live, colours, feel, light, walls, size. Nested builds and arranges the room from your answers." },
-      { icon: "tree",   title: "Move anything",    body: "Click a piece to pick it up, drag empty space to orbit. Auto-arrange cleans up when it gets crowded." },
-      { icon: "flower", title: "Sixteen palettes", body: "Clay & Linen through to Midnight — or drop in a photo of a room you like and it matches the colours." },
-      { icon: "seed",   title: "Runs on your machine", body: "No account and no upload. It's a browser tab, so it opens instantly and your floor plan stays yours." }
-    ],
+    /* Both of these are switched off — the section runs straight from the
+       buttons into the walkthrough below. Put entries back in either list
+       and they reappear, no code changes needed. */
+    features: [],
 
-    learned:
-      "How a render loop, a scene graph, and raycast-based selection fit together — " +
-      "and that the hard part of 3D isn't the maths, it's making the controls obvious " +
-      "to someone who has never opened the tool before.",
+    learned: "",
 
 
     /* Drop a rendered demo in assets/ and name it here, and it REPLACES the
@@ -382,28 +377,60 @@ window.PORTFOLIO = {
     kicker: "Beyond",
     title: "Beyond the classroom",
 
+    /* `more` is optional — write one and the entry grows a "Read more"
+       button. Leave it off and the entry just sits there quietly. */
     activities: [
-      { role: "President",       org: "Jewish Student Union",                          period: "2022 — 2025" },
-      { role: "Secretary",       org: "American Sign Language National Honor Society",  period: "2024 — 2025" },
-      { role: "Youth Mentor",    org: "Friendship Circle of Atlanta",                   period: "2023" },
-      { role: "Varsity Swimmer", org: "Lassiter Swim & Dive",                           period: "2022 — 2025" },
+      { role: "President",       org: "Jewish Student Union",                          period: "2022 — 2025",
+        more: "Coordinated meetings and planned recruitment events for a group of 45+ members learning about Jewish culture. Joined the JSUGo three-week summer enrichment trip to Israel." },
+      { role: "Secretary",       org: "American Sign Language National Honor Society",  period: "2024 — 2025",
+        more: "Arranged activities for Deaf and Hard of Hearing students across the county. As secretary I compiled the meeting minutes and made sure events actually ran on time." },
+      { role: "Youth Mentor",    org: "Friendship Circle of Atlanta",                   period: "2023",
+        more: "Friendship Circle builds friendship and inclusion through disability-awareness events. I directed over 100 runners in the Friendship 5K, which raised more than $64,000." },
+      { role: "Varsity Swimmer", org: "Lassiter Swim & Dive",                           period: "2022 — 2025",
+        more: "Lettered for varsity swim and met the county cut requirements in the 200 IM, 100 breaststroke and 100 freestyle. Won the team's “Most Dedicated Swimmer” award for the 2023–2024 season." },
       { role: "Swim Member",     org: "Gamecock Club Swim",                             period: "2025 — 2026" },
-      { role: "Lead Drummer",    org: "Three rock bands",                               period: "2020 — 2025" }
+      { role: "Lead Drummer",    org: "Three rock bands",                               period: "2020 — 2025",
+        more: "Rock, indie and pop at venues around Atlanta — the Coca-Cola Roxy, MadLife Studios, Atlantic Station and Marietta Square. Won the 2023 Georgia Regional Battle of the Bands." }
     ],
 
     // status: "Reading" | "Finished" | "Up next"
     reading: [
-      { title: "Replace with a book", author: "Author Name", status: "Reading",  take: "One line on why you picked it up." },
-      { title: "Another book",        author: "Author Name", status: "Finished", take: "The one idea that stuck with you." },
-      { title: "The one on the pile", author: "Author Name", status: "Up next",  take: "Why it's next." }
+      {
+        title: "7L: The Seven Levels of Communication",
+        author: "Michael J. Maher",
+        status: "Reading",
+        take: "",                        // ← one line on why you picked it up
+        cover: "assets/book-7l.jpg",
+        buy: "https://www.amazon.com/7L-Levels-Communication-Relationships-Referrals/dp/1942952473"
+      }
     ],
 
     // icon: leaf | fern | flower | tree | book | seed | sprout
     interests: [
-      { icon: "tree",   title: "The pool deck",    body: "Five summers of coaching. Still the best part of my year." },
-      { icon: "flower", title: "Drumming",         body: "Lead drummer in three bands. Loud, and worth it." },
+      { icon: "tree",   title: "The pool deck",    body: "Five summers of coaching. Still the best part of my year.",
+        more: "From 2023 to 2025 I was paired one-on-one with a swimmer on the FOCUS Adaptive Swim Team (FAST Fins), working on stamina, team skills and self-confidence — and taking real time off their races. FOCUS is built around perfecting strokes, following verbal commands and increasing fitness." },
+      { icon: "flower", title: "Drumming",         body: "Lead drummer in three bands. Loud, and worth it.",
+        more: "Rock, indie and pop at venues around Atlanta — the Coca-Cola Roxy, MadLife Studios, Atlantic Station and Marietta Square. Won the 2023 Georgia Regional Battle of the Bands." },
       { icon: "leaf",   title: "Interface design", body: "Why some software feels calm and some feels like a slot machine." },
-      { icon: "seed",   title: "Sign language",    body: "Two years in the ASL Honor Society. A whole grammar in your hands." }
+      { icon: "seed",   title: "Sign language",    body: "Two years in the ASL Honor Society. A whole grammar in your hands.",
+        more: "Fluent in American Sign Language after four years of classes. As secretary of the ASL National Honor Society I arranged activities for Deaf and Hard of Hearing students around the county." }
+    ],
+
+    /* Photo galleries. Each one crossfades on its own and gets dots and
+       arrows so a visitor can steer. Add another object here for drumming,
+       coaching, or anything else — the code handles as many as you like. */
+    galleries: [
+      {
+        title: "On the pool deck",
+        photos: [
+          { src: "assets/swim/swim-1.jpg", caption: "Poolside after a session" },
+          { src: "assets/swim/swim-2.jpg", caption: "The team after an evening meet" },
+          { src: "assets/swim/swim-3.jpg", caption: "Summer squad, 2025" },
+          { src: "assets/swim/swim-4.jpg", caption: "Chimney Lakes coaching staff, 2025" },
+          { src: "assets/swim/swim-5.jpg", caption: "Between events" },
+          { src: "assets/swim/swim-6.jpg", caption: "Off the blocks at a meet" }
+        ]
+      }
     ]
   },
 

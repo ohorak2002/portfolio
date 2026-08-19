@@ -646,9 +646,10 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
 .acts { border-top: 1px solid var(--line-soft); }
 .acts li {
-  display: flex; align-items: center; gap: 1rem;
   padding: .9rem .2rem; border-bottom: 1px solid var(--line-soft);
 }
+.acts__row { display: flex; align-items: center; gap: 1rem; }
+.acts .more { margin-left: 2.2rem; }   /* line up under the title, past the icon */
 .acts__icon { width: 20px; height: 20px; color: var(--leaf); flex: none; }
 .acts__photo {
   width: 36px; height: 36px; border-radius: 50%; flex: none;
@@ -660,13 +661,27 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
 /* ────────────────────  17. READING (Beyond)  ────────────────────────── */
 
-.shelf { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); }
+/* auto-fill, not auto-fit: a single book keeps one column's width instead
+   of stretching across the whole row. */
+.shelf { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(245px, 1fr)); }
 .book {
   display: flex; gap: 1rem;
   padding: 1.3rem; border-radius: var(--radius);
   border: 1px solid var(--line); background: var(--card);
 }
 .book__spine { width: 8px; flex: none; border-radius: 3px; background: linear-gradient(var(--leaf), var(--forest)); opacity: .8; }
+.book__cover {
+  width: 84px; flex: none; align-self: flex-start;
+  border-radius: 4px; border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.book__buy { margin-top: .9rem; }
+.book__buyLabel {
+  display: block; margin-bottom: .4rem;
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.btn--sm { padding: .35rem .8rem; font-size: .8rem; }
 .book__status {
   display: inline-block; margin-bottom: .45rem;
   font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
@@ -686,8 +701,84 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .interests li { background: var(--card); padding: 1.5rem 1.4rem; }
 .interests__icon { display: block; width: 24px; height: 24px; color: var(--leaf); margin-bottom: .85rem; }
 .interests__photo {
-  display: block; width: calc(100% + 2.8rem); height: 140px;
+  display: block; width: calc(100% + 2.8rem); height: 170px;
   margin: -1.5rem -1.4rem .95rem; object-fit: cover;
+}
+
+/* ─── Read more ──────────────────────────────────────────────────────── */
+.more { margin-top: .8rem; }
+.more__btn {
+  display: inline-flex; align-items: center; gap: .35rem;
+  cursor: pointer; list-style: none;
+  font-size: .82rem; font-weight: 600; color: var(--leaf-ink);
+  padding: .15rem 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s var(--ease);
+}
+.more__btn::-webkit-details-marker { display: none; }
+.more__btn::after {
+  content: ""; width: 6px; height: 6px; margin-left: .1rem;
+  border-right: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform .25s var(--ease);
+}
+.more[open] .more__btn::after { transform: rotate(-135deg) translate(-2px, -2px); }
+.more__btn:hover { border-bottom-color: currentColor; }
+.more__btn:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; border-radius: 3px; }
+.more__body {
+  margin-top: .6rem; padding-left: .8rem;
+  border-left: 2px solid var(--line);
+  font-size: .9rem; color: var(--ink-mid); line-height: 1.65;
+}
+.more[open] .more__body { animation: moreIn .3s var(--ease) both; }
+@keyframes moreIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* ─── Photo gallery ──────────────────────────────────────────────────── */
+.gallery { margin: 0; }   /* the .subhead above it provides the spacing */
+.gallery:focus-visible { outline: 2px solid var(--leaf); outline-offset: 6px; border-radius: var(--radius); }
+.gallery__stage {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; background: var(--card); box-shadow: var(--shadow);
+}
+.gallery__img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.03);
+  transition: opacity 1s var(--ease), transform 6s linear;
+}
+.gallery__img.is-on { opacity: 1; transform: scale(1); }
+.gallery__arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 38px; height: 38px; border-radius: 99px;
+  display: grid; place-items: center; cursor: pointer;
+  font-size: 1.4rem; line-height: 1; color: var(--ink-mid);
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+  opacity: 0; transition: opacity .25s var(--ease), background .2s var(--ease);
+}
+.gallery__stage:hover .gallery__arrow,
+.gallery__arrow:focus-visible { opacity: 1; }
+.gallery__arrow:hover { background: var(--paper); }
+.gallery__arrow--prev { left: .7rem; }
+.gallery__arrow--next { right: .7rem; }
+.gallery__caption {
+  margin-top: .75rem; font-size: .86rem; color: var(--ink-soft); min-height: 1.2em;
+}
+.gallery__dots { display: flex; gap: .45rem; margin-top: .6rem; }
+.gallery__dot {
+  width: 8px; height: 8px; padding: 0; border-radius: 99px; cursor: pointer;
+  background: var(--line); border: none;
+  transition: background .25s var(--ease), transform .25s var(--ease);
+}
+.gallery__dot:hover { background: var(--ink-soft); }
+.gallery__dot.is-on { background: var(--leaf-ink); transform: scale(1.35); }
+.gallery__dot:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .gallery__img { transition: opacity .01ms; transform: none; }
+  .gallery__arrow { opacity: 1; }
 }
 .interests h4 { font-family: var(--font-sans); font-size: var(--t-base); font-weight: 600; color: var(--ink); margin-bottom: .3rem; }
 .interests p { font-size: var(--t-sm); color: var(--ink-dim); }
