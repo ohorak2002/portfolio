@@ -32,8 +32,9 @@
   --nav-h: 66px;
 }
 
-/* Light — paper white, mist, sage, forest */
-[data-theme="light"] {
+/* One palette — paper white, mist, and two weights of sage. There is no
+   dark mode: the site is always this. */
+:root {
   --paper:   #FCFDFB;   /* page background            */
   --tint:    #F2F7F0;   /* alternating band           */
   --mist:    #E8F5E9;   /* soft green fill            */
@@ -45,36 +46,17 @@
   --ink-mid: #47563F;   /* body copy                  */
   --ink-dim: #66755E;   /* meta                       */
 
-  /* Two greens, two jobs. --leaf is for illustration and icons, where a soft
-     sage looks right and only needs 3:1. --leaf-ink is the same green pushed
-     dark enough to be readable as actual text (4.8:1+ on every background). */
-  --leaf:     #68935D;   /* 3.2:1+ on every background it sits on */
+  /* Light sage throughout — no deep forest green anywhere. Two weights, two
+     jobs. --leaf is for illustration, icons and focus rings, where the soft
+     tint looks right and only needs 3:1. --leaf-ink and --forest are the same
+     sage pushed just dark enough to read as text and to carry white button
+     text; anything lighter drops under 4.5:1 and stops being readable. */
+  --leaf:     #6E9A61;   /* 3.1:1+ on every background it sits on */
   --leaf-ink: #4F7346;
-  --forest:   #2F4A20;  /* primary green              */
+  --forest:   #517748;   /* buttons and accents        */
   --forest-ink: #FFFFFF;
 
-  --shadow: 0 14px 40px -22px rgba(31, 51, 21, .3);
-}
-
-/* Dark — forest at night, not a black hole */
-[data-theme="dark"] {
-  --paper:   #10170D;
-  --tint:    #16200F;
-  --mist:    #1D2A16;
-  --card:    #182213;
-  --line:    #2C3B24;
-  --line-soft: #223018;
-
-  --ink:     #EEF4EA;
-  --ink-mid: #BCCDB4;
-  --ink-dim: #94A88C;
-
-  --leaf:     #9AC48D;   /* already 9:1 on the dark ground — one value does both */
-  --leaf-ink: #9AC48D;
-  --forest:   #A8D49A;
-  --forest-ink: #12200C;
-
-  --shadow: 0 16px 44px -24px rgba(0, 0, 0, .8);
+  --shadow: 0 14px 40px -22px rgba(55, 78, 44, .28);
 }
 
 /* ────────────────────────────  2. BASE  ─────────────────────────────── */
@@ -165,18 +147,6 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   background: var(--mist);
 }
 .nav__links a.nav__feature:hover { background: var(--forest); color: var(--forest-ink); }
-
-.nav__theme {
-  width: 38px; height: 38px; flex: none;
-  display: grid; place-items: center;
-  border-radius: 50%; color: var(--ink-dim);
-  border: 1px solid var(--line);
-  transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease), background var(--fast) var(--ease);
-}
-.nav__theme:hover { color: var(--forest); border-color: var(--forest); background: var(--mist); }
-.ico-moon { display: none; }
-[data-theme="dark"] .ico-sun  { display: none; }
-[data-theme="dark"] .ico-moon { display: block; }
 
 /* ─────────────────────────────  4. HERO  ────────────────────────────── */
 
@@ -1121,7 +1091,6 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
    pushing their underline away from the text. Buttons just take padding. */
 
 .nav__mark   { padding-block: .5rem; }
-.nav__theme  { width: 44px; height: 44px; }
 
 /* The nav is hidden below 680px but still shown — and tapped — on tablets. */
 .nav__links a { position: relative; }

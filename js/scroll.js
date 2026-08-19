@@ -1,6 +1,6 @@
 /* ============================================================================
    scroll.js — the small amount of motion this site actually needs.
-   Rise-in on scroll · sticky nav · active section · theme · copy email.
+   Rise-in on scroll · sticky nav · active section · copy email.
    That's the whole file. Nothing follows your cursor, nothing spins.
    ========================================================================= */
 
@@ -10,25 +10,6 @@
   const $  = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ─── THEME ────────────────────────────────────────────────────────── */
-
-  const root = document.documentElement;
-  const saved = localStorage.getItem("pf-theme");
-  root.dataset.theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-
-  const themeBtn = $("#themeToggle");
-  function syncThemeLabel() {
-    const next = root.dataset.theme === "dark" ? "light" : "dark";
-    themeBtn.setAttribute("aria-label", `Switch to ${next} mode`);
-  }
-  syncThemeLabel();
-
-  themeBtn.addEventListener("click", () => {
-    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
-    localStorage.setItem("pf-theme", root.dataset.theme);
-    syncThemeLabel();
-  });
 
   /* ─── RISE-IN ──────────────────────────────────────────────────────── */
   /* Every animated element uses the same observer, the same distance and the

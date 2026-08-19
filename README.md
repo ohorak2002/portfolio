@@ -17,7 +17,7 @@ index.html        ← page skeleton and mount points.
 css/style.css     ← all the design. Colours are the first 80 lines.
 js/botanical.js   ← the hand-drawn plant SVGs.
 js/render.js      ← turns data.js into HTML. Rarely needs changing.
-js/scroll.js      ← reveal-on-scroll, sticky nav, theme toggle, copy email.
+js/scroll.js      ← reveal-on-scroll, sticky nav, photo galleries, copy email.
 ```
 
 ## Sections on the page
@@ -112,10 +112,12 @@ npx serve .
 
 ## Design notes
 
-**Colour.** Two greens do two jobs. `--leaf` is the soft sage used for
-illustrations and icons. `--leaf-ink` is the same green pushed darker so it
-stays readable as text. Every text and graphic pair on the page has been
-measured against WCAG AA in both light and dark mode.
+**Colour.** One light palette — paper white, mist, and two weights of sage.
+There is no dark mode. `--leaf` is the soft sage used for illustrations,
+icons and focus rings, where 3:1 is enough. `--leaf-ink` and `--forest` are
+the same sage pushed just dark enough to read as text and to carry white
+button text; anything lighter drops under 4.5:1. Every text and graphic pair
+on the page has been measured against WCAG AA.
 
 **Motion.** There is exactly one animation: a slow, soft rise as elements
 enter the viewport. Same distance, same easing, same duration everywhere —
