@@ -269,6 +269,7 @@
   D.experience.jobs.forEach((x, i) => {
     path.appendChild(el("li", { "data-rise": "", style: `--d:${i * 60}ms` }, [
       el("span", { class: "path__icon", html: B.icons.leaf }),
+      x.photo ? el("img", { class: "path__photo", src: x.photo, alt: `${x.role} at ${x.org}`, loading: "lazy" }) : null,
       el("p", { class: "path__period", text: `${x.period} · ${x.place}` }),
       el("h4", { class: "path__role", text: x.role }),
       el("p", { class: "path__org", text: x.org }),
@@ -296,7 +297,9 @@
   const acts = $(".acts");
   D.beyond.activities.forEach(a => {
     acts.appendChild(el("li", {}, [
-      el("span", { class: "acts__icon", html: B.icons.fern }),
+      a.photo
+        ? el("img", { class: "acts__photo", src: a.photo, alt: `${a.role} — ${a.org}`, loading: "lazy" })
+        : el("span", { class: "acts__icon", html: B.icons.fern }),
       el("div", {}, [
         el("h4", { text: a.role }),
         el("p", { class: "acts__org", text: a.org })
@@ -321,7 +324,9 @@
   const interests = $(".interests");
   D.beyond.interests.forEach((it, i) => {
     interests.appendChild(el("li", { "data-rise": "", style: `--d:${i * 70}ms` }, [
-      el("span", { class: "interests__icon", html: B.get(it.icon) }),
+      it.photo
+        ? el("img", { class: "interests__photo", src: it.photo, alt: it.title, loading: "lazy" })
+        : el("span", { class: "interests__icon", html: B.get(it.icon) }),
       el("h4", { text: it.title }),
       el("p", { text: it.body })
     ]));

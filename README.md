@@ -70,6 +70,18 @@ the camera was pointed at a blank wall when you captured.
 **Links.** `links: { live: "", repo: "" }` — while both are empty the section
 shows a "links coming soon" note. Fill either one and real buttons appear.
 
+## Photos for jobs, activities and interests
+
+Any entry in `experience.jobs`, `beyond.activities` or `beyond.interests` can
+take an optional `photo` field — drop a file in `assets/` and point to it:
+
+```js
+{ role: "Swim Instructor", org: "Atlanta Swim Academy", ..., photo: "assets/coaching.jpg" }
+```
+
+Leave it out and that entry keeps its hand-drawn icon, so you can add photos
+to some entries and not others without anything looking unfinished.
+
 ## Adding your photo
 
 Your photo is already in `assets/profile.jpg`. Two knobs in `data.js`:
