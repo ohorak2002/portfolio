@@ -393,7 +393,9 @@ window.PORTFOLIO = {
         more: "Rock, indie and pop at venues around Atlanta — the Coca-Cola Roxy, MadLife Studios, Atlantic Station and Marietta Square. Won the 2023 Georgia Regional Battle of the Bands." }
     ],
 
-    // status: "Reading" | "Finished" | "Up next"
+    /* status: "Reading" | "Finished" | "Up next"
+       Give a book a `look` object and it grows a "Take a look" button that
+       opens the panel below — the ladder, the takeaways and the links. */
     reading: [
       {
         title: "7L: The Seven Levels of Communication",
@@ -401,7 +403,53 @@ window.PORTFOLIO = {
         status: "Reading",
         take: "",                        // ← one line on why you picked it up
         cover: "assets/book-7l.jpg",
-        buy: "https://www.amazon.com/7L-Levels-Communication-Relationships-Referrals/dp/1942952473"
+        buy: "https://www.amazon.com/7L-Levels-Communication-Relationships-Referrals/dp/1942952473",
+
+        look: {
+          cta: "Take a look inside",
+          facts: "192 pages · BenBella Books · 2016",
+          blurb:
+            "Maher's argument is that how you reach someone caps how much you " +
+            "can move them. He ranks seven ways of making contact, from a " +
+            "billboard up to sitting across a table, and the ranking is " +
+            "inconvenient: the cheap methods that scale are the ones that " +
+            "persuade nobody. It's written as a parable — a struggling agent " +
+            "called Rick Masters is taught the system — rather than as a manual.",
+
+          ladder: {
+            title: "The seven levels, bottom to top",
+            note:
+              "The bottom three inform: they announce, confirm and remind, and " +
+              "that is all they are good for. The top three persuade. Level four " +
+              "is the hinge — cheap enough to do often, personal enough to land.",
+            items: [
+              { n: 7, name: "One-on-one",        zone: "influential", body: "One person, undivided attention. Nothing else changes a mind as reliably." },
+              { n: 6, name: "Events & seminars", zone: "influential", body: "A room you convened. Many real conversations at once, still face to face." },
+              { n: 5, name: "Phone calls",       zone: "influential", body: "A live voice. It interrupts, which is exactly why it works." },
+              { n: 4, name: "Handwritten notes", zone: "hinge",       body: "Slow and physical. Rare enough now that people keep them on the fridge." },
+              { n: 3, name: "Electronic",        zone: "informational", body: "Email and messages. Free to send, effortless to ignore." },
+              { n: 2, name: "Direct mail",       zone: "informational", body: "Something you can hold, still addressed to nobody in particular." },
+              { n: 1, name: "Advertising",       zone: "informational", body: "Broadcast to everyone, remembered by no one." }
+            ]
+          },
+
+          points: [
+            { title: "The channel is the message",
+              body: "Before worrying about what to say, Maher asks where you're saying it. A brilliant email still loses to an ordinary phone call." },
+            { title: "Give first, and keep count of nothing",
+              body: "He frames it as leaving the \"Ego Era\" for the \"Generosity Generation\" — lead with what you can do for someone, and stop auditing whether it came back." },
+            { title: "Referrals are the output, not the goal",
+              body: "You don't chase referrals; you build the kind of relationships that produce them. The business follows the friendships, not the other way round." },
+            { title: "Do the top of the ladder on purpose",
+              body: "The influential levels take real time, so they only happen if you schedule them. Left to drift, everyone slides back down to email." }
+          ],
+
+          links: [
+            { label: "Read a sample",  href: "https://books.google.com/books/about/7L_The_Seven_Levels_of_Communication.html?id=o1tlCQAAQBAJ", note: "Google Books preview" },
+            { label: "Borrow it free", href: "https://archive.org/details/7lsevenlevelsofc0000mahe", note: "Internet Archive lending library — free account needed" },
+            { label: "Buy it",         href: "https://www.amazon.com/7L-Levels-Communication-Relationships-Referrals/dp/1942952473", note: "Amazon" }
+          ]
+        }
       }
     ],
 

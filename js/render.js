@@ -46,6 +46,59 @@
     ]);
   }
 
+  /* "Take a look inside" — a disclosure holding a short write-up of a book,
+     the seven-level ladder, the takeaways, and where to read or buy it.
+     Built on <details>, so it still opens with JavaScript switched off. */
+  function bookLook(k) {
+    const body = [];
+
+    if (k.blurb) body.push(el("p", { class: "look__blurb", text: k.blurb }));
+
+    if (k.ladder && (k.ladder.items || []).length) {
+      const L = k.ladder;
+      body.push(el("div", { class: "look__block" }, [
+        L.title ? el("h5", { class: "look__h", text: L.title }) : null,
+        el("ol", { class: "ladder" }, L.items.map(x => el("li", { class: `ladder__rung ladder__rung--${x.zone}` }, [
+          el("span", { class: "ladder__n", text: String(x.n) }),
+          el("div", {}, [
+            el("span", { class: "ladder__name", text: x.name }),
+            el("span", { class: "ladder__body", text: x.body })
+          ])
+        ]))),
+        L.note ? el("p", { class: "look__note", text: L.note }) : null
+      ]));
+    }
+
+    if ((k.points || []).length) {
+      body.push(el("div", { class: "look__block" }, [
+        el("h5", { class: "look__h", text: "What I'm taking from it" }),
+        el("ul", { class: "look__points" }, k.points.map(p => el("li", {}, [
+          el("strong", { text: p.title }),
+          el("span", { text: p.body })
+        ])))
+      ]));
+    }
+
+    if ((k.links || []).length) {
+      body.push(el("div", { class: "look__block" }, [
+        el("h5", { class: "look__h", text: "Start reading" }),
+        el("div", { class: "look__links" }, k.links.map((l, i) => el("a", {
+          class: `btn btn--sm ${i === 0 ? "btn--solid" : "btn--quiet"}`,
+          href: l.href, target: "_blank", rel: "noopener",
+          title: l.note || null, text: l.label
+        }))),
+        el("p", { class: "look__note", text: k.links.map(l => l.note).filter(Boolean).join(" · ") })
+      ]));
+    }
+
+    return el("details", { class: "look" }, [
+      el("summary", { class: "look__btn" }, [
+        el("span", { class: "look__btnLabel", text: k.cta || "Take a look inside" })
+      ]),
+      el("div", { class: "look__body" }, body)
+    ]);
+  }
+
   /* A crossfading photo gallery with dots and arrows.
      The compact variant sits inside a card: the dots move on top of the
      photo and the caption line is dropped, so it stays small. The captions
@@ -373,19 +426,23 @@
 
   const shelf = $(".shelf");
   D.beyond.reading.forEach((b, i) => {
-    shelf.appendChild(el("li", { class: "book", "data-rise": "", style: `--d:${i * 70}ms` }, [
+    const look = b.look;
+    shelf.appendChild(el("li", {
+      class: `book${look ? " book--featured" : ""}`, "data-rise": "", style: `--d:${i * 70}ms`
+    }, [
       b.cover
         ? el("img", { class: "book__cover", src: b.cover, alt: `${b.title} — cover`, loading: "lazy" })
         : el("span", { class: "book__spine", "aria-hidden": "true" }),
-      el("div", {}, [
+      el("div", { class: "book__body" }, [
         el("span", { class: "book__status", text: b.status }),
         el("h4", { text: b.title }),
         el("p", { class: "book__author", text: b.author }),
+        look && look.facts ? el("p", { class: "book__facts", text: look.facts }) : null,
         b.take ? el("p", { class: "book__take", text: b.take }) : null,
-        b.buy ? el("div", { class: "book__buy" }, [
+        look ? bookLook(look) : (b.buy ? el("div", { class: "book__buy" }, [
           el("span", { class: "book__buyLabel", text: "Where to buy" }),
           el("a", { class: "btn btn--quiet btn--sm", href: b.buy, target: "_blank", rel: "noopener", text: "Amazon" })
-        ]) : null
+        ]) : null)
       ])
     ]));
   });
