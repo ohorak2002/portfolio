@@ -232,7 +232,7 @@ window.PORTFOLIO = {
     ],
     facts: [
       { label: "Studying",     value: "Management Information Systems, UGA — class of 2029" },
-      { label: "GPA",          value: "4.0 · President's List 2025" },
+      { label: "GPA",          value: "4.0 · President's List 2025, South Carolina" },
       { label: "Building",     value: "Nested, a browser-based 3D room designer" },
       { label: "Ask me about", value: "Coaching, swimming, or drumming" },
       { label: "Open to",      value: "Internships and collaborations" }
@@ -250,19 +250,45 @@ window.PORTFOLIO = {
     kicker: "Experience",
     title: "Work experience",
 
-    education: {
-      school: "University of Georgia",
-      place: "Athens, GA",
-      degree: "B.S. Management Information Systems",
-      period: "Expected May 2029",
-      gpa: "4.0 GPA · President's List 2025",
-      honors: [
-        "Julia Helen Smith Foundation Scholarship ($10,000)",
-        "Molinaroli College of Engineering and Computing Merit Scholarship",
-        "Cobb Swim Coaches Association Scholarship",
-        "Linda B. Kenney Scholarship",
-        "National Honor Society",
-        "Scholar Athlete Academic Swimmer · Athletic & Academic Letters"
+    /* Two schools, newest first. Each keeps its OWN gpa and honors, so
+       nothing gets credited to the wrong place — the 4.0 and President's
+       List were earned at South Carolina, not Georgia. */
+    education: [
+      {
+        school: "University of Georgia",
+        place: "Athens, GA",
+        degree: "B.S. Management Information Systems",
+        period: "Expected May 2029",
+        current: true
+      },
+      {
+        school: "University of South Carolina",
+        place: "Columbia, SC",
+        degree: "",                       // ← add what you studied there
+        period: "2025 — 2026",            // ← check these dates
+        gpa: "4.0 GPA · President's List 2025",
+        honors: [
+          "Molinaroli College of Engineering and Computing Merit Scholarship"
+        ]
+      }
+    ],
+
+    /* Everything won somewhere other than the two universities above.
+       Grouped by where it came from so nothing reads as a college honour. */
+    awards: {
+      title: "Other awards & scholarships",
+      groups: [
+        {
+          source: "Lassiter High School · class of 2025",
+          items: [
+            "Julia Helen Smith Foundation Scholarship ($10,000)",
+            "Linda B. Kenney Scholarship",
+            "Cobb Swim Coaches Association Scholarship",
+            "National Honor Society, 2023 — 2025",
+            "Scholar Athlete Academic Swimmer · Athletic & Academic Letters",
+            "Principal's Award in two subjects"
+          ]
+        }
       ]
     },
 

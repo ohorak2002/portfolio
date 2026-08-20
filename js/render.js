@@ -354,26 +354,61 @@
   if (D.meta.links.resume) dl.href = D.meta.links.resume;
   else dl.remove();
 
-  const E = D.experience.education;
-  $(".edu").append(
-    el("div", { class: "edu__head" }, [
-      el("div", {}, [
-        el("h4", { class: "edu__school", text: E.school }),
-        el("p", { class: "edu__degree", text: E.degree })
+  /* One card per school, each carrying only its own GPA and honours. Older
+     data used a single education object; both shapes still work. */
+  const schools = Array.isArray(D.experience.education)
+    ? D.experience.education
+    : [D.experience.education];
+
+  const eduWrap = $(".edu");
+  schools.forEach(E => {
+    eduWrap.appendChild(el("div", { class: `edu__item${E.current ? " edu__item--now" : ""}` }, [
+      el("div", { class: "edu__head" }, [
+        el("div", {}, [
+          el("h4", { class: "edu__school" }, [
+            el("span", { text: E.school }),
+            E.current ? el("span", { class: "edu__now", text: "Current" }) : null
+          ]),
+          E.degree ? el("p", { class: "edu__degree", text: E.degree }) : null
+        ]),
+        el("div", { class: "edu__meta" }, [
+          el("p", { text: E.period }),
+          el("p", { text: E.place })
+        ])
       ]),
-      el("div", { class: "edu__meta" }, [
-        el("p", { text: E.period }),
-        el("p", { text: E.place })
-      ])
-    ]),
-    el("p", { class: "edu__gpa", text: E.gpa }),
-    el("ul", { class: "honors" }, (E.honors || []).map(h =>
-      el("li", {}, [
-        el("span", { class: "honors__icon", html: B.icons.flower }),
-        el("span", { text: h })
-      ])
-    ))
-  );
+      E.gpa ? el("p", { class: "edu__gpa", text: E.gpa }) : null,
+      (E.honors || []).length
+        ? el("ul", { class: "honors" }, E.honors.map(h => el("li", {}, [
+            el("span", { class: "honors__icon", html: B.icons.flower }),
+            el("span", { text: h })
+          ])))
+        : null
+    ]));
+  });
+
+  /* Awards that belong to neither university — high school and elsewhere. */
+  const A = D.experience.awards;
+  const awardsWrap = $(".awards");
+  if (awardsWrap) {
+    if (!A || !(A.groups || []).length) {
+      awardsWrap.remove();
+      const ah = $(".awards__head");
+      if (ah) ah.remove();
+    } else {
+      const ah = $(".awards__head");
+      if (ah && A.title) ah.firstChild.textContent = A.title;
+
+      A.groups.forEach(g => {
+        awardsWrap.appendChild(el("div", { class: "awards__group", "data-rise": "" }, [
+          el("h4", { class: "awards__source", text: g.source }),
+          el("ul", { class: "honors" }, g.items.map(item => el("li", {}, [
+            el("span", { class: "honors__icon", html: B.icons.flower }),
+            el("span", { text: item })
+          ])))
+        ]));
+      });
+    }
+  }
 
   /* What I'm enrolled in this term. Each one leads with its own mark, and
      the detail hides behind a Read more so the list stays skimmable. */

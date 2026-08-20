@@ -592,6 +592,27 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   color: var(--forest); background: var(--mist);
   padding: .3rem .8rem; border-radius: 99px; margin-bottom: 1.3rem;
 }
+/* One card per school. They stack, and the current one is marked so the
+   4.0 can't be read as belonging to the wrong university. */
+.edu__item + .edu__item {
+  margin-top: 1.4rem; padding-top: 1.4rem;
+  border-top: 1px solid var(--line-soft);
+}
+.edu__school { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+.edu__now {
+  font-family: var(--font-sans);
+  font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--forest); background: var(--mist);
+  padding: .22rem .6rem; border-radius: 99px;
+}
+
+/* Awards won somewhere other than the universities. */
+.awards { display: grid; gap: 1.4rem; }
+.awards__source {
+  font-family: var(--font-sans); font-size: var(--t-sm); font-weight: 600;
+  color: var(--ink); margin-bottom: .7rem;
+}
+
 .honors { display: grid; gap: .55rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .honors li { display: flex; gap: .6rem; align-items: flex-start; font-size: var(--t-sm); color: var(--ink-mid); }
 .honors__icon { width: 17px; height: 17px; color: var(--leaf); flex: none; margin-top: .28rem; }
