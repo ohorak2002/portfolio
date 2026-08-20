@@ -247,8 +247,8 @@ window.PORTFOLIO = {
 
   /* ─── 4 · WORK EXPERIENCE ─────────────────────────────────────────── */
   experience: {
-    kicker: "Experience",
-    title: "Work experience",
+    kicker: "Background",
+    title: "Education & experience",
 
     /* Two schools, newest first. Each keeps its OWN gpa and honors, so
        nothing gets credited to the wrong place — the 4.0 and President's
