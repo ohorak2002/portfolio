@@ -267,6 +267,68 @@ window.PORTFOLIO = {
     },
 
     coursework: ["Algorithmic Design (Java)", "Computing in Product Innovation (CTRL)"],
+
+    /* What I'm enrolled in right now. Titles, codes and credit hours come
+       from the UGA Bulletin; the summaries are my own. icon: sheet | shield |
+       curve | globe | wheat — or any of the botanical names. */
+    courses: {
+      term: "Fall 2026",
+      items: [
+        {
+          code: "MIST 2090", icon: "sheet",
+          title: "Introduction to Information Systems in Business",
+          hours: "3 credits",
+          short: "The core of the MIS degree — how technology actually changes the way a business runs.",
+          more:
+            "Covers leading technology-driven change inside an organisation: how information " +
+            "systems fit together, how to improve a business process rather than just automate " +
+            "it, modelling a business and its data, running a project, and heavy spreadsheet " +
+            "work. This is the one most directly connected to what I want to do."
+        },
+        {
+          code: "RMIN 4000", icon: "shield",
+          title: "Risk Management and Insurance",
+          hours: "3 credits",
+          short: "Finding the risk in something before it finds you, and deciding what to do about it.",
+          more:
+            "Identifying, measuring and treating risk for both companies and individuals. " +
+            "Runs through how the insurance industry operates, the legal principles behind a " +
+            "contract, property and liability exposure for cars and homes, and the life and " +
+            "health side including retirement and employee benefits."
+        },
+        {
+          code: "MATH 1113", icon: "curve",
+          title: "Precalculus",
+          hours: "3 credits",
+          short: "The groundwork for calculus — functions, growth curves and trigonometry.",
+          more:
+            "Functions and their graphs, composition and inverses, exponential and logarithmic " +
+            "behaviour — which is where compound interest and growth and decay live — plus " +
+            "trigonometry and straightforward optimisation problems."
+        },
+        {
+          code: "ECOL 1000", icon: "globe",
+          title: "Ecological Basis of Environmental Issues",
+          hours: "3 credits",
+          short: "The science under the environmental arguments people actually have.",
+          more:
+            "Population dynamics, energy moving through an ecosystem, biodiversity and " +
+            "conservation, and how forests, freshwater and fisheries get managed. It ends up " +
+            "at climate change, pollution and water scarcity, and at the policy and ethics " +
+            "questions that come with them."
+        },
+        {
+          code: "AESC 2050", icon: "wheat",
+          title: "Effects of Global Agriculture on World Culture",
+          hours: "3 credits",
+          short: "How the way the world grows food ends up shaping the world itself.",
+          more:
+            "Traces farming's effect on human societies: how geography and culture decide the " +
+            "way people farm, what the green revolution set in motion, and the way food " +
+            "production feeds into politics, economics, health and the environment."
+        }
+      ]
+    },
     skills: ["Java", "CTRL", "GitHub / GitHub Pages", "HTML & CSS", "JavaScript", "Three.js"],
 
     // Newest first.

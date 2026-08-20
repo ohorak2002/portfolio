@@ -65,6 +65,44 @@ window.BOTANICAL = (function () {
       <path d="M12 21v-9"/>
       <path d="M12 12c0-3.3 2.7-6 6-6 0 3.3-2.7 6-6 6z"/>
       <path d="M12 15C12 12.8 10.2 11 8 11c0 2.2 1.8 4 4 4z"/>
+    </svg>`,
+
+    /* Course marks. Same 24x24 frame, same 1.5 stroke, so they sit beside
+       the botanical set without looking borrowed from somewhere else. */
+
+    sheet: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="16" rx="2"/>
+      <path d="M3 9h18M9 9v11"/>
+      <path d="M12 16.5v-2M15 16.5v-4M18 16.5v-6"/>
+    </svg>`,
+
+    shield: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 3l7 3v5.5c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6z"/>
+      <path d="M9 12l2 2 4-4"/>
+    </svg>`,
+
+    curve: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 3v17h17"/>
+      <path d="M4 17c4 0 5-11 9-11 3 0 4 5 8 5"/>
+    </svg>`,
+
+    globe: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M3 12h18"/>
+      <path d="M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/>
+    </svg>`,
+
+    wheat: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 21V9"/>
+      <path d="M12 9c0-2.2 1.3-4 3-4 0 2.2-1.3 4-3 4z"/>
+      <path d="M12 9c0-2.2-1.3-4-3-4 0 2.2 1.3 4 3 4z"/>
+      <path d="M12 14c0-2.2 1.3-4 3-4 0 2.2-1.3 4-3 4z"/>
+      <path d="M12 14c0-2.2-1.3-4-3-4 0 2.2 1.3 4 3 4z"/>
     </svg>`
   };
 

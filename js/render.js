@@ -344,15 +344,8 @@
     ]));
   });
 
-  const VALUE_ICONS = ["sprout", "book", "tree", "seed"];
-  const values = $(".values");
-  D.about.values.forEach((v, i) => {
-    values.appendChild(el("li", { "data-rise": "", style: `--d:${i * 70}ms` }, [
-      el("span", { class: "values__icon", html: B.get(VALUE_ICONS[i % VALUE_ICONS.length]) }),
-      el("h3", { text: v.title }),
-      el("p", { text: v.body })
-    ]));
-  });
+  /* The four value cards used to sit here. The block is gone from the page;
+     the writing is still in data.js under about.values if it ever comes back. */
 
   /* ─── 4 · WORK EXPERIENCE ──────────────────────────────────────────── */
   head("#experience", D.experience);
@@ -381,6 +374,34 @@
       ])
     ))
   );
+
+  /* What I'm enrolled in this term. Each one leads with its own mark, and
+     the detail hides behind a Read more so the list stays skimmable. */
+  const classes = $(".classes");
+  const C = D.experience.courses;
+  if (classes) {
+    if (!C || !(C.items || []).length) {
+      classes.remove();
+      const h = $(".classes__head");
+      if (h) h.remove();
+    } else {
+      const h = $(".classes__head");
+      if (h && C.term) h.append(el("span", { class: "classes__term", text: C.term }));
+
+      C.items.forEach((c, i) => {
+        classes.appendChild(el("li", { class: "class", "data-rise": "", style: `--d:${i * 60}ms` }, [
+          el("span", { class: "class__icon", html: B.get(c.icon) }),
+          el("div", { class: "class__body" }, [
+            el("span", { class: "class__code", text: c.code }),
+            el("h4", { class: "class__title", text: c.title }),
+            c.hours ? el("span", { class: "class__hours", text: c.hours }) : null,
+            c.short ? el("p", { class: "class__short", text: c.short }) : null,
+            readMore(c.more)
+          ])
+        ]));
+      });
+    }
+  }
 
   $(".kit").append(
     el("div", { class: "kit__group" }, [
