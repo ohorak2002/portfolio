@@ -606,6 +606,76 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   padding: .22rem .6rem; border-radius: 99px;
 }
 
+/* ──────────────  13a. CERTIFICATIONS (Résumé)  ──────────────────────── */
+/* The certificate itself is the lead, because a visitor recognises the
+   shape of one before they read the title. It sits at a fixed width so a
+   second certificate lines up beside the first, and the credential ID is
+   printed next to the verify link so the claim can be checked. */
+
+.certs { display: grid; gap: 1rem; }
+.cert {
+  display: flex; gap: clamp(1rem, 2.5vw, 1.6rem); align-items: flex-start;
+  padding: clamp(1.2rem, 2.6vw, 1.5rem);
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.cert:hover { border-color: var(--leaf); transform: translateY(-3px); }
+
+/* The picture is a link — hovering lifts the leaf mark into view so it's
+   obvious there's a bigger version behind it. */
+.cert__shot {
+  position: relative; flex: none; display: block;
+  width: clamp(150px, 22vw, 232px);
+  border-radius: var(--radius-sm); overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: var(--paper);
+}
+.cert__img { display: block; width: 100%; height: auto; }
+.cert__zoom {
+  position: absolute; right: .5rem; bottom: .5rem;
+  width: 26px; height: 26px; padding: 5px;
+  border-radius: 50%; background: var(--card); color: var(--leaf);
+  box-shadow: var(--shadow);
+  opacity: 0; transform: translateY(4px);
+  transition: opacity var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.cert__shot:hover .cert__zoom,
+.cert__shot:focus-visible .cert__zoom { opacity: 1; transform: none; }
+
+.cert__body { min-width: 0; flex: 1; }
+.cert__name {
+  font-family: var(--font-serif); font-size: var(--t-lg); font-weight: 500;
+  color: var(--ink);
+}
+.cert__issuer { font-size: var(--t-sm); color: var(--ink-dim); margin-top: .15rem; }
+.cert__blurb { font-size: var(--t-sm); color: var(--ink-mid); margin-top: .7rem; }
+.cert__tags { margin-top: .8rem; }
+
+/* Issued / expiry / credential ID, as label-over-value pairs so they stay
+   readable when they wrap onto a phone. */
+.cert__meta {
+  display: flex; flex-wrap: wrap; gap: .5rem 1.6rem;
+  margin-top: 1rem; padding-top: .9rem;
+  border-top: 1px solid var(--line-soft);
+}
+.cert__meta dt {
+  font-family: var(--font-sans);
+  font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.cert__meta dd { font-size: var(--t-sm); color: var(--ink-mid); margin-top: .1rem; }
+.cert__id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.cert__actions { margin-top: 1rem; }
+
+/* On a phone the picture goes full width above the text — at 150px wide it
+   is too small to read, and too small to be worth tapping. */
+@media (max-width: 560px) {
+  .cert { flex-direction: column; }
+  .cert__shot { width: 100%; }
+}
+
 /* Awards won somewhere other than the universities. */
 .awards { display: grid; gap: 1.4rem; }
 .awards__source {

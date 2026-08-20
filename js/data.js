@@ -273,6 +273,40 @@ window.PORTFOLIO = {
       }
     ],
 
+    /* Certificates earned outside a degree. Each one needs a `verify` link —
+       an unverifiable certificate is worth less than no certificate, and the
+       card shows the credential ID next to the link so a recruiter can check
+       it in one click.
+
+       thumb = the small picture in the card (keep it under ~40KB)
+       full  = the readable version that opens when the picture is clicked
+       expires: "" means no expiry date. */
+    certifications: {
+      title: "Certifications",
+      items: [
+        {
+          name: "AI Literacy for All",
+          issuer: "Digital Education Council",
+          co: "University of Georgia",
+          issued: "August 2026",
+          expires: "",
+          credentialId: "renmpdnu0c",
+          verify: "https://courses.digitaleducationcouncil.com/certificates/renmpdnu0c",
+          thumb: "assets/cert-dec-ai-literacy-thumb.jpg",
+          full: "assets/cert-dec-ai-literacy.jpg",
+
+          /* ⚠ DRAFT — rewrite this in your own words. Say why you took it,
+             not what the syllabus said. One or two sentences is plenty. */
+          blurb:
+            "A joint programme between the Digital Education Council and UGA. " +
+            "I took it because I'd already been building on top of these tools " +
+            "for months and wanted the grounding to go with the practice.",
+
+          tags: ["AI literacy", "Responsible AI"]
+        }
+      ]
+    },
+
     /* Everything won somewhere other than the two universities above.
        Grouped by where it came from so nothing reads as a college honour. */
     awards: {

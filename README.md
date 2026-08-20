@@ -27,7 +27,7 @@ Seven sections, with five in the top nav:
 1. **Home** — the large arched portrait, name, tagline
 2. **Nested** — the featured project, deliberately the biggest block on the page
 3. **About me** — who you are, quick facts, four principles
-4. **Work experience** — education and honors, coursework and skills, five roles
+4. **Work experience** — education, certifications, honors, coursework and skills, five roles
 5. **My goals** — short and long term
 6. **Beyond the classroom** — activities, reading, interests
 7. **Contact me** — email, phone, links
@@ -69,6 +69,38 @@ the camera was pointed at a blank wall when you captured.
 
 **Links.** `links: { live: "", repo: "" }` — while both are empty the section
 shows a "links coming soon" note. Fill either one and real buttons appear.
+
+## Adding a certification
+
+`experience.certifications.items` in `data.js`. Each entry leads with a picture
+of the certificate, and clicking that picture opens the readable version:
+
+```js
+{
+  name: "AI Literacy for All",
+  issuer: "Digital Education Council",
+  co: "University of Georgia",        // second organisation, or leave it out
+  issued: "August 2026",
+  expires: "",                        // "" prints "No expiry"
+  credentialId: "renmpdnu0c",
+  verify: "https://…/certificates/renmpdnu0c",
+  thumb: "assets/cert-name-thumb.jpg",   // the small one in the card
+  full:  "assets/cert-name.jpg",         // opens when clicked
+  blurb: "Why you took it, in one or two sentences.",
+  tags: ["AI literacy"]
+}
+```
+
+**Making the two images.** Save the certificate as a picture, then make a wide
+version about 1400px across for `full` and a small one about 560px across for
+`thumb`. Keep `thumb` under roughly 40KB — it loads with the page, `full` only
+loads if someone clicks.
+
+**Always fill in `verify`.** A certificate nobody can check is worth less than
+no certificate at all. The card prints the credential ID right next to the
+link so a recruiter can confirm it in one click.
+
+Add a second entry and the cards stack down the page; nothing else changes.
 
 ## Photos for jobs, activities and interests
 
