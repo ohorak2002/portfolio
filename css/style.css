@@ -161,7 +161,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 /* ─────────────────────────────  4. HERO  ────────────────────────────── */
 
 /* The hero is one screen and no more. It used to be a single narrow column
-   ~490px wide centred in a 1280px window, which left a large empty margin on
+   ~490px wide centered in a 1280px window, which left a large empty margin on
    both sides and pushed the name, the statement and the buttons below the
    fold. It is now two columns: words on the left, portrait on the right. */
 .hero {
@@ -193,7 +193,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
 .hero__copy { display: flex; flex-direction: column; align-items: flex-start; }
 
-/* ── The portrait: the centrepiece of the page ──────────────────────────
+/* ── The portrait: the centerpiece of the page ──────────────────────────
    An arch, not a circle. The photo is a standing 2:3 portrait, so a tall
    arched frame shows the whole subject instead of cropping to a head — and
    an arch reads as a garden doorway, which suits the rest of the page.   */
@@ -259,7 +259,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   font-size: var(--t-sm); font-weight: 600; letter-spacing: .04em;
   color: var(--leaf-ink); margin-bottom: 1.1rem;
 }
-/* The one line that carries the hero. Serif, large, quiet colour. */
+/* The one line that carries the hero. Serif, large, quiet color. */
 .hero__statement {
   font-family: var(--font-serif);
   font-size: clamp(1.3rem, 1.05rem + 1.05vw, 1.95rem);
@@ -305,7 +305,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .btn--quiet:hover { border-color: var(--forest); color: var(--forest); background: var(--mist); }
 .btn--big { min-height: 56px; padding: 1rem 2.4rem; font-size: var(--t-base); }
 /* LinkedIn sits beside the email as a second way in — same weight, its own
-   colour so the pair doesn't read as one button repeated. */
+   color so the pair doesn't read as one button repeated. */
 .btn--in { background: var(--mist); color: var(--leaf-ink); border: 1px solid var(--leaf); }
 .btn--in:hover { background: var(--card); border-color: var(--forest); color: var(--forest); transform: translateY(-2px); }
 
@@ -488,7 +488,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .goal__input:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
 .goal__text { min-width: 0; }
 .goal__label { cursor: pointer; }
-/* Ticked goals recede. Done with colour rather than opacity, because
+/* Ticked goals recede. Done with color rather than opacity, because
    opacity belongs to the reveal animation and the two would fight. */
 .goals li:has(.goal__input:checked) { background: var(--tint); border-color: var(--line-soft); }
 .goals li:has(.goal__input:checked) .goal__label {
@@ -509,7 +509,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .goals p { font-size: var(--t-sm); color: var(--ink-dim); }
 
 /* ─────────────────  9. SUBHEADS (inside a big section)  ─────────────── */
-/* Six major sections, each holding a few labelled blocks. The subhead is
+/* Six major sections, each holding a few labeled blocks. The subhead is
    deliberately quieter than a section title so the hierarchy stays obvious. */
 
 .subhead {
@@ -633,7 +633,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 }
 
 /* ──────────────  13a. CERTIFICATIONS (Résumé)  ──────────────────────── */
-/* The certificate itself is the lead, because a visitor recognises the
+/* The certificate itself is the lead, because a visitor recognizes the
    shape of one before they read the title. It sits at a fixed width so a
    second certificate lines up beside the first, and the credential ID is
    printed next to the verify link so the claim can be checked. */
@@ -1391,7 +1391,7 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 /* ────────────────────────  25. RESPONSIVE  ──────────────────────────── */
 
 @media (max-width: 880px) {
-  /* Back to one centred column, portrait first — the original arrangement,
+  /* Back to one centered column, portrait first — the original arrangement,
      which is the right one once there is no width to spread into. */
   .hero { min-height: 0; padding-bottom: 4rem; text-align: center; }
   .hero__inner { grid-template-columns: 1fr; gap: 1.8rem; justify-items: center; }

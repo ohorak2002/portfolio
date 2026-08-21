@@ -1,5 +1,5 @@
 /* ============================================================================
-   scroll.js — the page's own behaviour, minus the animation.
+   scroll.js — the page's own behavior, minus the animation.
    Sticky nav · active section · slideshows · checklist · copy email.
    Reveals and hero motion live in js/motion.js.
    Nothing follows your cursor, nothing spins.

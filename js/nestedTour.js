@@ -4,7 +4,7 @@
 
    This is the same storyboard as the Remotion film in ../nested-video, but
    built as DOM + JS so it works on the live site: ~9KB instead of a multi-
-   megabyte GIF, sharp at any size, and it follows the page's own colours.
+   megabyte GIF, sharp at any size, and it follows the page's own colors.
 
    Every number, item name, store and price below was read out of the running
    app — nothing is invented.

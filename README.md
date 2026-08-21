@@ -14,7 +14,7 @@ interests and contact details. Change the text, save, refresh.
 ```
 js/data.js        ← your content. This is the file you edit.
 index.html        ← page skeleton and mount points.
-css/style.css     ← all the design. Colours are the first 80 lines.
+css/style.css     ← all the design. Colors are the first 80 lines.
 js/botanical.js   ← the hand-drawn plant SVGs.
 js/render.js      ← turns data.js into HTML. Rarely needs changing.
 js/scroll.js      ← reveal-on-scroll, sticky nav, photo galleries, copy email.
@@ -79,7 +79,7 @@ of the certificate, and clicking that picture opens the readable version:
 {
   name: "AI Literacy for All",
   issuer: "Digital Education Council",
-  co: "University of Georgia",        // second organisation, or leave it out
+  co: "University of Georgia",        // second organization, or leave it out
   issued: "August 2026",
   expires: "",                        // "" prints "No expiry"
   credentialId: "renmpdnu0c",
@@ -144,7 +144,7 @@ npx serve .
 
 ## Design notes
 
-**Colour.** One light palette — paper white, mist, and two weights of sage.
+**Color.** One light palette — paper white, mist, and two weights of sage.
 There is no dark mode. `--leaf` is the soft sage used for illustrations,
 icons and focus rings, where 3:1 is enough. `--leaf-ink` and `--forest` are
 the same sage pushed just dark enough to read as text and to carry white
@@ -165,7 +165,7 @@ nav is a convenience rather than a requirement.
 links use an invisible pseudo-element to grow the tappable box without pushing
 their underline away from the text.
 
-## Customising the look
+## Customizing the look
 
 `css/style.css` starts with the design tokens:
 

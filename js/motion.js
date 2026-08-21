@@ -92,7 +92,7 @@ if (M) {
 
       if (halo) {
         /* A slow breath. Barely visible on any single frame, but it keeps
-           the largest area of colour on the page from reading as dead. */
+           the largest area of color on the page from reading as dead. */
         animate(halo,
           { scale: [1, 1.07, 1], opacity: [0.9, 1, 0.9] },
           { duration: 9, repeat: Infinity, ease: "easeInOut" });

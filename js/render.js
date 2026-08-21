@@ -354,7 +354,7 @@
   if (D.meta.links.resume) dl.href = D.meta.links.resume;
   else dl.remove();
 
-  /* One card per school, each carrying only its own GPA and honours. Older
+  /* One card per school, each carrying only its own GPA and honors. Older
      data used a single education object; both shapes still work. */
   const schools = Array.isArray(D.experience.education)
     ? D.experience.education
@@ -387,7 +387,7 @@
   });
 
   /* Certificates earned outside a degree. Each card leads with a picture of
-     the certificate itself, because that is the thing a visitor recognises
+     the certificate itself, because that is the thing a visitor recognizes
      before they've read a word — clicking it opens the readable version. The
      credential ID sits next to a verify link so the claim can be checked
      without leaving the page for long. */
@@ -536,9 +536,9 @@
   /* ─── 5 · MY GOALS ─────────────────────────────────────────────────── */
   head("#goals", D.goals);
 
-  /* A checklist, not a list — a visitor can tick these off as they read, and
-     the ticks are remembered on their own machine. The key is the title, so
-     reordering the goals doesn't shuffle anyone's ticks. */
+  /* A checklist, not a list — a visitor can check these off as they read, and
+     the checkmarks are remembered on their own machine. The key is the title,
+     so reordering the goals doesn't shuffle anyone's boxes. */
   const goals = $(".goals");
   D.goals.items.forEach((g, i) => {
     const id = `goal-${i}`;

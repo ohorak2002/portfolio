@@ -33,7 +33,7 @@ window.PORTFOLIO = {
   /* ─── 1 · HOME ────────────────────────────────────────────────────── */
   hero: {
     greeting: "Hello, I'm",
-    // The emphasised line under your name. Wrap words in *asterisks* to tint
+    // The emphasized line under your name. Wrap words in *asterisks* to tint
     // them forest green. Keep it to one sentence — it carries the whole hero.
     statement:
       "MIS student at the University of Georgia, and the person behind *Nested*."
@@ -49,7 +49,7 @@ window.PORTFOLIO = {
       "and what you like, and it lays the whole thing out for you — walls, floor, " +
       "furniture, lighting — then hands you the controls. Drag anything you want to " +
       "move, swap the palette, or drop in a photo of a room you like and it pulls " +
-      "the colours out. No account, no upload, nothing leaves your machine.",
+      "the colors out. No account, no upload, nothing leaves your machine.",
 
     // Screenshots pulled straight from the running app. Add or remove freely;
     // one image shows as a still, several crossfade slowly.
@@ -144,8 +144,8 @@ window.PORTFOLIO = {
           category: "Getting started",
           title: "Answer six questions",
           body:
-            "Where you live, the colours you would not get tired of, how the room " +
-            "should feel, the light, the walls, the size. Tick what already came " +
+            "Where you live, the colors you would not get tired of, how the room " +
+            "should feel, the light, the walls, the size. Check off what already came " +
             "with the place and Nested won't recommend things you own. That's the " +
             "whole setup — it builds and arranges the room from your answers.",
           video: "assets/nested-1-start.mp4",
@@ -158,25 +158,25 @@ window.PORTFOLIO = {
           title: "Trace your actual room",
           body:
             "Real rooms are rarely a clean rectangle. Upload a floorplan and it " +
-            "shows through behind a half-metre grid — paint over it and the shape " +
+            "shows through behind a half-meter grid — paint over it and the shape " +
             "becomes your room, alcoves and cut corners included. The floor area " +
             "updates as you go, or start from an L-shaped preset.",
           video: "assets/nested-2-floorplan.mp4",
           gif: "assets/nested-2-floorplan.gif",
-          alt: "A floorplan showing behind a half-metre grid while an L-shaped room is painted over it, with the floor area counting up."
+          alt: "A floorplan showing behind a half-meter grid while an L-shaped room is painted over it, with the floor area counting up."
         },
         {
           n: "03",
           category: "Shop & experiment",
           title: "Try every version, free",
           body:
-            "Browse the catalogue by category, drop pieces into the room and watch " +
+            "Browse the catalog by category, drop pieces into the room and watch " +
             "the running total move. Swap anything for a cheaper equivalent and see " +
             "what it saves. Rearranging costs nothing, so you can be indecisive on " +
             "purpose until the room is actually right.",
           video: "assets/nested-3-experiment.mp4",
           gif: "assets/nested-3-experiment.gif",
-          alt: "Pieces being added to a room from the catalogue while the estimated total climbs and cheaper swaps are shown."
+          alt: "Pieces being added to a room from the catalog while the estimated total climbs and cheaper swaps are shown."
         },
         {
           n: "04",
@@ -195,7 +195,7 @@ window.PORTFOLIO = {
              walkMedia() falls back to it whenever `video` is absent.
              Restore the line below once a good MP4 exists. */
           gif: "assets/nested-4-photo.gif",
-          alt: "A reference photo being scanned, its colours extracted, and matching furniture listed with prices."
+          alt: "A reference photo being scanned, its colors extracted, and matching furniture listed with prices."
         }
       ]
     },
@@ -304,7 +304,7 @@ window.PORTFOLIO = {
           /* ⚠ DRAFT — rewrite this in your own words. Say why you took it,
              not what the syllabus said. One or two sentences is plenty. */
           blurb:
-            "A joint programme between the Digital Education Council and UGA. " +
+            "A joint program between the Digital Education Council and UGA. " +
             "I took it because I'd already been building on top of these tools " +
             "for months and wanted the grounding to go with the practice.",
 
@@ -314,7 +314,7 @@ window.PORTFOLIO = {
     },
 
     /* Everything won somewhere other than the two universities above.
-       Grouped by where it came from so nothing reads as a college honour. */
+       Grouped by where it came from so nothing reads as a college honor. */
     awards: {
       title: "Other awards & scholarships",
       groups: [
@@ -346,9 +346,9 @@ window.PORTFOLIO = {
           hours: "3 credits",
           short: "The core of the MIS degree — how technology actually changes the way a business runs.",
           more:
-            "Covers leading technology-driven change inside an organisation: how information " +
+            "Covers leading technology-driven change inside an organization: how information " +
             "systems fit together, how to improve a business process rather than just automate " +
-            "it, modelling a business and its data, running a project, and heavy spreadsheet " +
+            "it, modeling a business and its data, running a project, and heavy spreadsheet " +
             "work. This is the one most directly connected to what I want to do."
         },
         {
@@ -369,8 +369,8 @@ window.PORTFOLIO = {
           short: "The groundwork for calculus — functions, growth curves and trigonometry.",
           more:
             "Functions and their graphs, composition and inverses, exponential and logarithmic " +
-            "behaviour — which is where compound interest and growth and decay live — plus " +
-            "trigonometry and straightforward optimisation problems."
+            "behavior — which is where compound interest and growth and decay live — plus " +
+            "trigonometry and straightforward optimization problems."
         },
         {
           code: "ECOL 1000", icon: "globe",
@@ -481,7 +481,7 @@ window.PORTFOLIO = {
         body:
           "Not just using the tools — understanding where they're strong, where " +
           "they quietly get things wrong, and how to build something real on top " +
-          "of them. Nested is where I'm practising."
+          "of them. Nested is where I'm practicing."
       },
       {
         horizon: "By graduation",
