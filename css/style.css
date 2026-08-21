@@ -126,6 +126,16 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
 }
 
+/* Reading progress. Scales on the X axis from a MotionValue, so it costs one
+   compositor property and never triggers layout. */
+.nav__progress {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 2px; background: var(--forest);
+  transform: scaleX(0); transform-origin: 0 50%;
+  opacity: 0; transition: opacity var(--fast) var(--ease);
+}
+.nav.is-stuck .nav__progress { opacity: .85; }
+
 .nav__mark { display: flex; align-items: center; gap: .55rem; color: var(--ink); }
 .nav__leaf { display: block; width: 21px; height: 21px; color: var(--forest); }
 .nav__leaf svg { width: 100%; height: 100%; }
@@ -150,11 +160,15 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
 /* ─────────────────────────────  4. HERO  ────────────────────────────── */
 
+/* The hero is one screen and no more. It used to be a single narrow column
+   ~490px wide centred in a 1280px window, which left a large empty margin on
+   both sides and pushed the name, the statement and the buttons below the
+   fold. It is now two columns: words on the left, portrait on the right. */
 .hero {
   position: relative;
-  display: flex; align-items: center;
-  padding: calc(var(--nav-h) + 1.6rem) 0 3rem;
-  text-align: center;
+  display: grid; align-items: center;
+  min-height: 100svh;
+  padding: calc(var(--nav-h) + 1.2rem) 0 4.5rem;
   overflow: hidden;
 }
 
@@ -164,12 +178,20 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   width: clamp(150px, 22vw, 290px);
   color: var(--leaf); opacity: .13;
   pointer-events: none;
+  will-change: transform;
 }
 .hero__frond svg { width: 100%; height: auto; }
-.hero__frond--l { left: -60px; transform: rotate(12deg); }
-.hero__frond--r { right: -60px; transform: rotate(-12deg) scaleX(-1); }
+.hero__frond--l { left: -60px; rotate: 12deg; }
+.hero__frond--r { right: -60px; rotate: -12deg; scale: -1 1; }
 
-.hero__inner { display: flex; flex-direction: column; align-items: center; }
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+
+.hero__copy { display: flex; flex-direction: column; align-items: flex-start; }
 
 /* ── The portrait: the centrepiece of the page ──────────────────────────
    An arch, not a circle. The photo is a standing 2:3 portrait, so a tall
@@ -178,10 +200,11 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
 .portrait {
   position: relative;
-  width: clamp(215px, 34vw, 300px);
+  width: min(100%, 340px);
   aspect-ratio: 3 / 4;
-  margin-bottom: 1.7rem;
+  margin-inline: auto;
   isolation: isolate;
+  will-change: transform;
 }
 
 /* A wide soft glow sitting behind everything */
@@ -239,19 +262,22 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 /* The one line that carries the hero. Serif, large, quiet colour. */
 .hero__statement {
   font-family: var(--font-serif);
-  font-size: clamp(1.35rem, 1.1rem + 1.2vw, 2.05rem);
-  color: var(--ink); max-width: 24ch;
+  font-size: clamp(1.3rem, 1.05rem + 1.05vw, 1.95rem);
+  color: var(--ink); max-width: 22ch;
   line-height: 1.3; letter-spacing: -.01em;
   margin-bottom: 2rem;
 }
 .hero__statement .hl { color: var(--forest); font-style: italic; }
 
-.hero__actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: .8rem; }
 
+/* Absolute, so it pins to the bottom of the hero instead of becoming a
+   sibling column of the content and floating in the right-hand margin. */
 .hero__down {
+  position: absolute; z-index: 3;
+  left: 50%; bottom: 1.6rem; translate: -50% 0;
   display: grid; place-items: center;
   width: 40px; height: 46px;
-  margin: 1.4rem auto 0;
 }
 .hero__down-line {
   width: 1px; height: 40px;
@@ -1365,6 +1391,15 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 /* ────────────────────────  25. RESPONSIVE  ──────────────────────────── */
 
 @media (max-width: 880px) {
+  /* Back to one centred column, portrait first — the original arrangement,
+     which is the right one once there is no width to spread into. */
+  .hero { min-height: 0; padding-bottom: 4rem; text-align: center; }
+  .hero__inner { grid-template-columns: 1fr; gap: 1.8rem; justify-items: center; }
+  .hero__copy { align-items: center; order: 2; }
+  .portrait { order: 1; width: min(74vw, 290px); }
+  .hero__statement { max-width: 26ch; }
+  .hero__actions { justify-content: center; }
+
   .about { grid-template-columns: 1fr; }
   .feature__top { grid-template-columns: 1fr; }
   .feature__art { order: -1; }          /* picture first when stacked */
@@ -1387,7 +1422,12 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
   .path__photo { float: none; width: 100%; height: 160px; margin: 0 0 .75rem; }
 
-  .portrait { width: min(74vw, 260px); }
+  /* Trimmed so the portrait, the statement and both buttons still land on
+     one phone screen rather than pushing the call to action below the fold. */
+  .hero { padding-bottom: 2.4rem; }
+  .hero__inner { gap: 1.3rem; }
+  .portrait { width: min(66vw, 248px); }
+
   .feature__btns { width: 100%; flex-direction: column; }
   .feature__btns .btn { width: 100%; }
   .contact__actions { width: 100%; flex-direction: column; }

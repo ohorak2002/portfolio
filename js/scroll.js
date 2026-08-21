@@ -1,7 +1,8 @@
 /* ============================================================================
-   scroll.js — the small amount of motion this site actually needs.
-   Rise-in on scroll · sticky nav · active section · copy email.
-   That's the whole file. Nothing follows your cursor, nothing spins.
+   scroll.js — the page's own behaviour, minus the animation.
+   Sticky nav · active section · slideshows · checklist · copy email.
+   Reveals and hero motion live in js/motion.js.
+   Nothing follows your cursor, nothing spins.
    ========================================================================= */
 
 (function () {
@@ -12,43 +13,8 @@
   const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ─── RISE-IN ──────────────────────────────────────────────────────── */
-  /* Every animated element uses the same observer, the same distance and the
-     same easing. Consistency is what makes motion feel calm instead of busy. */
-
-  const rise = $$("[data-rise]");
-
-  if (REDUCED || !("IntersectionObserver" in window)) {
-    rise.forEach(n => n.classList.add("is-in"));
-  } else {
-    const io = new IntersectionObserver((entries, obs) => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        e.target.classList.add("is-in");
-        obs.unobserve(e.target);          // animate once, then leave it alone
-      });
-    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
-
-    rise.forEach(n => io.observe(n));
-
-    // The hero is above the fold — stagger it in on load rather than on scroll.
-    const heroBits = $$(".hero [data-rise]");
-    addEventListener("load", () => {
-      heroBits.forEach((n, i) => {
-        n.style.setProperty("--d", `${i * 90}ms`);
-        n.classList.add("is-in");
-      });
-    });
-
-    /* Safety net: if something above failed, reveal whatever is already on
-       screen after a moment. Scoped to the viewport so the rest of the page
-       keeps its scroll animation. */
-    setTimeout(() => {
-      $$("[data-rise]:not(.is-in)").forEach(n => {
-        const r = n.getBoundingClientRect();
-        if (r.top < innerHeight - 60 && r.bottom > 0) n.classList.add("is-in");
-      });
-    }, 2200);
-  }
+  /* Lives in js/motion.js now — Motion's inView drives every reveal, and the
+     failsafe in index.html covers the case where that module never loads. */
 
   /* ─── STICKY NAV + ACTIVE SECTION ──────────────────────────────────── */
 

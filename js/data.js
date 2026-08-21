@@ -187,7 +187,13 @@ window.PORTFOLIO = {
             "photo in. Nested pulls the palette out of it and finds real pieces that " +
             "match, each with a store and a price — so the room you liked becomes a " +
             "shopping list you can actually act on.",
-          video: "assets/nested-4-photo.mp4",
+          /* No `video` here on purpose. nested-4-photo.mp4 decodes to a flat
+             dark-green frame with magenta blocks — the container is intact,
+             so the damage is in the recording itself and re-encoding will
+             not help; the clip has to be captured again. The GIF is a
+             separate, clean capture (864x486, 65 frames, 10fps), and
+             walkMedia() falls back to it whenever `video` is absent.
+             Restore the line below once a good MP4 exists. */
           gif: "assets/nested-4-photo.gif",
           alt: "A reference photo being scanned, its colours extracted, and matching furniture listed with prices."
         }

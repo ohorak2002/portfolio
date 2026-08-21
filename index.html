@@ -21,6 +21,9 @@
 
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/style.css">
+
+<!-- With JS off nothing can animate in, so nothing may start hidden. -->
+<noscript><style>[data-rise]{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 
 <body>
@@ -44,6 +47,7 @@
     </nav>
 
   </div>
+  <span class="nav__progress" id="navProgress" aria-hidden="true"></span>
 </header>
 
 <main id="main">
@@ -54,7 +58,19 @@
   <span class="hero__frond hero__frond--r" aria-hidden="true"></span>
 
   <div class="wrap hero__inner">
-    <p class="hero__greeting" data-rise></p>
+    <!-- Left: the words. Right: the portrait. Two columns so the hero fills
+         the screen instead of leaving a narrow column in a field of white. -->
+    <div class="hero__copy">
+      <p class="hero__greeting" data-rise></p>
+      <h1 class="hero__name" data-rise></h1>
+      <p class="hero__role" data-rise></p>
+      <p class="hero__statement" data-rise></p>
+
+      <div class="hero__actions" data-rise>
+        <a class="btn btn--solid" href="#nested">See Nested</a>
+        <a class="btn btn--quiet" href="#contact">Contact me</a>
+      </div>
+    </div>
 
     <!-- The portrait is the centrepiece of the page -->
     <figure class="portrait" data-rise>
@@ -62,15 +78,6 @@
       <span class="portrait__arch" aria-hidden="true"></span>
       <div class="portrait__media" id="portrait"></div>
     </figure>
-
-    <h1 class="hero__name" data-rise></h1>
-    <p class="hero__role" data-rise></p>
-    <p class="hero__statement" data-rise></p>
-
-    <div class="hero__actions" data-rise>
-      <a class="btn btn--solid" href="#nested">See Nested</a>
-      <a class="btn btn--quiet" href="#contact">Contact me</a>
-    </div>
   </div>
 
   <a class="hero__down" href="#nested" aria-label="Scroll to Nested">
@@ -238,5 +245,22 @@
 <script src="js/render.js"></script>
 <script src="js/nestedTour.js"></script>
 <script src="js/scroll.js"></script>
+
+<!-- Motion (framer-motion) drives every reveal on the page. It loads from a
+     CDN as a module, so two things have to be true for the page to be safe:
+     it must not run twice, and the text must appear even if it never loads. -->
+<script type="module" src="js/motion.js"></script>
+<script>
+  /* Failsafe. If motion.js hasn't claimed the page within 1.5s — offline,
+     blocked CDN, ancient browser — reveal everything with the plain CSS
+     transition instead. Content visibility must never depend on a CDN. */
+  setTimeout(function () {
+    if (document.documentElement.classList.contains("motion-ready")) return;
+    document.documentElement.classList.add("motion-off");
+    document.querySelectorAll("[data-rise]").forEach(function (n) {
+      n.classList.add("is-in");
+    });
+  }, 1500);
+</script>
 </body>
 </html>
