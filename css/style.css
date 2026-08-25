@@ -400,8 +400,8 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
    status — no new hue, just a lower-key version of the page. */
 .feature__hiatus {
   display: flex; gap: .8rem; align-items: flex-start;
-  margin: 0 0 1.4rem; padding: 1rem 1.15rem;
-  max-width: 60ch;
+  margin: 2rem 0 0; padding: 1.1rem 1.25rem;
+  max-width: 70ch;
   background: var(--tint); border: 1px solid var(--line);
   border-left: 3px solid var(--leaf); border-radius: var(--radius-sm);
 }

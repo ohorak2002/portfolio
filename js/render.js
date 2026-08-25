@@ -203,18 +203,6 @@
   $(".feature__tagline").textContent = N.tagline;
   $(".feature__blurb").textContent = N.blurb;
 
-  /* A paused project says so, right under the blurb, before anything invites
-     you to try it. The chip is muted amber, not the green "live" chip. */
-  if (N.hiatus) {
-    $(".feature__blurb").after(el("div", { class: "feature__hiatus", role: "note" }, [
-      el("span", { class: "feature__hiatus-mark", "aria-hidden": "true" }),
-      el("div", {}, [
-        N.hiatus.title ? el("strong", { class: "feature__hiatus-title", text: N.hiatus.title }) : null,
-        el("p", { text: N.hiatus.body })
-      ])
-    ]));
-  }
-
   const ftags = $(".feature__tags");
   (N.tags || []).forEach(t => ftags.appendChild(el("span", { class: "tag", text: t })));
   if (N.hiatus && N.hiatus.chip) ftags.prepend(el("span", { class: "tag tag--paused", text: N.hiatus.chip }));
@@ -320,6 +308,21 @@
         ])
       ]));
     });
+
+    /* The hiatus note lives here now, right under the last clip — the project
+       reads as active all the way through the walkthrough, then closes with
+       an honest "and here's why it's paused". Body + optional resume line. */
+    if (N.hiatus) {
+      const para = [N.hiatus.body];
+      if (N.hiatus.resume) para.push(N.hiatus.resume);
+      steps.after(el("div", { class: "feature__hiatus", role: "note" }, [
+        el("span", { class: "feature__hiatus-mark", "aria-hidden": "true" }),
+        el("div", {}, [
+          N.hiatus.title ? el("strong", { class: "feature__hiatus-title", text: N.hiatus.title }) : null,
+          ...para.map(t => el("p", { text: t }))
+        ])
+      ]));
+    }
   } else if (walk) {
     walk.remove();
   }

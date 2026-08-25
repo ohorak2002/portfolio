@@ -64,7 +64,12 @@ window.PORTFOLIO = {
         "asset look right by hand is slow, and the tools that generate 3D from " +
         "a prompt aren't there yet. So rather than ship rooms full of models " +
         "that look off, I'm waiting for the AI that builds 3D assets to get " +
-        "meaningfully better — and picking Nested back up the moment it does."
+        "meaningfully better — and picking Nested back up the moment it does.",
+      resume:
+        "Realistically that means a new model built for 3D — the way image " +
+        "generators leapt in a couple of years, but for furniture and objects " +
+        "you can actually drop into a room. The day prompt-to-3D clears a " +
+        "usable bar for quality, Nested comes off pause and I start again."
     },
 
     // Screenshots pulled straight from the running app. Add or remove freely;
