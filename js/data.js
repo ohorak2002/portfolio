@@ -51,6 +51,22 @@ window.PORTFOLIO = {
       "move, swap the palette, or drop in a photo of a room you like and it pulls " +
       "the colors out. No account, no upload, nothing leaves your machine.",
 
+    /* Nested is paused. Set hiatus to null to clear the banner and the chip
+       and the project reads as active again. Wording is Oren's own account of
+       why — check it still reads the way he'd say it. */
+    hiatus: {
+      chip: "On hiatus",
+      title: "Paused until 3D catches up",
+      body:
+        "Nested is on a break. The whole experience leans on good 3D models — " +
+        "the furniture and every object you place in the room — and rendering " +
+        "those at a quality I'm happy with is the wall I've hit. Making each " +
+        "asset look right by hand is slow, and the tools that generate 3D from " +
+        "a prompt aren't there yet. So rather than ship rooms full of models " +
+        "that look off, I'm waiting for the AI that builds 3D assets to get " +
+        "meaningfully better — and picking Nested back up the moment it does."
+    },
+
     // Screenshots pulled straight from the running app. Add or remove freely;
     // one image shows as a still, several crossfade slowly.
     shots: [

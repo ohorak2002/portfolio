@@ -387,6 +387,33 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .tag--live {
   background: var(--forest); color: var(--forest-ink); font-weight: 600;
 }
+/* A paused project reads as quiet, not alarming — desaturated rather than a
+   new colour, so it stays inside the green-and-white palette while clearly
+   not being the green "live" chip. */
+.tag--paused {
+  background: var(--tint); color: var(--ink-mid);
+  font-weight: 600; border: 1px solid var(--line);
+}
+
+/* The hiatus note. Sits under the blurb, before anything invites you to try
+   the project. A hollow ring and a muted left rule mark it as a dormant
+   status — no new hue, just a lower-key version of the page. */
+.feature__hiatus {
+  display: flex; gap: .8rem; align-items: flex-start;
+  margin: 0 0 1.4rem; padding: 1rem 1.15rem;
+  max-width: 60ch;
+  background: var(--tint); border: 1px solid var(--line);
+  border-left: 3px solid var(--leaf); border-radius: var(--radius-sm);
+}
+.feature__hiatus-mark {
+  flex: none; width: 9px; height: 9px; margin-top: .5rem;
+  border-radius: 50%; border: 2px solid var(--leaf); background: transparent;
+}
+.feature__hiatus-title {
+  display: block; margin-bottom: .25rem;
+  font-family: var(--font-sans); font-weight: 600; color: var(--ink);
+}
+.feature__hiatus p { font-size: var(--t-sm); color: var(--ink-mid); line-height: 1.65; }
 
 .feature__btns { display: flex; flex-wrap: wrap; gap: .7rem; }
 .feature__soon { font-size: var(--t-sm); color: var(--ink-dim); font-style: italic; }
