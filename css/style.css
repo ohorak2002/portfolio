@@ -387,33 +387,62 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 .tag--live {
   background: var(--forest); color: var(--forest-ink); font-weight: 600;
 }
-/* A paused project reads as quiet, not alarming — desaturated rather than a
-   new colour, so it stays inside the green-and-white palette while clearly
-   not being the green "live" chip. */
+/* A paused project should be impossible to miss — but still calm, still
+   green-and-white. The chip carries the ⏸ pause glyph and breathes slowly so
+   the eye lands on it; the bottom note gets a pulsing pause badge. */
 .tag--paused {
-  background: var(--tint); color: var(--ink-mid);
-  font-weight: 600; border: 1px solid var(--line);
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--mist); color: var(--leaf-ink);
+  font-weight: 700; border: 1px solid var(--leaf);
+}
+.tag__pause { display: inline-flex; width: 12px; height: 12px; }
+.tag__pause svg { width: 100%; height: 100%; display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .tag--paused { animation: hiatusBreath 2.6s var(--ease) infinite; }
 }
 
-/* The hiatus note. Sits under the blurb, before anything invites you to try
-   the project. A hollow ring and a muted left rule mark it as a dormant
-   status — no new hue, just a lower-key version of the page. */
+/* The hiatus note. Sits under the last walkthrough clip and closes the
+   section. Stronger left rule and a live pause badge make it register as a
+   real status, not a footnote — no new hue, just more presence. */
 .feature__hiatus {
-  display: flex; gap: .8rem; align-items: flex-start;
-  margin: 2rem 0 0; padding: 1.1rem 1.25rem;
+  display: flex; gap: 1rem; align-items: flex-start;
+  margin: 2.4rem 0 0; padding: 1.3rem 1.4rem;
   max-width: 70ch;
   background: var(--tint); border: 1px solid var(--line);
-  border-left: 3px solid var(--leaf); border-radius: var(--radius-sm);
+  border-left: 4px solid var(--leaf); border-radius: var(--radius-sm);
 }
 .feature__hiatus-mark {
-  flex: none; width: 9px; height: 9px; margin-top: .5rem;
-  border-radius: 50%; border: 2px solid var(--leaf); background: transparent;
+  position: relative; flex: none;
+  width: 42px; height: 42px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--mist); border: 1px solid var(--leaf);
+  color: var(--leaf-ink);
+}
+.feature__hiatus-mark svg { width: 22px; height: 22px; display: block; }
+/* A soft ring that pulses outward — a slow "still here, just paused" beat. */
+.feature__hiatus-mark::after {
+  content: ""; position: absolute; inset: -1px;
+  border-radius: 50%; border: 2px solid var(--leaf);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .feature__hiatus-mark::after { animation: hiatusRing 2.6s var(--ease) infinite; }
 }
 .feature__hiatus-title {
-  display: block; margin-bottom: .25rem;
-  font-family: var(--font-sans); font-weight: 600; color: var(--ink);
+  display: block; margin-bottom: .3rem;
+  font-family: var(--font-sans); font-size: var(--t-base); font-weight: 700; color: var(--ink);
 }
 .feature__hiatus p { font-size: var(--t-sm); color: var(--ink-mid); line-height: 1.65; }
+.feature__hiatus p + p { margin-top: .7rem; }
+
+@keyframes hiatusBreath {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .55; }
+}
+@keyframes hiatusRing {
+  0%   { transform: scale(1);    opacity: .7; }
+  70%  { transform: scale(1.45); opacity: 0; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
 
 .feature__btns { display: flex; flex-wrap: wrap; gap: .7rem; }
 .feature__soon { font-size: var(--t-sm); color: var(--ink-dim); font-style: italic; }

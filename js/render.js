@@ -23,6 +23,13 @@
     return n;
   }
 
+  /* The universal pause glyph — two bars. Used in the hiatus chip and badge
+     so the "on pause" meaning reads instantly, before anyone reads a word. */
+  const PAUSE_SVG =
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+    '<rect x="7" y="5.5" width="3.6" height="13" rx="1.3"/>' +
+    '<rect x="13.4" y="5.5" width="3.6" height="13" rx="1.3"/></svg>';
+
   const esc = s => String(s).replace(/[&<>"']/g, c =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -205,8 +212,14 @@
 
   const ftags = $(".feature__tags");
   (N.tags || []).forEach(t => ftags.appendChild(el("span", { class: "tag", text: t })));
-  if (N.hiatus && N.hiatus.chip) ftags.prepend(el("span", { class: "tag tag--paused", text: N.hiatus.chip }));
-  else if (N.status) ftags.prepend(el("span", { class: "tag tag--live", text: N.status }));
+  if (N.hiatus && N.hiatus.chip) {
+    ftags.prepend(el("span", { class: "tag tag--paused" }, [
+      el("span", { class: "tag__pause", html: PAUSE_SVG, "aria-hidden": "true" }),
+      el("span", { text: N.hiatus.chip })
+    ]));
+  } else if (N.status) {
+    ftags.prepend(el("span", { class: "tag tag--live", text: N.status }));
+  }
 
   const factions = $(".feature__actions");
   const fbtns = linkButtons(N.links, "feature__btns");
@@ -316,7 +329,7 @@
       const para = [N.hiatus.body];
       if (N.hiatus.resume) para.push(N.hiatus.resume);
       steps.after(el("div", { class: "feature__hiatus", role: "note" }, [
-        el("span", { class: "feature__hiatus-mark", "aria-hidden": "true" }),
+        el("span", { class: "feature__hiatus-mark", html: PAUSE_SVG, "aria-hidden": "true" }),
         el("div", {}, [
           N.hiatus.title ? el("strong", { class: "feature__hiatus-title", text: N.hiatus.title }) : null,
           ...para.map(t => el("p", { text: t }))
