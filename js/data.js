@@ -330,6 +330,27 @@ window.PORTFOLIO = {
             "for months and wanted the grounding to go with the practice.",
 
           tags: ["AI literacy", "Responsible AI"]
+        },
+        {
+          name: "Excel Essential Training (Microsoft 365)",
+          issuer: "LinkedIn Learning",
+          co: "",                         // no second organisation
+          issued: "August 2026",
+          expires: "",                    // "" prints "No expiry"
+          credentialId: "ae7e9519bfd3d4a9fab6cdd47c82587450f5e0456d57228dce2a130a6f419178",
+          verify: "https://www.linkedin.com/learning/certificates/e7622e909be37b98ca791c3a4592259154d6b37a818d6cd51a33921bae6ac599",
+          thumb: "assets/cert-excel-essential-thumb.jpg",
+          full: "assets/cert-excel-essential.jpg",
+
+          /* ⚠ DRAFT — rewrite this in your own words. Say why you took it,
+             not what the syllabus said. One or two sentences is plenty. */
+          blurb:
+            "Excel is the tool every business team actually runs on, so I wanted " +
+            "to be genuinely fluent in it — not just able to fake my way through a " +
+            "spreadsheet. This covered the day-to-day work: formulas, tables and " +
+            "cleaning real data into something useful.",
+
+          tags: ["Microsoft Excel", "Spreadsheets"]
         }
       ]
     },
