@@ -341,11 +341,13 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 /* ──────────────────────────  6. ABOUT  ──────────────────────────────── */
 
 .about { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
-.about__prose p { font-size: var(--t-lg); color: var(--ink-mid); }
-.about__prose p + p { margin-top: 1.3rem; }
+/* Body size, not lead size — the lead scale (--t-lg) made this read like a
+   pull-quote and cost a lot of vertical room. */
+.about__prose p { font-size: var(--t-base); color: var(--ink-mid); line-height: 1.65; }
+.about__prose p + p { margin-top: 1rem; }
 
 .facts { border-top: 1px solid var(--line); }
-.facts li { padding: 1.05rem 0; border-bottom: 1px solid var(--line); }
+.facts li { padding: .75rem 0; border-bottom: 1px solid var(--line); }
 .facts dt {
   font-size: var(--t-sm); font-weight: 600; letter-spacing: .1em;
   text-transform: uppercase; color: var(--ink-dim); margin-bottom: .25rem;
