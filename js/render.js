@@ -420,72 +420,78 @@
      before they've read a word — clicking it opens the readable version. The
      credential ID sits next to a verify link so the claim can be checked
      without leaving the page for long. */
-  const CERT = D.experience.certifications;
-  const certs = $(".certs");
-  if (certs) {
-    if (!CERT || !(CERT.items || []).length) {
-      certs.remove();
-      const ch = $(".certs__head");
-      if (ch) ch.remove();
-    } else {
-      const ch = $(".certs__head");
-      if (ch && CERT.title) ch.firstChild.textContent = CERT.title;
+  /* One card for a credential — a certificate or a Claude Academy badge.
+     `kind` only changes the wording screen readers hear. */
+  function credentialCard(c, i, kind) {
+    const issuer = [c.issuer, c.co].filter(Boolean).join(" · ");
+    const shot = c.thumb || c.full;
 
-      CERT.items.forEach((c, i) => {
-        const issuer = [c.issuer, c.co].filter(Boolean).join(" · ");
-        const shot = c.thumb || c.full;
+    const meta = [];
+    if (c.issued) meta.push(["Issued", c.issued]);
+    if (c.expires) meta.push(["Expires", c.expires]);
+    else if (c.issued) meta.push(["Expires", "No expiry"]);
+    if (c.credentialId) meta.push(["Credential ID", c.credentialId]);
 
-        // Meta rows — only the ones that have something to say.
-        const meta = [];
-        if (c.issued) meta.push(["Issued", c.issued]);
-        if (c.expires) meta.push(["Expires", c.expires]);
-        else if (c.issued) meta.push(["Expires", "No expiry"]);
-        if (c.credentialId) meta.push(["Credential ID", c.credentialId]);
-
-        certs.appendChild(el("li", { class: "cert", "data-rise": "", style: `--d:${i * 70}ms` }, [
-          shot
-            ? el("a", {
-                class: "cert__shot", href: c.full || shot,
-                target: "_blank", rel: "noopener",
-                "aria-label": `${c.name} — open the full certificate`
-              }, [
-                el("img", {
-                  class: "cert__img", src: shot, alt: `${c.name} certificate from ${c.issuer}`,
-                  loading: "lazy", decoding: "async"
-                }),
-                el("span", { class: "cert__zoom", "aria-hidden": "true", html: B.icons.leaf })
-              ])
-            : null,
-
-          el("div", { class: "cert__body" }, [
-            el("h4", { class: "cert__name", text: c.name }),
-            issuer ? el("p", { class: "cert__issuer", text: issuer }) : null,
-            c.blurb ? el("p", { class: "cert__blurb", text: c.blurb }) : null,
-
-            (c.tags || []).length
-              ? el("div", { class: "tags cert__tags" }, c.tags.map(t => el("span", { class: "tag", text: t })))
-              : null,
-
-            meta.length
-              ? el("dl", { class: "cert__meta" }, meta.map(([k, v]) => el("div", {}, [
-                  el("dt", { text: k }),
-                  el("dd", { class: k === "Credential ID" ? "cert__id" : null, text: v })
-                ])))
-              : null,
-
-            c.verify
-              ? el("div", { class: "cert__actions" }, [
-                  el("a", {
-                    class: "btn btn--quiet btn--sm", href: c.verify,
-                    target: "_blank", rel: "noopener", text: "Verify credential"
-                  })
-                ])
-              : null
+    return el("li", { class: "cert", "data-rise": "", style: `--d:${i * 70}ms` }, [
+      shot
+        ? el("a", {
+            class: "cert__shot", href: c.full || shot,
+            target: "_blank", rel: "noopener",
+            "aria-label": `${c.name} — open the full ${kind}`
+          }, [
+            el("img", {
+              class: "cert__img", src: shot, alt: `${c.name} ${kind} from ${c.issuer}`,
+              loading: "lazy", decoding: "async"
+            }),
+            el("span", { class: "cert__zoom", "aria-hidden": "true", html: B.icons.leaf })
           ])
-        ]));
-      });
-    }
+        : null,
+
+      el("div", { class: "cert__body" }, [
+        el("h4", { class: "cert__name", text: c.name }),
+        issuer ? el("p", { class: "cert__issuer", text: issuer }) : null,
+        c.blurb ? el("p", { class: "cert__blurb", text: c.blurb }) : null,
+
+        (c.tags || []).length
+          ? el("div", { class: "tags cert__tags" }, c.tags.map(t => el("span", { class: "tag", text: t })))
+          : null,
+
+        meta.length
+          ? el("dl", { class: "cert__meta" }, meta.map(([k, v]) => el("div", {}, [
+              el("dt", { text: k }),
+              el("dd", { class: k === "Credential ID" ? "cert__id" : null, text: v })
+            ])))
+          : null,
+
+        c.verify
+          ? el("div", { class: "cert__actions" }, [
+              el("a", {
+                class: "btn btn--quiet btn--sm", href: c.verify,
+                target: "_blank", rel: "noopener", text: "Verify credential"
+              })
+            ])
+          : null
+      ])
+    ]);
   }
+
+  // Fill a credential grid + its heading, or remove both if there's nothing.
+  function fillCredentials(listSel, headSel, data, kind) {
+    const list = $(listSel);
+    if (!list) return;
+    if (!data || !(data.items || []).length) {
+      list.remove();
+      const h = $(headSel);
+      if (h) h.remove();
+      return;
+    }
+    const h = $(headSel);
+    if (h && data.title) h.firstChild.textContent = data.title;
+    data.items.forEach((c, i) => list.appendChild(credentialCard(c, i, kind)));
+  }
+
+  fillCredentials(".certs", ".certs__head", D.experience.certifications, "certificate");
+  fillCredentials(".badges", ".badges__head", D.experience.academy, "badge");
 
   /* Awards that belong to neither university — high school and elsewhere. */
   const A = D.experience.awards;

@@ -355,6 +355,35 @@ window.PORTFOLIO = {
       ]
     },
 
+    /* Anthropic's Claude Academy badges. Same card shape as certifications —
+       add another entry as each course is finished. thumb/full can be the
+       same badge image; it just opens larger on click. */
+    academy: {
+      title: "Claude Academy",
+      items: [
+        {
+          name: "Claude 101",
+          issuer: "Anthropic",
+          co: "Claude Academy",
+          issued: "September 2026",
+          expires: "",                    // "" prints "No expiry"
+          credentialId: "0f286c78c647cc1ecb40420320c44750",
+          verify: "https://academy.claude.com/verify/0f286c78c647cc1ecb40420320c44750",
+          thumb: "assets/badge-claude-101.svg",
+          full: "assets/badge-claude-101.svg",
+
+          /* ⚠ DRAFT — rewrite this in your own words. Why you started Claude
+             Academy, in a sentence or two. */
+          blurb:
+            "My first course on Anthropic's own learning platform — the grounding " +
+            "in how Claude actually works, straight from the people who build it. " +
+            "This is where the AI goal on my list starts; Claude Code is next.",
+
+          tags: ["Claude", "Anthropic"]
+        }
+      ]
+    },
+
     /* Everything won somewhere other than the two universities above.
        Grouped by where it came from so nothing reads as a college honor. */
     awards: {
