@@ -6,6 +6,7 @@ desktop.ini
 # Editors
 .vscode/
 .idea/
+.claude/
 *.swp
 
 # Node (only if you ever add tooling)

@@ -3,8 +3,12 @@
    Every word on the site comes from the object below.
    Change text here, save the file, refresh the browser.
 
-   Page order:  Home · Nested · About me · Work Experience · My goals ·
+   Page order:  Home · CardWise · About me · Work Experience · My goals ·
                 Beyond the classroom · Contact
+
+   The headline project lives under `featured`. Nested held that slot until
+   22 Sep 2026 and is now one of the smaller projects below it; its full old
+   section is kept, unrendered, in js/data-nested-archive.js.
    ========================================================================= */
 
 window.PORTFOLIO = {
@@ -36,198 +40,132 @@ window.PORTFOLIO = {
     // The emphasized line under your name. Wrap words in *asterisks* to tint
     // them forest green. Keep it to one sentence — it carries the whole hero.
     statement:
-      "MIS student at the University of Georgia, and the person behind *Nested*."
+      "MIS student at the University of Georgia, and the person behind *CardWise*."
   },
 
-  /* ─── 2 · NESTED — the headline project ───────────────────────────── */
-  nested: {
+  /* ─── 2 · CARDWISE — the headline project ─────────────────── */
+  featured: {
     kicker: "Featured project",
-    name: "Nested",
-    tagline: "You don't have to picture it.",
+    name: "CardWise",
+    tagline: "The right card, before you pay.",
     blurb:
-      "Nested builds a room from six questions. Tell it the shape of your space " +
-      "and what you like, and it lays the whole thing out for you — walls, floor, " +
-      "furniture, lighting — then hands you the controls. Drag anything you want to " +
-      "move, swap the palette, or drop in a photo of a room you like and it pulls " +
-      "the colors out. No account, no upload, nothing leaves your machine.",
+      "CardWise is an iPhone app that tells you which credit card to pay with, " +
+      "a few minutes after you walk into a shop — while you can still do " +
+      "something about it. You add your cards by picking them, not describing " +
+      "them, and it works out what each one earns where you are. It only speaks " +
+      "up when the gap between your best card and your next best one is actually " +
+      "worth an interruption, and afterwards it tells you what that choice earned.",
 
-    /* Nested is paused. Set hiatus to null to clear the banner and the chip
-       and the project reads as active again. Wording is Oren's own account of
-       why — check it still reads the way he'd say it. */
-    hiatus: {
-      chip: "On hiatus",
-      title: "Paused until 3D catches up",
-      body:
-        "Nested is on a break. The whole experience leans on good 3D models — " +
-        "the furniture and every object you place in the room — and rendering " +
-        "those at a quality I'm happy with is the wall I've hit. Making each " +
-        "asset look right by hand is slow, and the tools that generate 3D from " +
-        "a prompt aren't there yet. So rather than ship rooms full of models " +
-        "that look off, I'm waiting for the AI that builds 3D assets to get " +
-        "meaningfully better — and picking Nested back up the moment it does.",
-      resume:
-        "Realistically that means a new model built for 3D — the way image " +
-        "generators leapt in a couple of years, but for furniture and objects " +
-        "you can actually drop into a room. The day prompt-to-3D clears a " +
-        "usable bar for quality, Nested comes off pause and I start again."
-    },
+    /* CardWise is the active project, so there is no pause note. Setting
+       hiatus to an object with a `chip` is what put the "On hiatus" badge on
+       Nested — see js/data-nested-archive.js for how that looked. */
+    hiatus: null,
 
-    // Screenshots pulled straight from the running app. Add or remove freely;
-    // one image shows as a still, several crossfade slowly.
-    shots: [
-      { src: "assets/nested-clay.jpg",       label: "Clay & Linen" },
-      { src: "assets/nested-terracotta.jpg", label: "Terracotta" },
-      { src: "assets/nested-midnight.jpg",   label: "Midnight" }
-    ],
+    /* The art slot runs the hero GIF. Stills would go here instead. */
+    shots: [],
 
-    /* Both of these are switched off — the section runs straight from the
-       buttons into the walkthrough below. Put entries back in either list
-       and they reappear, no code changes needed. */
+    /* Both switched off — the section runs from the buttons into the
+       walkthrough. Put entries back in either list and they reappear. */
     features: [],
-
     learned: "",
 
+    /* Every GIF on this page was built from the screenshots CardWise's own CI
+       takes: a job boots a simulator, opens each screen and photographs it, so
+       what you see is the real app, not a mockup. There is no video version —
+       these are stitched from stills, so there is nothing to compress. */
+    video: "",
+    gif: "assets/cardwise-hero.gif",
 
-    /* Drop a rendered demo in assets/ and name it here, and it REPLACES the
-       live tour below. Leave both "" to keep the tour.
-         video: "assets/nested-demo.mp4"   ← best quality, plays silently on loop
-         gif:   "assets/nested-shop.gif"   ← simpler, bigger file
-       If you set both, the video wins and the gif is the fallback poster. */
-    video: "assets/nested-demo.mp4",
-    gif: "",
-
-    /* The live demo that plays in the Nested section. Same storyboard as the
-       Remotion film in ../nested-video. Every figure below was read out of
-       the running app — items, stores, prices and the $573 total. */
-    tour: {
-      actMs: 6500,
-
-      shots: [
-        { src: "assets/nested-clay.jpg",       label: "Clay & Linen" },
-        { src: "assets/nested-terracotta.jpg", label: "Terracotta" },
-        { src: "assets/nested-midnight.jpg",   label: "Midnight" }
-      ],
-
-      palettes: [
-        { name: "Clay & Linen", swatch: ["#C9B49C", "#EDE4D6", "#8A7A66"] },
-        { name: "Terracotta",   swatch: ["#C4714B", "#E8C6AE", "#7A4230"] },
-        { name: "Midnight",     swatch: ["#2B3140", "#4A5570", "#171B24"] },
-        { name: "Forest Floor", swatch: ["#5A6E4E", "#93A882", "#33402C"] },
-        { name: "Pine & Slate", swatch: ["#4A6357", "#8FA69A", "#2C3B34"] },
-        { name: "Sand & Sea",   swatch: ["#C7B79B", "#7FA3AC", "#4C6670"] }
-      ],
-
-      items: [
-        { name: "Upholstered Platform Bed, Queen", price: 549, store: "Wayfair",
-          save: { amount: 370, store: "Walmart", price: 179 } },
-        { name: "Two-Drawer Nightstand", price: 119, store: "Target" },
-        { name: "Arc Floor Lamp", price: 299, store: "West Elm",
-          save: { amount: 260, store: "IKEA", price: 39 } },
-        { name: "Artificial Monstera, 4 ft", price: 88, store: "Wayfair",
-          save: { amount: 66, store: "Walmart", price: 22 } }
-      ],
-
-      cart: [
-        { name: "Platform Bed Frame, Queen", price: 179 },
-        { name: "Two-Drawer Nightstand",     price: 119 },
-        { name: "Area Rug, 8x10",            price: 89 },
-        { name: "Floor Lamp, Standing",      price: 39 },
-        { name: "Artificial Monstera, 4 ft", price: 88 },
-        { name: "Gallery Frame Set of 6",    price: 59 }
-      ],
-      cartTotal: 573,
-      savingsNote: "Swapping every piece for its cheapest equivalent would save about $66.",
-
-      compare: {
-        from: { store: "Wayfair", name: "Upholstered Platform Bed, Queen", price: 549 },
-        to:   { store: "Walmart", name: "Platform Bed Frame, Queen (Value)", price: 179 }
-      },
-
-      stores: ["IKEA", "Wayfair", "West Elm", "Target", "Home Depot", "Walmart", "Amazon"]
-    },
-
-
-    /* The four-step walkthrough — one GIF per topic, all rendered by
-       Remotion from ../nested-video. The framing: an interior designer is
-       expensive and shopping in person is slow, so Nested lets you try every
-       version of a room for nothing, then buy once. */
     walkthrough: {
       kicker: "How it works",
-      title: "Try the room before you pay for it",
+      title: "It has to arrive early, or not at all",
       intro:
-        "Hiring an interior designer is expensive, and working it out yourself " +
-        "means driving to shops and guessing. Nested lets you experiment for " +
-        "free — see the exact room in 3D with the exact prices, and only spend " +
-        "money once you already know what you want.",
+        "Apple doesn't let another app put anything into the Apple Pay card " +
+        "picker, so there is no way to catch you at the till. The whole app " +
+        "hangs on being early instead: your phone notices you've arrived " +
+        "somewhere your cards treat differently, and says so while you're still " +
+        "walking in. Everything below is the real app — the pictures come out " +
+        "of the test suite, which photographs every screen on every change.",
       steps: [
         {
           n: "01",
-          category: "Getting started",
-          title: "Answer six questions",
+          category: "Your wallet",
+          title: "Pick the card. Don't describe it.",
           body:
-            "Where you live, the colors you would not get tired of, how the room " +
-            "should feel, the light, the walls, the size. Check off what already came " +
-            "with the place and Nested won't recommend things you own. That's the " +
-            "whole setup — it builds and arranges the room from your answers.",
-          video: "assets/nested-1-start.mp4",
-          gif: "assets/nested-1-start.gif",
-          alt: "The six-question intake being filled in: address, palette, feel, light, and exact room dimensions."
+            "Choose the bank, then the exact product — \"Gold\" names more than " +
+            "one card, so the list shows the network, the annual fee and what " +
+            "each is best at. The benefits arrive already ticked and in plain " +
+            "English: 4x at restaurants, no foreign transaction fee. Untick " +
+            "anything your card doesn't have. Nothing to type, no rate to look " +
+            "up, and a card that isn't on the list can still be entered by hand.",
+          gif: "assets/cardwise-1-wallet.gif",
+          alt: "Adding a card: choosing the bank, confirming the benefits already ticked, and the card landing in the wallet."
         },
         {
           n: "02",
-          category: "Your real space",
-          title: "Trace your actual room",
+          category: "Where you are",
+          title: "See which card wins nearby",
           body:
-            "Real rooms are rarely a clean rectangle. Upload a floorplan and it " +
-            "shows through behind a half-meter grid — paint over it and the shape " +
-            "becomes your room, alcoves and cut corners included. The floor area " +
-            "updates as you go, or start from an L-shaped preset.",
-          video: "assets/nested-2-floorplan.mp4",
-          gif: "assets/nested-2-floorplan.gif",
-          alt: "A floorplan showing behind a half-meter grid while an L-shaped room is painted over it, with the floor area counting up."
+            "The map is the one screen you go and look at rather than being " +
+            "told. Filter by restaurants, groceries, gas, hotels, and every " +
+            "pin carries the card that wins there — a ring means a card beats " +
+            "its own everyday rate. It never invents a reward: somewhere your " +
+            "cards treat like anywhere else says so, instead of guessing.",
+          gif: "assets/cardwise-2-map.gif",
+          alt: "The nearby map with category filters, pins for each shop, and a place opening to show which card wins there."
         },
         {
           n: "03",
-          category: "Shop & experiment",
-          title: "Try every version, free",
+          category: "The interruption",
+          title: "Only when it's worth it",
           body:
-            "Browse the catalog by category, drop pieces into the room and watch " +
-            "the running total move. Swap anything for a cheaper equivalent and see " +
-            "what it saves. Rearranging costs nothing, so you can be indecisive on " +
-            "purpose until the room is actually right.",
-          video: "assets/nested-3-experiment.mp4",
-          gif: "assets/nested-3-experiment.gif",
-          alt: "Pieces being added to a room from the catalog while the estimated total climbs and cheaper swaps are shown."
+            "An app that speaks up every time is an app you turn off, so this " +
+            "one scores the moment before it says anything. Quiet hours, a " +
+            "daily ceiling, one reminder per shop, and a win too small to matter " +
+            "stays silent — you pick how talkative it is. The reminder itself is " +
+            "written end to end; a geofence waking a closed app is the one part " +
+            "only a real iPhone can prove, and it hasn't been on one yet.",
+          gif: "assets/cardwise-3-reminder.gif",
+          alt: "Notification settings: the four intensity levels, quiet hours, and the screen explaining why a card was recommended."
         },
         {
           n: "04",
-          category: "Copy a real room",
-          title: "Bring a photo you liked",
+          category: "Was it worth it",
+          title: "What it actually earned",
           body:
-            "Saw a room at an open house, in a listing, or on a screenshot? Drop the " +
-            "photo in. Nested pulls the palette out of it and finds real pieces that " +
-            "match, each with a store and a price — so the room you liked becomes a " +
-            "shopping list you can actually act on.",
-          /* No `video` here on purpose. nested-4-photo.mp4 decodes to a flat
-             dark-green frame with magenta blocks — the container is intact,
-             so the damage is in the recording itself and re-encoding will
-             not help; the clip has to be captured again. The GIF is a
-             separate, clean capture (864x486, 65 frames, 10fps), and
-             walkMedia() falls back to it whenever `video` is absent.
-             Restore the line below once a good MP4 exists. */
-          gif: "assets/nested-4-photo.gif",
-          alt: "A reference photo being scanned, its colors extracted, and matching furniture listed with prices."
+            "Most apps like this never answer the obvious question. After a " +
+            "reminder, CardWise asks two optional questions and keeps a running " +
+            "figure — and it's careful about what that figure means. Nothing was " +
+            "discounted, so it's never called savings, and it counts only what " +
+            "the recommended card earned over the next best card you already " +
+            "held. It can come out negative, and it isn't rounded up when it does.",
+          gif: "assets/cardwise-4-impact.gif",
+          alt: "The impact screen showing rewards by category, how many reminders were used, and the benefit deadline timeline."
         }
       ]
     },
 
-    tags: ["Three.js", "React", "WebGL", "Vite"],
-    links: { live: "https://room-maker-phi.vercel.app", repo: "https://github.com/ohorak2002/room-maker" },
+    tags: ["Swift", "SwiftUI", "Core Location", "Places API", "GitHub Actions"],
+    links: { repo: "https://github.com/ohorak2002/CardWise" },
     status: "In active development"
   },
 
-  // Smaller things, listed under Nested.
+  // Smaller things, listed under CardWise.
   otherProjects: [
+    {
+      title: "Nested — a 3D room designer in the browser",
+      year: "2026 · paused",
+      blurb:
+        "Six questions and it builds you a room in 3D — walls, floor, furniture, " +
+        "light — then hands you the controls: drag anything, swap the palette, or " +
+        "drop in a photo of a room you like and it pulls the colors out and finds " +
+        "real pieces to match. It works, and it's still up. I've paused it because " +
+        "the whole experience rests on good 3D models, and making each one look " +
+        "right by hand is slow while prompt-to-3D isn't there yet. It comes off " +
+        "pause the day that changes.",
+      tags: ["Three.js", "React", "WebGL", "Vite"],
+      links: { live: "https://room-maker-phi.vercel.app", repo: "https://github.com/ohorak2002/room-maker" }
+    },
     {
       title: "This portfolio",
       year: "2026",
@@ -260,7 +198,7 @@ window.PORTFOLIO = {
     facts: [
       { label: "Studying",     value: "Management Information Systems, UGA — class of 2029" },
       { label: "GPA",          value: "4.0 · President's List 2025, South Carolina" },
-      { label: "Building",     value: "Nested, a browser-based 3D room designer" },
+      { label: "Building",     value: "CardWise, an iPhone app that picks the right card to pay with" },
       { label: "Ask me about", value: "Coaching, swimming, or drumming" },
       { label: "Open to",      value: "Internships and collaborations" }
     ],
@@ -466,7 +404,7 @@ window.PORTFOLIO = {
         }
       ]
     },
-    skills: ["Java", "CTRL", "GitHub / GitHub Pages", "HTML & CSS", "JavaScript", "Three.js"],
+    skills: ["Swift", "SwiftUI", "Java", "CTRL", "Git & GitHub Actions", "HTML & CSS", "JavaScript", "Three.js"],
 
     // Newest first.
     jobs: [
@@ -534,10 +472,11 @@ window.PORTFOLIO = {
     items: [
       {
         horizon: "This year",
-        title: "Get Nested to a real v1",
+        title: "Get CardWise onto a real phone",
         body:
-          "Not a demo — something a person could actually use to plan a room, " +
-          "with saving, undo, and controls that don't need explaining."
+          "Everything is green in the test suite, but a test can't prove that a " +
+          "geofence wakes a closed app on a real iPhone. Until it runs on one in " +
+          "a real shop, it isn't finished."
       },
       {
         horizon: "This year",
@@ -552,7 +491,7 @@ window.PORTFOLIO = {
         body:
           "Not just using the tools — understanding where they're strong, where " +
           "they quietly get things wrong, and how to build something real on top " +
-          "of them. Nested is where I'm practicing."
+          "of them. CardWise is where I'm practicing."
       },
       {
         horizon: "By graduation",

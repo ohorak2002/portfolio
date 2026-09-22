@@ -18,6 +18,9 @@ css/style.css     ← all the design. Colors are the first 80 lines.
 js/botanical.js   ← the hand-drawn plant SVGs.
 js/render.js      ← turns data.js into HTML. Rarely needs changing.
 js/scroll.js      ← reveal-on-scroll, sticky nav, photo galleries, copy email.
+
+js/data-nested-archive.js   ← the old Nested section, parked. Not loaded.
+tools/make-cardwise-gifs.py ← rebuilds the CardWise GIFs from CI screenshots.
 ```
 
 ## Sections on the page
@@ -25,50 +28,51 @@ js/scroll.js      ← reveal-on-scroll, sticky nav, photo galleries, copy email.
 Seven sections, with five in the top nav:
 
 1. **Home** — the large arched portrait, name, tagline
-2. **Nested** — the featured project, deliberately the biggest block on the page
+2. **CardWise** — the featured project, deliberately the biggest block on the page
 3. **About me** — who you are, quick facts, four principles
 4. **Work experience** — education, certifications, honors, coursework and skills, five roles
 5. **My goals** — short and long term
 6. **Beyond the classroom** — activities, reading, interests
 7. **Contact me** — email, phone, links
 
-Nested sits immediately after the hero because it's the work you most want
-people to see. To move it below About, swap the two `<section>` blocks in
-`index.html` and reorder the nav links above them.
+The featured project sits immediately after the hero because it's the work you
+most want people to see. To move it below About, swap the two `<section>`
+blocks in `index.html` and reorder the nav links above them.
 
-## Nested
+## The featured project
 
-Its own top-level block in `data.js`.
+Whatever is in `data.js` under `featured` — CardWise today. Nothing in
+`index.html` or `render.js` names a project, so swapping the headline is a
+data change, not a code change. Nested held the slot until 22 Sep 2026 and its
+whole old section is kept, unrendered, in `js/data-nested-archive.js`, with
+instructions at the top for putting it back.
 
-**Screenshots.** `shots` is a list of real captures from the running app. One
-image shows as a still; several crossfade slowly (4.2s each) with the palette
-name in the corner. They only animate while the section is on screen, and not
-at all under `prefers-reduced-motion`.
+**The GIFs.** Every picture in the CardWise section is built from the
+screenshots the app's own CI takes — a job boots a simulator, opens each screen
+and photographs it. No mockups. `tools/make-cardwise-gifs.py` stitches those
+stills into the five GIFs in `assets/`: one hero and one per walkthrough step.
 
-```js
-shots: [
-  { src: "assets/nested-clay.jpg", label: "Clay & Linen" },
-  ...
-]
+```bash
+python tools/make-cardwise-gifs.py [SCREENSHOT_DIR] [OUTPUT_DIR]
 ```
 
-To refresh them: run Nested, open devtools, and paste this into the console to
-downscale the canvas and save it.
+It needs Pillow and nothing else — no ffmpeg, no Node. That is on purpose:
+this laptop is Windows on ARM64 and ffmpeg, gifsicle and Remotion all ship
+binaries that don't exist for it. To refresh after the app changes, download a
+newer `CardWise-screenshots` artifact and re-run the script; the storyboards at
+the bottom of the file say which screen appears in which GIF.
 
-```js
-const c = document.querySelector('canvas'), w = 1200;
-const off = document.createElement('canvas');
-off.width = w; off.height = Math.round(c.height * w / c.width);
-off.getContext('2d').drawImage(c, 0, 0, off.width, off.height);
-const a = document.createElement('a');
-a.href = off.toDataURL('image/jpeg', 0.8); a.download = 'nested-new.jpg'; a.click();
-```
-
-Check the file size afterwards. A suspiciously small file (under ~40KB) means
-the camera was pointed at a blank wall when you captured.
+Two numbers worth knowing before you change the canvas size. The walkthrough
+alternates sides, and the two columns are **not** equal — a GIF shows at 495px
+wide on odd steps and 365px on even ones, so the phone is given most of the
+canvas rather than a wide margin, or the app's own text stops being readable in
+the narrow column. And the long still holds cost almost nothing: Pillow writes
+only the changed rectangle per frame, so file size is paid for by motion, which
+is why each GIF stays under 1MB at 780x640.
 
 **Links.** `links: { live: "", repo: "" }` — while both are empty the section
 shows a "links coming soon" note. Fill either one and real buttons appear.
+CardWise has only a repo link, because it isn't on the App Store.
 
 ## Adding a certification
 

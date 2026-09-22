@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Oren Horak — Portfolio</title>
-<meta name="description" content="Oren Horak — Management Information Systems student at the University of Georgia. Creator of Nested, a browser-based 3D room designer.">
+<meta name="description" content="Oren Horak — Management Information Systems student at the University of Georgia. Building CardWise, an iPhone app that tells you which credit card to pay with.">
 <meta name="color-scheme" content="light dark">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Oren Horak — Portfolio">
-<meta property="og:description" content="MIS student at the University of Georgia. Creator of Nested, a browser-based 3D room designer.">
+<meta property="og:description" content="MIS student at the University of Georgia. Building CardWise, an iPhone app that tells you which credit card to pay with.">
 <meta property="og:image" content="assets/profile.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -39,7 +39,7 @@
     </a>
 
     <nav class="nav__links" aria-label="Page sections">
-      <a href="#nested" class="nav__feature">Nested</a>
+      <a href="#featured" class="nav__feature">CardWise</a>
       <a href="#about">About me</a>
       <a href="#experience">Experience</a>
       <a href="#goals">My goals</a>
@@ -67,7 +67,7 @@
       <p class="hero__statement" data-rise></p>
 
       <div class="hero__actions" data-rise>
-        <a class="btn btn--solid" href="#nested">See Nested</a>
+        <a class="btn btn--solid" href="#featured">See CardWise</a>
         <a class="btn btn--quiet" href="#contact">Contact me</a>
       </div>
     </div>
@@ -80,13 +80,15 @@
     </figure>
   </div>
 
-  <a class="hero__down" href="#nested" aria-label="Scroll to Nested">
+  <a class="hero__down" href="#featured" aria-label="Scroll to CardWise">
     <span class="hero__down-line" aria-hidden="true"></span>
   </a>
 </section>
 
-<!-- ══════════════ 2 · NESTED (featured) ══════════════ -->
-<section class="band feature" id="nested">
+<!-- ══════════════ 2 · THE HEADLINE PROJECT ══════════════ -->
+<!-- Whatever data.js has under `featured`. CardWise today; Nested until
+     22 Sep 2026. The id is deliberately not a project name. -->
+<section class="band feature" id="featured">
   <div class="wrap">
     <div class="feature__top">
       <div class="feature__intro" data-rise>
@@ -99,9 +101,7 @@
         <div class="feature__actions"></div>
       </div>
 
-      <div class="feature__art" data-rise>
-        <div id="nestedTour"></div>
-      </div>
+      <div class="feature__art" data-rise></div>
     </div>
 
     <ul class="feature__features"></ul>
@@ -246,7 +246,6 @@
 <script src="js/data.js"></script>
 <script src="js/botanical.js"></script>
 <script src="js/render.js"></script>
-<script src="js/nestedTour.js"></script>
 <script src="js/scroll.js"></script>
 
 <!-- Motion (framer-motion) drives every reveal on the page. It loads from a

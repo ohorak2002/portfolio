@@ -166,7 +166,8 @@
     return el("figure", attrs, kids);
   }
 
-  // Build the Live / Code button pair used by Nested and the smaller projects.
+  // Build the Live / Code button pair used by the headline project and the
+  // smaller ones. A project with no `live` link just gets "View the code".
   function linkButtons(links, cls) {
     const box = el("div", { class: cls });
     if (links && links.live) box.appendChild(el("a", { class: "btn btn--solid", href: links.live, target: "_blank", rel: "noopener", text: "Try it live" }));
@@ -202,10 +203,12 @@
 
   document.querySelectorAll(".divider").forEach(d => { d.innerHTML = B.divider; });
 
-  /* ─── 2 · NESTED ───────────────────────────────────────────────────── */
-  const N = D.nested;
+  /* ─── 2 · THE HEADLINE PROJECT ─────────────────────────────────────── */
+  /* Whatever is in data.js under `featured` — CardWise today, Nested before
+     it. Nothing below names a project; it all comes out of the data. */
+  const N = D.featured;
 
-  $("#nested .kicker").textContent = N.kicker;
+  $("#featured .kicker").textContent = N.kicker;
   $(".feature__name").textContent = N.name;
   $(".feature__tagline").textContent = N.tagline;
   $(".feature__blurb").textContent = N.blurb;
@@ -230,6 +233,9 @@
      a rendered video, a gif, the live tour, still screenshots, the drawing. */
   const art = $(".feature__art");
   const shots = N.shots || [];
+  /* Null unless the live-tour mount is in index.html. It was Nested's, and
+     index.html no longer carries it — see js/data-nested-archive.js if that
+     tour ever needs to come back. Everything below stays null-safe. */
   const tourMount = $("#nestedTour");
 
   if (N.video || N.gif) {
