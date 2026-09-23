@@ -1,0 +1,36 @@
+/* CardWise legal and support pages. Same palette and type as the portfolio,
+   kept standalone so these pages never break when the portfolio changes. */
+:root {
+  --paper: #FCFDFB;
+  --line: #DCE8DA;
+  --ink: #1B2A16;
+  --ink-mid: #47563F;
+  --ink-dim: #66755E;
+  --leaf-ink: #4F7346;
+  --font-serif: "Lora", Georgia, "Times New Roman", serif;
+  --font-sans: "Raleway", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink-mid);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 42rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+.eyebrow { color: var(--leaf-ink); font-weight: 600; font-size: 0.95rem; }
+h1 { font-family: var(--font-serif); font-weight: 500; color: var(--ink); font-size: clamp(1.9rem, 1.5rem + 2vw, 2.6rem); line-height: 1.2; margin: 0.35rem 0 0.5rem; }
+h2 { font-family: var(--font-serif); font-weight: 500; color: var(--ink); font-size: 1.35rem; margin: 2.25rem 0 0.6rem; }
+p, ul { margin: 0 0 1rem; }
+ul { padding-left: 1.25rem; }
+li { margin-bottom: 0.45rem; }
+strong { color: var(--ink); font-weight: 600; }
+a { color: var(--leaf-ink); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--leaf-ink); outline-offset: 3px; border-radius: 4px; }
+.meta { color: var(--ink-dim); font-size: 0.95rem; }
+.summary { border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.25rem; margin: 1.5rem 0; background: #fff; }
+footer { border-top: 1px solid var(--line); margin-top: 3rem; padding-top: 1.25rem; font-size: 0.95rem; color: var(--ink-dim); }
