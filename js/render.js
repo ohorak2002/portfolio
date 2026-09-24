@@ -228,6 +228,10 @@
   const fbtns = linkButtons(N.links, "feature__btns");
   if (fbtns.children.length) factions.appendChild(fbtns);
   else factions.appendChild(el("p", { class: "feature__soon", text: "Links coming once it's deployed." }));
+  if ((N.legal || []).length) {
+    factions.appendChild(el("p", { class: "feature__legal" },
+      N.legal.map(l => el("a", { href: l.href, text: l.label }))));
+  }
 
   /* What fills the art slot, in order of preference:
      a rendered video, a gif, the live tour, still screenshots, the drawing. */

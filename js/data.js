@@ -147,6 +147,12 @@ window.PORTFOLIO = {
 
     tags: ["Swift", "SwiftUI", "Core Location", "Places API", "GitHub Actions"],
     links: { repo: "https://github.com/ohorak2002/CardWise" },
+    /* Small text links under the buttons. These two pages are also the App
+       Store privacy and support URLs, so keep them where they are. */
+    legal: [
+      { label: "Privacy policy", href: "cardwise/privacy/" },
+      { label: "Support", href: "cardwise/support/" }
+    ],
     status: "In active development"
   },
 

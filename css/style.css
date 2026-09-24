@@ -448,6 +448,9 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
 
 .feature__btns { display: flex; flex-wrap: wrap; gap: .7rem; }
 .feature__soon { font-size: var(--t-sm); color: var(--ink-dim); font-style: italic; }
+.feature__legal { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: .9rem; font-size: var(--t-sm); }
+.feature__legal a { color: var(--leaf-ink); text-decoration: underline; text-underline-offset: 3px; }
+.feature__legal a:hover { color: var(--forest); }
 
 /* Artwork — a real screenshot if there is one, else the drawn room */
 .feature__art {
