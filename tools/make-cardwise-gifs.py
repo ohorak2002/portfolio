@@ -17,8 +17,9 @@ after the app changes, grab the newest run's artifact:
 then point this script at that directory and re-run it. If a screen is renamed
 or added in CI, update the storyboards at the bottom of this file to match.
 
-Each GIF puts one screen at a time inside a fixed device frame on the app's own
-navy, and animates the way the app actually behaves: content pushes in from the
+Each GIF puts one screen at a time inside a fixed device frame on the
+portfolio's own soft green (it used to be the app's navy, which fought the
+page around it), and animates the way the app actually behaves: content pushes in from the
 right (a nav push), then scrolls. The floating tab bar is pinned so the phone
 reads as a running app in every frame rather than a tall picture being panned.
 
@@ -47,11 +48,14 @@ if len(sys.argv) > 2:
 W, H = 780, 640
 FPS_MS = 80                      # 12.5 fps
 
-NAVY = (6, 20, 46)               # backdrop — CardWise hero navy, flattened
-BEZEL = (9, 15, 26)
-EDGE = (38, 54, 80)
-CYAN = (66, 204, 255)            # CardWiseInterface.cyan
-WHITE = (255, 255, 255)
+# The frame around the app takes the portfolio's colours, not the app's: the
+# GIFs sit in a green page, and a navy slab in the middle of it read as a hole.
+# The app's own screens are untouched — those are its real colours.
+BACKDROP = (232, 245, 233)       # --mist  #E8F5E9, the site's soft green fill
+CAPTION = (27, 42, 22)           # --ink   #1B2A16, deep forest headings
+ACCENT = (110, 154, 97)          # --leaf  #6E9A61, the site's accent bar green
+BEZEL = (16, 18, 16)             # a real iPhone is black whatever the page is
+EDGE = (92, 99, 90)              # the metal rim, so the phone has an outline
 
 DEV_W = 520                      # device outer width
 INSET = 11                       # bezel thickness
@@ -94,19 +98,30 @@ def screen(name):
     return _cache[name]
 
 
+# No drop shadow under the phone. One was tried: a blurred fade needs dozens of
+# near-identical greens, the GIF palette cannot spare them, and it came out as
+# a hard-edged teal slab. The page already gives each GIF a soft CSS shadow.
+
+
+_backdrops = {}
+
+
 def backdrop(caption):
-    """The fixed part of every frame: navy, caption, device shell."""
-    img = Image.new("RGB", (W, H), NAVY)
+    """The fixed part of every frame: soft green, caption, device shell."""
+    if caption in _backdrops:
+        return _backdrops[caption].copy()
+    img = Image.new("RGB", (W, H), BACKDROP)
     d = ImageDraw.Draw(img)
 
-    d.rounded_rectangle([56, 38, 62, 74], radius=3, fill=CYAN)
-    d.text((76, 40), caption, font=font(25), fill=(233, 240, 255))
+    d.rounded_rectangle([56, 38, 62, 74], radius=3, fill=ACCENT)
+    d.text((76, 40), caption, font=font(25), fill=CAPTION)
 
     d.rounded_rectangle([DEV_X - 1, DEV_Y - 1, DEV_X + DEV_W + 1, H + 60],
                         radius=54, fill=EDGE)
     d.rounded_rectangle([DEV_X, DEV_Y, DEV_X + DEV_W, H + 60],
                         radius=53, fill=BEZEL)
-    return img
+    _backdrops[caption] = img
+    return img.copy()
 
 
 def screen_mask():
@@ -196,6 +211,15 @@ def build(name, caption, beats):
     for i, f in enumerate(sample):
         mont.paste(f, (0, H * i))
     pal = mont.quantize(colors=200, method=Image.Quantize.MAXCOVERAGE)
+    # The quantizer rounds the backdrop to whatever entry is nearest, which
+    # landed a visibly yellower green than the page it sits on. Pin the
+    # site's colours to their exact values, in the entries they map to.
+    entries = pal.getpalette()[:768]
+    for exact in (BACKDROP, CAPTION, ACCENT):
+        i = Image.new("RGB", (1, 1), exact).quantize(
+            palette=pal, dither=Image.Dither.NONE).getpixel((0, 0))
+        entries[i * 3:i * 3 + 3] = list(exact)
+    pal.putpalette(entries)
 
     q = [f.quantize(palette=pal, dither=Image.Dither.NONE) for f in frames]
     path = os.path.join(OUT, name)

@@ -1145,7 +1145,8 @@ h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); line-height: 1.1
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #080B08;
+  /* Same green the GIFs are drawn on, so a GIF still loading is not a black box. */
+  background: var(--mist);
   box-shadow: var(--shadow);
   line-height: 0;
 }
