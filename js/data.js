@@ -69,12 +69,13 @@ window.PORTFOLIO = {
     features: [],
     learned: "",
 
-    /* Every GIF on this page was built from the screenshots CardWise's own CI
-       takes: a job boots a simulator, opens each screen and photographs it, so
-       what you see is the real app, not a mockup. There is no video version —
-       these are stitched from stills, so there is nothing to compress. */
+    /* Every animation on this page was built from the screenshots CardWise's
+       own CI takes: a job boots a simulator, opens each screen and photographs
+       it, so what you see is the real app, not a mockup. They are animated WebP
+       at 30fps (tools/make-cardwise-gifs.py). The field is still called `gif`
+       because an <img> plays either format and render.js needs no change. */
     video: "",
-    gif: "assets/cardwise-hero.gif",
+    gif: "assets/cardwise-hero.webp",
 
     walkthrough: {
       kicker: "How it works",
@@ -98,7 +99,7 @@ window.PORTFOLIO = {
             "English: 4x at restaurants, no foreign transaction fee. Untick " +
             "anything your card doesn't have. Nothing to type, no rate to look " +
             "up, and a card that isn't on the list can still be entered by hand.",
-          gif: "assets/cardwise-1-wallet.gif",
+          gif: "assets/cardwise-1-wallet.webp",
           alt: "Adding a card: choosing the bank, confirming the benefits already ticked, and the card landing in the wallet."
         },
         {
@@ -111,7 +112,7 @@ window.PORTFOLIO = {
             "pin carries the card that wins there — a ring means a card beats " +
             "its own everyday rate. It never invents a reward: somewhere your " +
             "cards treat like anywhere else says so, instead of guessing.",
-          gif: "assets/cardwise-2-map.gif",
+          gif: "assets/cardwise-2-map.webp",
           alt: "The nearby map with category filters, pins for each shop, and a place opening to show which card wins there."
         },
         {
@@ -125,7 +126,7 @@ window.PORTFOLIO = {
             "stays silent — you pick how talkative it is. The reminder itself is " +
             "written end to end; a geofence waking a closed app is the one part " +
             "only a real iPhone can prove, and it hasn't been on one yet.",
-          gif: "assets/cardwise-3-reminder.gif",
+          gif: "assets/cardwise-3-reminder.webp",
           alt: "Notification settings: the four intensity levels, quiet hours, and the screen explaining why a card was recommended."
         },
         {
@@ -139,7 +140,7 @@ window.PORTFOLIO = {
             "discounted, so it's never called savings, and it counts only what " +
             "the recommended card earned over the next best card you already " +
             "held. It can come out negative, and it isn't rounded up when it does.",
-          gif: "assets/cardwise-4-impact.gif",
+          gif: "assets/cardwise-4-impact.webp",
           alt: "The impact screen showing rewards by category, how many reminders were used, and the benefit deadline timeline."
         }
       ]

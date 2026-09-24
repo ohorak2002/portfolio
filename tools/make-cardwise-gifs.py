@@ -1,5 +1,12 @@
 """
-Build the CardWise walkthrough GIFs for the portfolio.
+Build the CardWise walkthrough animations for the portfolio.
+
+Output is animated WebP, not GIF (the filename is historical). WebP was chosen
+on 2026-09-24 because the GIFs were 12.5fps and looked laggy: a GIF is limited
+to 256 colours and pays for every frame, while WebP is full colour, supports
+a per-frame duration (a two-second hold is one frame, not twenty-five), and
+comes out smaller at 30fps than the GIFs were at 12.5. Every current browser
+shows animated WebP in a plain <img>.
 
     python tools/make-cardwise-gifs.py [SCREENSHOT_DIR] [OUTPUT_DIR]
 
@@ -23,13 +30,13 @@ page around it), and animates the way the app actually behaves: content pushes i
 right (a nav push), then scrolls. The floating tab bar is pinned so the phone
 reads as a running app in every frame rather than a tall picture being panned.
 
-Holds are static on purpose: Pillow only writes the changed rectangle per frame,
-so a still hold costs almost nothing and the file size is paid for by motion.
+Holds are single frames with a long duration, so a still moment costs one
+frame and the file size is paid for by motion alone.
 """
 
 import os
 import sys
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 # The CI screenshot artifact these were built from, and where the GIFs land.
 # Override either one on the command line.
@@ -46,7 +53,10 @@ if len(sys.argv) > 2:
 # the narrow one, so the phone is given most of the canvas — every pixel spent
 # on margin is a pixel taken off the app's own text at display size.
 W, H = 780, 640
-FPS_MS = 80                      # 12.5 fps
+FRAME_MS = 33                    # 30fps for anything that moves
+PUSH_MS = 480                    # a nav push, about iOS's own speed
+SCROLL_MS = 900                  # an unhurried scroll
+WEBP_OPTS = dict(lossless=False, quality=72, method=4)   # 70 and 80 look identical on the text; 72 is ~15% smaller
 
 # The frame around the app takes the portfolio's colours, not the app's: the
 # GIFs sit in a green page, and a navy slab in the middle of it read as a hole.
@@ -56,6 +66,7 @@ CAPTION = (27, 42, 22)           # --ink   #1B2A16, deep forest headings
 ACCENT = (110, 154, 97)          # --leaf  #6E9A61, the site's accent bar green
 BEZEL = (16, 18, 16)             # a real iPhone is black whatever the page is
 EDGE = (92, 99, 90)              # the metal rim, so the phone has an outline
+SHADOW = (55, 78, 44)            # the site's --shadow tint, not grey
 
 DEV_W = 520                      # device outer width
 INSET = 11                       # bezel thickness
@@ -98,9 +109,18 @@ def screen(name):
     return _cache[name]
 
 
-# No drop shadow under the phone. One was tried: a blurred fade needs dozens of
-# near-identical greens, the GIF palette cannot spare them, and it came out as
-# a hard-edged teal slab. The page already gives each GIF a soft CSS shadow.
+def _shadow():
+    """A soft green-tinted shadow under the phone, drawn once.
+
+    The GIF versions could not have one: a blurred fade needs dozens of
+    near-identical greens, the 256-colour palette could not spare them, and it
+    came out as a hard-edged teal slab. WebP has no palette, so it is back."""
+    alpha = Image.new("L", (W, H), 0)
+    ImageDraw.Draw(alpha).rounded_rectangle(
+        [DEV_X + 10, DEV_Y + 22, DEV_X + DEV_W - 10, H + 80], radius=56, fill=60)
+    alpha = alpha.filter(ImageFilter.GaussianBlur(20))
+    base = Image.new("RGB", (W, H), BACKDROP)
+    return Image.composite(Image.new("RGB", (W, H), SHADOW), base, alpha)
 
 
 _backdrops = {}
@@ -110,7 +130,7 @@ def backdrop(caption):
     """The fixed part of every frame: soft green, caption, device shell."""
     if caption in _backdrops:
         return _backdrops[caption].copy()
-    img = Image.new("RGB", (W, H), BACKDROP)
+    img = _shadow()
     d = ImageDraw.Draw(img)
 
     d.rounded_rectangle([56, 38, 62, 74], radius=3, fill=ACCENT)
@@ -176,8 +196,20 @@ def build(name, caption, beats):
     """
     beats: list of (screenshot, scroll_to[, status_from]) — scroll_to is a
     fraction of the available scroll range, 0 = top.
+
+    Frames are (image, milliseconds). Motion is drawn at 30fps; a hold is one
+    frame with a long duration.
     """
     frames = []
+
+    def hold(img, ms):
+        frames.append((img, ms))
+
+    def motion(total_ms, draw):
+        n = max(2, round(total_ms / FRAME_MS))
+        for f in range(n):
+            frames.append((draw(ease((f + 1) / n)), FRAME_MS))
+
     prev = None
     for beat in beats:
         fname, scroll_to = beat[0], beat[1]
@@ -187,78 +219,63 @@ def build(name, caption, beats):
         target = int(span * scroll_to)
 
         if prev is None:
-            frames += [compose(caption, sh, 0, status=st)] * 12
+            hold(compose(caption, sh, 0, status=st), 960)
         else:
-            for f in range(6):                        # push in
-                frames.append(compose(caption, prev, 0, incoming=sh,
-                                      push=ease((f + 1) / 6), status=st))
-            frames += [compose(caption, sh, 0, status=st)] * 8
+            motion(PUSH_MS, lambda t, p=prev, s_=sh, st_=st:
+                   compose(caption, p, 0, incoming=s_, push=t, status=st_))
+            hold(compose(caption, sh, 0, status=st), 640)
 
         if target > 0:
-            for f in range(9):                        # scroll down
-                frames.append(compose(caption, sh,
-                                      int(target * ease((f + 1) / 9)), status=st))
-            frames += [compose(caption, sh, target, status=st)] * 7
+            motion(SCROLL_MS, lambda t, s_=sh, st_=st, tg=target:
+                   compose(caption, s_, int(tg * t), status=st_))
+            hold(compose(caption, sh, target, status=st), 700)
         else:
-            frames += [compose(caption, sh, 0, status=st)] * 6
+            hold(compose(caption, sh, 0, status=st), 480)
         prev = sh
 
-    frames += [frames[-1]] * 6                        # breathe before the loop
+    img, ms = frames[-1]
+    frames[-1] = (img, ms + 480)                      # breathe before the loop
 
-    # One palette for the whole GIF, built from evenly sampled frames.
-    sample = frames[:: max(1, len(frames) // 14)]
-    mont = Image.new("RGB", (W, H * len(sample)))
-    for i, f in enumerate(sample):
-        mont.paste(f, (0, H * i))
-    pal = mont.quantize(colors=200, method=Image.Quantize.MAXCOVERAGE)
-    # The quantizer rounds the backdrop to whatever entry is nearest, which
-    # landed a visibly yellower green than the page it sits on. Pin the
-    # site's colours to their exact values, in the entries they map to.
-    entries = pal.getpalette()[:768]
-    for exact in (BACKDROP, CAPTION, ACCENT):
-        i = Image.new("RGB", (1, 1), exact).quantize(
-            palette=pal, dither=Image.Dither.NONE).getpixel((0, 0))
-        entries[i * 3:i * 3 + 3] = list(exact)
-    pal.putpalette(entries)
-
-    q = [f.quantize(palette=pal, dither=Image.Dither.NONE) for f in frames]
     path = os.path.join(OUT, name)
-    q[0].save(path, save_all=True, append_images=q[1:], duration=FPS_MS,
-              loop=0, optimize=True, disposal=1)
+    frames[0][0].save(
+        path, save_all=True, append_images=[f for f, _ in frames[1:]],
+        duration=[ms for _, ms in frames], loop=0,
+        **WEBP_OPTS)
     kb = os.path.getsize(path) // 1024
-    print(f"{name:34s} {W}x{H}  {len(q)} frames  {kb}KB")
+    secs = sum(ms for _, ms in frames) / 1000
+    print(f"{name:34s} {W}x{H}  {len(frames)} frames  {secs:.1f}s  {kb}KB")
     return kb
 
 
 if __name__ == "__main__":
     # The art slot at the top of the section: the product in one glance.
-    build("cardwise-hero.gif", "The right card, before you pay.", [
+    build("cardwise-hero.webp", "The right card, before you pay.", [
         ("1-home.png", 0.6),
         ("2-map.png", 0.8),
         ("3-wallet.png", 0.6),
     ])
 
-    build("cardwise-1-wallet.gif", "Pick the exact card. Nothing to type.", [
+    build("cardwise-1-wallet.webp", "Pick the exact card. Nothing to type.", [
         ("14-addcard.png", 0.0),
         ("9-cardbenefits.png", 1.0),
         ("10-cardpreview.png", 0.55),
         ("3-wallet.png", 0.75),
     ])
 
-    build("cardwise-2-map.gif", "Which card wins, at every shop near you.", [
+    build("cardwise-2-map.webp", "Which card wins, at every shop near you.", [
         ("2-map.png", 0.85),
         ("18-mapfilters.png", 0.5),
         ("11-placecard.png", 0.0),
         ("12-placedetail.png", 0.7),
     ])
 
-    build("cardwise-3-reminder.gif", "It decides when you are worth interrupting.", [
+    build("cardwise-3-reminder.webp", "It decides when you are worth interrupting.", [
         ("7-watching.png", 0.6),
         ("15-notifications.png", 0.75),
         ("23-why.png", 0.8),
     ])
 
-    build("cardwise-4-impact.gif", "Then it reports what that actually earned.", [
+    build("cardwise-4-impact.webp", "Then it reports what that actually earned.", [
         ("19-today.png", 0.8, "1-home.png"),   # captured mid-scroll up top
         ("6-impact.png", 0.7),
         ("20-timeline.png", 0.4),
