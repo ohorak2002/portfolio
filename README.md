@@ -20,7 +20,7 @@ js/render.js      ← turns data.js into HTML. Rarely needs changing.
 js/scroll.js      ← reveal-on-scroll, sticky nav, photo galleries, copy email.
 
 js/data-nested-archive.js   ← the old Nested section, parked. Not loaded.
-tools/make-cardwise-gifs.py ← rebuilds the CardWise GIFs from CI screenshots.
+tools/make-cardahead-gifs.py ← rebuilds the CardAhead GIFs from CI screenshots.
 ```
 
 ## Sections on the page
@@ -28,7 +28,7 @@ tools/make-cardwise-gifs.py ← rebuilds the CardWise GIFs from CI screenshots.
 Seven sections, with five in the top nav:
 
 1. **Home** — the large arched portrait, name, tagline
-2. **CardWise** — the featured project, deliberately the biggest block on the page
+2. **CardAhead** — the featured project, deliberately the biggest block on the page
 3. **About me** — who you are, quick facts, four principles
 4. **Work experience** — education, certifications, honors, coursework and skills, five roles
 5. **My goals** — short and long term
@@ -41,25 +41,25 @@ blocks in `index.html` and reorder the nav links above them.
 
 ## The featured project
 
-Whatever is in `data.js` under `featured` — CardWise today. Nothing in
+Whatever is in `data.js` under `featured` — CardAhead today. Nothing in
 `index.html` or `render.js` names a project, so swapping the headline is a
 data change, not a code change. Nested held the slot until 22 Sep 2026 and its
 whole old section is kept, unrendered, in `js/data-nested-archive.js`, with
 instructions at the top for putting it back.
 
-**The GIFs.** Every picture in the CardWise section is built from the
+**The GIFs.** Every picture in the CardAhead section is built from the
 screenshots the app's own CI takes — a job boots a simulator, opens each screen
-and photographs it. No mockups. `tools/make-cardwise-gifs.py` stitches those
+and photographs it. No mockups. `tools/make-cardahead-gifs.py` stitches those
 stills into the five GIFs in `assets/`: one hero and one per walkthrough step.
 
 ```bash
-python tools/make-cardwise-gifs.py [SCREENSHOT_DIR] [OUTPUT_DIR]
+python tools/make-cardahead-gifs.py [SCREENSHOT_DIR] [OUTPUT_DIR]
 ```
 
 It needs Pillow and nothing else — no ffmpeg, no Node. That is on purpose:
 this laptop is Windows on ARM64 and ffmpeg, gifsicle and Remotion all ship
 binaries that don't exist for it. To refresh after the app changes, download a
-newer `CardWise-screenshots` artifact and re-run the script; the storyboards at
+newer `CardAhead-screenshots` artifact and re-run the script; the storyboards at
 the bottom of the file say which screen appears in which GIF.
 
 Two numbers worth knowing before you change the canvas size. The walkthrough
@@ -72,7 +72,7 @@ is why each GIF stays under 1MB at 780x640.
 
 **Links.** `links: { live: "", repo: "" }` — while both are empty the section
 shows a "links coming soon" note. Fill either one and real buttons appear.
-CardWise has only a repo link, because it isn't on the App Store.
+CardAhead has only a repo link, because it isn't on the App Store.
 
 ## Adding a certification
 

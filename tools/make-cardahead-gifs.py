@@ -1,5 +1,5 @@
 """
-Build the CardWise walkthrough animations for the portfolio.
+Build the CardAhead walkthrough animations for the portfolio.
 
 Output is animated WebP, not GIF (the filename is historical). WebP was chosen
 on 2026-09-24 because the GIFs were 12.5fps and looked laggy: a GIF is limited
@@ -8,18 +8,18 @@ a per-frame duration (a two-second hold is one frame, not twenty-five), and
 comes out smaller at 30fps than the GIFs were at 12.5. Every current browser
 shows animated WebP in a plain <img>.
 
-    python tools/make-cardwise-gifs.py [SCREENSHOT_DIR] [OUTPUT_DIR]
+    python tools/make-cardahead-gifs.py [SCREENSHOT_DIR] [OUTPUT_DIR]
 
 Needs Pillow and nothing else — no ffmpeg, no gifsicle, no Node. That is
 deliberate: this laptop is Windows on ARM64, and ffmpeg, gifsicle and Remotion
 all ship binaries that do not exist for that architecture.
 
 Source material is the real CI screenshots (1206x2622, iPhone @3x) from the
-CardWise `screenshots` job — nothing is mocked up or redrawn. To refresh them
+CardAhead `screenshots` job — nothing is mocked up or redrawn. To refresh them
 after the app changes, grab the newest run's artifact:
 
-    gh run list --repo ohorak2002/CardWise --workflow ci.yml
-    gh run download <run-id> -n CardWise-screenshots -D <some-dir>
+    gh run list --repo ohorak2002/CardAhead --workflow ci.yml
+    gh run download <run-id> -n CardAhead-screenshots -D <some-dir>
 
 then point this script at that directory and re-run it. If a screen is renamed
 or added in CI, update the storyboards at the bottom of this file to match.
@@ -40,7 +40,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 # The CI screenshot artifact these were built from, and where the GIFs land.
 # Override either one on the command line.
-SRC = r"C:\Users\orenh\OneDrive\Desktop\Claude Code\CardWise\ci-artifacts-35538982055"
+SRC = r"C:\Users\orenh\OneDrive\Desktop\Claude Code\CardAhead\ci-artifacts-36027207064"
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                    "assets")
 if len(sys.argv) > 1:
@@ -249,33 +249,33 @@ def build(name, caption, beats):
 
 if __name__ == "__main__":
     # The art slot at the top of the section: the product in one glance.
-    build("cardwise-hero.webp", "The right card, before you pay.", [
+    build("cardahead-hero.webp", "The right card, before you pay.", [
         ("1-home.png", 0.6),
         ("2-map.png", 0.8),
         ("3-wallet.png", 0.6),
     ])
 
-    build("cardwise-1-wallet.webp", "Pick the exact card. Nothing to type.", [
+    build("cardahead-1-wallet.webp", "Pick the exact card. Nothing to type.", [
         ("14-addcard.png", 0.0),
         ("9-cardbenefits.png", 1.0),
         ("10-cardpreview.png", 0.55),
         ("3-wallet.png", 0.75),
     ])
 
-    build("cardwise-2-map.webp", "Which card wins, at every shop near you.", [
+    build("cardahead-2-map.webp", "Which card wins, at every shop near you.", [
         ("2-map.png", 0.85),
         ("18-mapfilters.png", 0.5),
         ("11-placecard.png", 0.0),
         ("12-placedetail.png", 0.7),
     ])
 
-    build("cardwise-3-reminder.webp", "It decides when you are worth interrupting.", [
+    build("cardahead-3-reminder.webp", "It decides when you are worth interrupting.", [
         ("7-watching.png", 0.6),
         ("15-notifications.png", 0.75),
         ("23-why.png", 0.8),
     ])
 
-    build("cardwise-4-impact.webp", "Then it reports what that actually earned.", [
+    build("cardahead-4-impact.webp", "Then it reports what that actually earned.", [
         ("19-today.png", 0.8, "1-home.png"),   # captured mid-scroll up top
         ("6-impact.png", 0.7),
         ("20-timeline.png", 0.4),

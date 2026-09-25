@@ -1,7 +1,7 @@
 /* ============================================================================
    data-nested-archive.js - PARKED, NOT LOADED BY THE SITE.
 
-   The Nested headline section exactly as it stood when CardWise took over as
+   The Nested headline section exactly as it stood when CardAhead took over as
    the featured project on 22 September 2026: the blurb, the hiatus note, the
    six palettes, the cart totalling 573 dollars and the four-step walkthrough
    - every figure read out of the running app rather than invented.

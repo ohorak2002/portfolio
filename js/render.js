@@ -204,7 +204,7 @@
   document.querySelectorAll(".divider").forEach(d => { d.innerHTML = B.divider; });
 
   /* ─── 2 · THE HEADLINE PROJECT ─────────────────────────────────────── */
-  /* Whatever is in data.js under `featured` — CardWise today, Nested before
+  /* Whatever is in data.js under `featured` — CardAhead today, Nested before
      it. Nothing below names a project; it all comes out of the data. */
   const N = D.featured;
 

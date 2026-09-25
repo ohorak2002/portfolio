@@ -3,7 +3,7 @@
    Every word on the site comes from the object below.
    Change text here, save the file, refresh the browser.
 
-   Page order:  Home · CardWise · About me · Work Experience · My goals ·
+   Page order:  Home · CardAhead · About me · Work Experience · My goals ·
                 Beyond the classroom · Contact
 
    The headline project lives under `featured`. Nested held that slot until
@@ -40,23 +40,23 @@ window.PORTFOLIO = {
     // The emphasized line under your name. Wrap words in *asterisks* to tint
     // them forest green. Keep it to one sentence — it carries the whole hero.
     statement:
-      "MIS student at the University of Georgia, and the person behind *CardWise*."
+      "MIS student at the University of Georgia, and the person behind *CardAhead*."
   },
 
-  /* ─── 2 · CARDWISE — the headline project ─────────────────── */
+  /* ─── 2 · CARDAHEAD — the headline project ─────────────────── */
   featured: {
     kicker: "Featured project",
-    name: "CardWise",
+    name: "CardAhead",
     tagline: "The right card, before you pay.",
     blurb:
-      "CardWise is an iPhone app that tells you which credit card to pay with, " +
+      "CardAhead is an iPhone app that tells you which credit card to pay with, " +
       "a few minutes after you walk into a shop — while you can still do " +
       "something about it. You add your cards by picking them, not describing " +
       "them, and it works out what each one earns where you are. It only speaks " +
       "up when the gap between your best card and your next best one is actually " +
       "worth an interruption, and afterwards it tells you what that choice earned.",
 
-    /* CardWise is the active project, so there is no pause note. Setting
+    /* CardAhead is the active project, so there is no pause note. Setting
        hiatus to an object with a `chip` is what put the "On hiatus" badge on
        Nested — see js/data-nested-archive.js for how that looked. */
     hiatus: null,
@@ -69,13 +69,13 @@ window.PORTFOLIO = {
     features: [],
     learned: "",
 
-    /* Every animation on this page was built from the screenshots CardWise's
+    /* Every animation on this page was built from the screenshots CardAhead's
        own CI takes: a job boots a simulator, opens each screen and photographs
        it, so what you see is the real app, not a mockup. They are animated WebP
-       at 30fps (tools/make-cardwise-gifs.py). The field is still called `gif`
+       at 30fps (tools/make-cardahead-gifs.py). The field is still called `gif`
        because an <img> plays either format and render.js needs no change. */
     video: "",
-    gif: "assets/cardwise-hero.webp",
+    gif: "assets/cardahead-hero.webp",
 
     walkthrough: {
       kicker: "How it works",
@@ -99,7 +99,7 @@ window.PORTFOLIO = {
             "English: 4x at restaurants, no foreign transaction fee. Untick " +
             "anything your card doesn't have. Nothing to type, no rate to look " +
             "up, and a card that isn't on the list can still be entered by hand.",
-          gif: "assets/cardwise-1-wallet.webp",
+          gif: "assets/cardahead-1-wallet.webp",
           alt: "Adding a card: choosing the bank, confirming the benefits already ticked, and the card landing in the wallet."
         },
         {
@@ -112,7 +112,7 @@ window.PORTFOLIO = {
             "pin carries the card that wins there — a ring means a card beats " +
             "its own everyday rate. It never invents a reward: somewhere your " +
             "cards treat like anywhere else says so, instead of guessing.",
-          gif: "assets/cardwise-2-map.webp",
+          gif: "assets/cardahead-2-map.webp",
           alt: "The nearby map with category filters, pins for each shop, and a place opening to show which card wins there."
         },
         {
@@ -126,7 +126,7 @@ window.PORTFOLIO = {
             "stays silent — you pick how talkative it is. The reminder itself is " +
             "written end to end; a geofence waking a closed app is the one part " +
             "only a real iPhone can prove, and it hasn't been on one yet.",
-          gif: "assets/cardwise-3-reminder.webp",
+          gif: "assets/cardahead-3-reminder.webp",
           alt: "Notification settings: the four intensity levels, quiet hours, and the screen explaining why a card was recommended."
         },
         {
@@ -135,29 +135,29 @@ window.PORTFOLIO = {
           title: "What it actually earned",
           body:
             "Most apps like this never answer the obvious question. After a " +
-            "reminder, CardWise asks two optional questions and keeps a running " +
+            "reminder, CardAhead asks two optional questions and keeps a running " +
             "figure — and it's careful about what that figure means. Nothing was " +
             "discounted, so it's never called savings, and it counts only what " +
             "the recommended card earned over the next best card you already " +
             "held. It can come out negative, and it isn't rounded up when it does.",
-          gif: "assets/cardwise-4-impact.webp",
+          gif: "assets/cardahead-4-impact.webp",
           alt: "The impact screen showing rewards by category, how many reminders were used, and the benefit deadline timeline."
         }
       ]
     },
 
     tags: ["Swift", "SwiftUI", "Core Location", "Places API", "GitHub Actions"],
-    links: { repo: "https://github.com/ohorak2002/CardWise" },
+    links: { repo: "https://github.com/ohorak2002/CardAhead" },
     /* Small text links under the buttons. These two pages are also the App
        Store privacy and support URLs, so keep them where they are. */
     legal: [
-      { label: "Privacy policy", href: "cardwise/privacy/" },
-      { label: "Support", href: "cardwise/support/" }
+      { label: "Privacy policy", href: "cardahead/privacy/" },
+      { label: "Support", href: "cardahead/support/" }
     ],
     status: "In active development"
   },
 
-  // Smaller things, listed under CardWise.
+  // Smaller things, listed under CardAhead.
   otherProjects: [
     {
       title: "Nested — a 3D room designer in the browser",
@@ -205,7 +205,7 @@ window.PORTFOLIO = {
     facts: [
       { label: "Studying",     value: "Management Information Systems, UGA — class of 2029" },
       { label: "GPA",          value: "4.0 · President's List 2025, South Carolina" },
-      { label: "Building",     value: "CardWise, an iPhone app that picks the right card to pay with" },
+      { label: "Building",     value: "CardAhead, an iPhone app that picks the right card to pay with" },
       { label: "Ask me about", value: "Coaching, swimming, or drumming" },
       { label: "Open to",      value: "Internships and collaborations" }
     ],
@@ -479,7 +479,7 @@ window.PORTFOLIO = {
     items: [
       {
         horizon: "This year",
-        title: "Get CardWise onto a real phone",
+        title: "Get CardAhead onto a real phone",
         body:
           "Everything is green in the test suite, but a test can't prove that a " +
           "geofence wakes a closed app on a real iPhone. Until it runs on one in " +
@@ -498,7 +498,7 @@ window.PORTFOLIO = {
         body:
           "Not just using the tools — understanding where they're strong, where " +
           "they quietly get things wrong, and how to build something real on top " +
-          "of them. CardWise is where I'm practicing."
+          "of them. CardAhead is where I'm practicing."
       },
       {
         horizon: "By graduation",
